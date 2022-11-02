@@ -7,6 +7,8 @@
 
 1 x BC557BTF
 
+1 x 38-40kHz Crystal
+
 1 x 10nF Capacitor
 
 1 x 100Ω Resistor
@@ -43,6 +45,13 @@ onsemi BC557BTF
 Link: https://www.digikey.ca/en/products/detail/onsemi/BC557BTF/975577
 
 Datasheet: https://www.onsemi.com/pdf/datasheet/bc556bta-d.pdf
+
+### Crystal
+Citizen Finedevice CFV-20638400AZFB
+
+Link: https://www.digikey.ca/en/products/detail/citizen-finedevice-co-ltd/CFV-20638400AZFB/2217076
+
+Datasheet: https://media.digikey.com/pdf/Data%20Sheets/Citizen%20PDFs/CFV-206_DS.pdf
 
 ### Others
 100, 10k, 100k Resistors
