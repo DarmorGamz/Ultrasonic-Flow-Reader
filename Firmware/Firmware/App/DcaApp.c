@@ -7,28 +7,23 @@
 void DcaApp_Init(void) {
 	// Init Watchdog.
 	Watchdog_Init();
+	
+	int8_t s8Status;
+    // Initialize Ethernet driver
+	
+    // Initialize the TCP/IP stack
+	printf("\nEthernet Power Up");
+    s8Status = Ethernet_Init();
+	printf("\nStatus Code %d", s8Status);
+	printf("\nEthernet Power Down");
+	Ethernet_PowerDown();
 }
 
 void DcaApp_Entry(void) {
+	printf("\nMain Loop Started");
 	while(1) {
 		delay_ms(1000);
-		printf("\nWatchdog Timer 1 second");
-		Watchdog_Feed();
-		
-		delay_ms(2000);
-		printf("\nWatchdog Timer 2 second");
-		Watchdog_Feed();
-		
-		delay_ms(4000);
-		printf("\nWatchdog Timer 4 second");
-		Watchdog_Feed();
-		
-		delay_ms(8000);
-		printf("\nWatchdog Timer 8 second");
-		Watchdog_Feed();
-		
-		delay_ms(9000);
-		printf("\nWatchdog Timer 9 second");
-		Watchdog_Feed();
+		printf("\nMain Loop");
+		//Watchdog_Feed();
 	}
 }
