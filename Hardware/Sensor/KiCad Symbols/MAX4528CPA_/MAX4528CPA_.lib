@@ -1,0 +1,32 @@
+EESchema-LIBRARY Version 2.3
+#encoding utf-8
+#(c) SnapEDA 2016 (snapeda.com)
+#This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License (CC BY-SA) with Design Exception 1.0
+#
+# MAX4528CPA+
+#
+DEF MAX4528CPA+ U 0 40 Y Y 1 L N
+F0 "U" -400 439 50 H V L BNN
+F1 "MAX4528CPA+" -400 -657 50 H V L BNN
+F2 "DIP794W47P254L991H457Q8" 0 0 50 H I L BNN
+F3 "" 0 0 50 H I L BNN
+F4 "None" 0 0 50 H I L BNN "PRICE"
+F5 "MAX4528CPA+" 0 0 50 H I L BNN "MP"
+F6 "PDIP-8 Maxim" 0 0 50 H I L BNN "PACKAGE"
+F7 "Unavailable" 0 0 50 H I L BNN "AVAILABILITY"
+F8 "2 Circuit IC Switch 2:1 110Ohm 8-PDIP" 0 0 50 H I L BNN "DESCRIPTION"
+F9 "Maxim Integrated" 0 0 50 H I L BNN "MF"
+DRAW
+S -400 -500 400 400 0 0 10 f
+X A 1 -600 100 200 R 40 40 0 0 I 
+X B 2 -600 0 200 R 40 40 0 0 I 
+X IN 4 -600 -100 200 R 40 40 0 0 I 
+X V+ 8 600 300 200 L 40 40 0 0 W 
+X X 7 600 100 200 L 40 40 0 0 O 
+X Y 6 600 0 200 L 40 40 0 0 O 
+X V- 5 600 -300 200 L 40 40 0 0 W 
+X GND 3 600 -400 200 L 40 40 0 0 W 
+ENDDRAW
+ENDDEF
+#
+# End Library
