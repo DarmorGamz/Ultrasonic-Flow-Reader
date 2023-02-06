@@ -58,6 +58,9 @@ extern void DEMO_UDP_Recv(int len);
 extern void DEMO_UDP_IdlePkt(int length);
 #endif
 
+// UDP callback added by Nick - defined in Ethernet.c
+extern void DNS_Handler(int len);
+
 typedef struct {
 	uint16_t                portNumber;
 	ip_receive_function_ptr callBack;

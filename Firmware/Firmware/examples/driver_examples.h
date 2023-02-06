@@ -14,7 +14,7 @@ extern "C" {
 
 void EXTERNAL_IRQ_0_example(void);
 
-void DEBUG_0_example(void);
+void FLASH_0_example(void);
 
 void delay_example(void);
 

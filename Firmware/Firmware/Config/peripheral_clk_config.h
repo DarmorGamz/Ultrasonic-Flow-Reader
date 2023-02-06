@@ -172,70 +172,6 @@
 #define CONF_GCLK_SERCOM1_SLOW_FREQUENCY 500000
 #endif
 
-// <y> Core Clock Source
-// <id> core_gclk_selection
-
-// <GCLK_CLKCTRL_GEN_GCLK0_Val"> Generic clock generator 0
-
-// <GCLK_CLKCTRL_GEN_GCLK1_Val"> Generic clock generator 1
-
-// <GCLK_CLKCTRL_GEN_GCLK2_Val"> Generic clock generator 2
-
-// <GCLK_CLKCTRL_GEN_GCLK3_Val"> Generic clock generator 3
-
-// <GCLK_CLKCTRL_GEN_GCLK4_Val"> Generic clock generator 4
-
-// <GCLK_CLKCTRL_GEN_GCLK5_Val"> Generic clock generator 5
-
-// <GCLK_CLKCTRL_GEN_GCLK6_Val"> Generic clock generator 6
-
-// <GCLK_CLKCTRL_GEN_GCLK7_Val"> Generic clock generator 7
-
-// <i> Select the clock source for CORE.
-#ifndef CONF_GCLK_SERCOM3_CORE_SRC
-#define CONF_GCLK_SERCOM3_CORE_SRC GCLK_CLKCTRL_GEN_GCLK3_Val
-#endif
-
-// <y> Slow Clock Source
-// <id> slow_gclk_selection
-
-// <GCLK_CLKCTRL_GEN_GCLK0_Val"> Generic clock generator 0
-
-// <GCLK_CLKCTRL_GEN_GCLK1_Val"> Generic clock generator 1
-
-// <GCLK_CLKCTRL_GEN_GCLK2_Val"> Generic clock generator 2
-
-// <GCLK_CLKCTRL_GEN_GCLK3_Val"> Generic clock generator 3
-
-// <GCLK_CLKCTRL_GEN_GCLK4_Val"> Generic clock generator 4
-
-// <GCLK_CLKCTRL_GEN_GCLK5_Val"> Generic clock generator 5
-
-// <GCLK_CLKCTRL_GEN_GCLK6_Val"> Generic clock generator 6
-
-// <GCLK_CLKCTRL_GEN_GCLK7_Val"> Generic clock generator 7
-
-// <i> Select the slow clock source.
-#ifndef CONF_GCLK_SERCOM3_SLOW_SRC
-#define CONF_GCLK_SERCOM3_SLOW_SRC GCLK_CLKCTRL_GEN_GCLK5_Val
-#endif
-
-/**
- * \def CONF_GCLK_SERCOM3_CORE_FREQUENCY
- * \brief SERCOM3's Core Clock frequency
- */
-#ifndef CONF_GCLK_SERCOM3_CORE_FREQUENCY
-#define CONF_GCLK_SERCOM3_CORE_FREQUENCY 1000000
-#endif
-
-/**
- * \def CONF_GCLK_SERCOM3_SLOW_FREQUENCY
- * \brief SERCOM3's Slow Clock frequency
- */
-#ifndef CONF_GCLK_SERCOM3_SLOW_FREQUENCY
-#define CONF_GCLK_SERCOM3_SLOW_FREQUENCY 400000
-#endif
-
 // <y> TC Clock Source
 // <id> tc_gclk_selection
 
@@ -256,16 +192,16 @@
 // <GCLK_CLKCTRL_GEN_GCLK7_Val"> Generic clock generator 7
 
 // <i> Select the clock source for TC.
-#ifndef CONF_GCLK_TC3_SRC
-#define CONF_GCLK_TC3_SRC GCLK_CLKCTRL_GEN_GCLK0_Val
+#ifndef CONF_GCLK_TC0_SRC
+#define CONF_GCLK_TC0_SRC GCLK_CLKCTRL_GEN_GCLK1_Val
 #endif
 
 /**
- * \def CONF_GCLK_TC3_FREQUENCY
- * \brief TC3's Clock frequency
+ * \def CONF_GCLK_TC0_FREQUENCY
+ * \brief TC0's Clock frequency
  */
-#ifndef CONF_GCLK_TC3_FREQUENCY
-#define CONF_GCLK_TC3_FREQUENCY 8000000
+#ifndef CONF_GCLK_TC0_FREQUENCY
+#define CONF_GCLK_TC0_FREQUENCY 1024
 #endif
 
 // <y> TC Clock Source

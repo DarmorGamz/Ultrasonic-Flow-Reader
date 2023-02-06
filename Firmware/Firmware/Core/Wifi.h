@@ -9,11 +9,11 @@ extern "C" {
 #include <compiler.h>
 
 
-/** CONSTANT AND MACRO DEFINITIONS *******************************************/
-
-
 /** PUBLIC FUNCTION PROTOTYPES ************************************************/
+int8_t Wifi_Init(void);
 
+void Wifi_PowerDown(void);
+void Wifi_PowerUp(void);
 
 #ifdef __cplusplus
 }

@@ -26,8 +26,7 @@ static uint16_t s_u16TimerCount;
  *  @param[out] None
  *  @return     0 indicates success. Anything else is an error.
  ******************************************************************************/
-int16_t Timer_Init(void)
-{
+int16_t Timer_Init(void) {
     // Initialization of TIMER_0 already done in driver_init.c
 
     // Clear the contents of the timer array
@@ -43,8 +42,7 @@ int16_t Timer_Init(void)
  *  @param[out] uint16_t    Index of the new timer
  *  @return     0 indicates success. Anything else is an error.
  ******************************************************************************/
-int16_t Timer_AddTimer(uint16_t *u16Timer)
-{
+int16_t Timer_AddTimer(uint16_t *u16Timer) {
     // Bail out with error if there are no timers left
     if (s_u16TimerCount>=TIMER_MAX_COUNT) return -1;
 
@@ -64,8 +62,7 @@ int16_t Timer_AddTimer(uint16_t *u16Timer)
  *  @param[out] None
  *  @return     Nothing
  ******************************************************************************/
-void Timer_SetTimer(uint16_t timer, uint16_t sec)
-{
+void Timer_SetTimer(uint16_t timer, uint16_t sec) {
     s_au16Timers[timer] = sec;
 }
 /**************************************************************************//**
@@ -74,8 +71,7 @@ void Timer_SetTimer(uint16_t timer, uint16_t sec)
  *  @param[out] None
  *  @return     uint16_t    Current timer value (in seconds)
  ******************************************************************************/
-uint16_t Timer_GetTimer(uint16_t timer)
-{
+uint16_t Timer_GetTimer(uint16_t timer) {
     return s_au16Timers[timer];
 }
 
@@ -87,8 +83,7 @@ uint16_t Timer_GetTimer(uint16_t timer)
  *  @return     Nothing
  ******************************************************************************/
 static struct timer_task task;
-void Timer_Register_Callback(void* fpTimerCb)
-{
+void Timer_Register_Callback(void* fpTimerCb) {
     task.interval = 1; // Timer output configured for one second
     task.cb = fpTimerCb;
     task.mode = TIMER_TASK_REPEAT;
@@ -103,8 +98,7 @@ void Timer_Register_Callback(void* fpTimerCb)
  *  @param[out] None
  *  @return     Nothing
  ******************************************************************************/
-void Timer_Pump(void)
-{
+void Timer_Pump(void) {
     for (uint16_t index=0; index<s_u16TimerCount; index++) {
         uint16_t count = Timer_GetTimer(index);
         if (count>0) Timer_SetTimer(index, count-1);

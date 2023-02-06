@@ -38,6 +38,15 @@
 #include <utils_assert.h>
 #include <hpl_tc_base.h>
 
+#ifndef CONF_TC0_ENABLE
+#define CONF_TC0_ENABLE 0
+#endif
+#ifndef CONF_TC1_ENABLE
+#define CONF_TC1_ENABLE 0
+#endif
+#ifndef CONF_TC2_ENABLE
+#define CONF_TC2_ENABLE 0
+#endif
 #ifndef CONF_TC3_ENABLE
 #define CONF_TC3_ENABLE 0
 #endif
@@ -57,17 +66,17 @@
 /**
  * \brief TC IRQ base index
  */
-#define TC_IRQ_BASE_INDEX ((uint8_t)TC3_IRQn)
+#define TC_IRQ_BASE_INDEX ((uint8_t)TC0_IRQn)
 
 /**
  * \brief TC base address
  */
-#define TC_HW_BASE_ADDR ((uint32_t)TC3)
+#define TC_HW_BASE_ADDR ((uint32_t)TC0)
 
 /**
  * \brief TC number offset
  */
-#define TC_NUMBER_OFFSET 3
+#define TC_NUMBER_OFFSET 0
 
 /**
  * \brief Macro is used to fill usart configuration structure based on its
@@ -105,6 +114,15 @@ struct tc_configuration {
  * \brief Array of TC configurations
  */
 static struct tc_configuration _tcs[] = {
+#if CONF_TC0_ENABLE == 1
+    TC_CONFIGURATION(0),
+#endif
+#if CONF_TC1_ENABLE == 1
+    TC_CONFIGURATION(1),
+#endif
+#if CONF_TC2_ENABLE == 1
+    TC_CONFIGURATION(2),
+#endif
 #if CONF_TC3_ENABLE == 1
     TC_CONFIGURATION(3),
 #endif
@@ -122,7 +140,7 @@ static struct tc_configuration _tcs[] = {
 #endif
 };
 
-static struct _timer_device *_tc3_dev = NULL;
+static struct _timer_device *_tc0_dev = NULL;
 
 static struct _timer_device *_tc4_dev = NULL;
 
@@ -280,9 +298,9 @@ static void tc_interrupt_handler(struct _timer_device *device)
 /**
  * \brief TC interrupt handler
  */
-void TC3_Handler(void)
+void TC0_Handler(void)
 {
-	tc_interrupt_handler(_tc3_dev);
+	tc_interrupt_handler(_tc0_dev);
 }
 
 /**
@@ -334,8 +352,8 @@ static int8_t get_tc_index(const void *const hw)
  */
 static void _tc_init_irq_param(const void *const hw, void *dev)
 {
-	if (hw == TC3) {
-		_tc3_dev = (struct _timer_device *)dev;
+	if (hw == TC0) {
+		_tc0_dev = (struct _timer_device *)dev;
 	}
 	if (hw == TC4) {
 		_tc4_dev = (struct _timer_device *)dev;

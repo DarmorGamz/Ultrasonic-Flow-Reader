@@ -5,16 +5,16 @@
     <ProjectVersion>7.0</ProjectVersion>
     <ToolchainName>com.Atmel.ARMGCC.C</ToolchainName>
     <ProjectGuid>dce6c7e3-ee26-4d79-826b-08594b9ad897</ProjectGuid>
-    <avrdevice>ATSAMD21J18A</avrdevice>
+    <avrdevice>ATSAMD20E18</avrdevice>
     <avrdeviceseries>none</avrdeviceseries>
     <OutputType>Executable</OutputType>
     <Language>C</Language>
     <OutputFileName>$(MSBuildProjectName)</OutputFileName>
     <OutputFileExtension>.elf</OutputFileExtension>
     <OutputDirectory>$(MSBuildProjectDirectory)\$(Configuration)</OutputDirectory>
-    <AssemblyName>DCA_Firmware</AssemblyName>
-    <Name>DCA_Firmware</Name>
-    <RootNamespace>DCA_Firmware</RootNamespace>
+    <AssemblyName>DCA_FIRMWARE</AssemblyName>
+    <Name>DCA_FIRMWARE</Name>
+    <RootNamespace>DCA_FIRMWARE</RootNamespace>
     <ToolchainFlavour>Native</ToolchainFlavour>
     <KeepTimersRunning>true</KeepTimersRunning>
     <OverrideVtor>false</OverrideVtor>
@@ -55,6 +55,7 @@
           <AcmeProjectActionInfo Action="File" Source="hal/include/hal_atomic.h" IsConfig="false" Hash="dAg/XLzGqPqh12ZGWK6HLw" />
           <AcmeProjectActionInfo Action="File" Source="hal/include/hal_delay.h" IsConfig="false" Hash="snalDV+S1QGquCV38zAdoA" />
           <AcmeProjectActionInfo Action="File" Source="hal/include/hal_ext_irq.h" IsConfig="false" Hash="sm9cN3GPkLctaX5iRw7wzw" />
+          <AcmeProjectActionInfo Action="File" Source="hal/include/hal_flash.h" IsConfig="false" Hash="/1zTaNTia1qfUqpSN+MhrA" />
           <AcmeProjectActionInfo Action="File" Source="hal/include/hal_gpio.h" IsConfig="false" Hash="3mBEQ9Ix28YOArddDes83Q" />
           <AcmeProjectActionInfo Action="File" Source="hal/include/hal_init.h" IsConfig="false" Hash="OrYSVpF3YA5XrOBImWpdSg" />
           <AcmeProjectActionInfo Action="File" Source="hal/include/hal_io.h" IsConfig="false" Hash="XZRSabc39WU/0MFBLYGLvQ" />
@@ -65,6 +66,7 @@
           <AcmeProjectActionInfo Action="File" Source="hal/include/hpl_delay.h" IsConfig="false" Hash="3tgjyGPrs0ePCewpMUQPbQ" />
           <AcmeProjectActionInfo Action="File" Source="hal/include/hpl_dma.h" IsConfig="false" Hash="C3XG0wWxKLSRQVHSNMCgIQ" />
           <AcmeProjectActionInfo Action="File" Source="hal/include/hpl_ext_irq.h" IsConfig="false" Hash="IEyup/01CSWudIu8vklYPQ" />
+          <AcmeProjectActionInfo Action="File" Source="hal/include/hpl_flash.h" IsConfig="false" Hash="DGgLGlKFEktLGx+0+woSGw" />
           <AcmeProjectActionInfo Action="File" Source="hal/include/hpl_gpio.h" IsConfig="false" Hash="kGeglKjrgbcKZDOsM+XTrw" />
           <AcmeProjectActionInfo Action="File" Source="hal/include/hpl_i2c_m_async.h" IsConfig="false" Hash="2YKSxDd++st93P4wS0x3sw" />
           <AcmeProjectActionInfo Action="File" Source="hal/include/hpl_i2c_m_sync.h" IsConfig="false" Hash="9PBv4UnwhtkmG2PaLCX74Q" />
@@ -79,9 +81,11 @@
           <AcmeProjectActionInfo Action="File" Source="hal/include/hpl_spi_sync.h" IsConfig="false" Hash="Qr5slVYsVsngWiAyjLwx8A" />
           <AcmeProjectActionInfo Action="File" Source="hal/include/hpl_time_measure.h" IsConfig="false" Hash="3gMv9Ur+2bKt2LK5h7IEcQ" />
           <AcmeProjectActionInfo Action="File" Source="hal/include/hpl_usart.h" IsConfig="false" Hash="gkIcItnlv0v8NvwxEz9neA" />
+          <AcmeProjectActionInfo Action="File" Source="hal/include/hpl_user_area.h" IsConfig="false" Hash="66YDS0l7ibOrJGOru9ZKVw" />
           <AcmeProjectActionInfo Action="File" Source="hal/include/hpl_wdt.h" IsConfig="false" Hash="J2BXxJGoxlx3Bi9pfKE/Cw" />
           <AcmeProjectActionInfo Action="File" Source="hal/src/hal_atomic.c" IsConfig="false" Hash="jOsfB5ZnunjCPnUQXuXi9g" />
           <AcmeProjectActionInfo Action="File" Source="hal/src/hal_delay.c" IsConfig="false" Hash="vZ+YYOpHjTcAZaAaTE3Izg" />
+          <AcmeProjectActionInfo Action="File" Source="hal/src/hal_flash.c" IsConfig="false" Hash="mZd7ifxXQdRgAiPkldzRJw" />
           <AcmeProjectActionInfo Action="File" Source="hal/src/hal_gpio.c" IsConfig="false" Hash="wIzN9zQd1b8qd+RDoSkD7Q" />
           <AcmeProjectActionInfo Action="File" Source="hal/src/hal_init.c" IsConfig="false" Hash="bJvq8kpNbbOE2nZfChOGTQ" />
           <AcmeProjectActionInfo Action="File" Source="hal/src/hal_io.c" IsConfig="false" Hash="FYpavzYSxhFzVrBQtcH2ZA" />
@@ -100,32 +104,26 @@
           <AcmeProjectActionInfo Action="File" Source="hal/utils/src/utils_event.c" IsConfig="false" Hash="sR2eRthblYjlO/jHulP6aw" />
           <AcmeProjectActionInfo Action="File" Source="hal/utils/src/utils_list.c" IsConfig="false" Hash="rW6uwWgOnnMWzJjuYzxzZw" />
           <AcmeProjectActionInfo Action="File" Source="hal/utils/src/utils_syscalls.c" IsConfig="false" Hash="NaBnZufa6Sau3+tzlyR7Kw" />
-          <AcmeProjectActionInfo Action="File" Source="hri/hri_ac_d21.h" IsConfig="false" Hash="+Myp4TtkhIOVhKgErt9wKQ" />
-          <AcmeProjectActionInfo Action="File" Source="hri/hri_adc_d21.h" IsConfig="false" Hash="vF1bInr6tBwYElwTTGt0Ow" />
-          <AcmeProjectActionInfo Action="File" Source="hri/hri_d21.h" IsConfig="false" Hash="a9CyG97BNC6jHqUWKL3zIg" />
-          <AcmeProjectActionInfo Action="File" Source="hri/hri_dac_d21.h" IsConfig="false" Hash="MtLLyq08BueHKoHbOHYmWw" />
-          <AcmeProjectActionInfo Action="File" Source="hri/hri_dmac_d21.h" IsConfig="false" Hash="rgQA7Glp01uhlmOnyZ3GjQ" />
-          <AcmeProjectActionInfo Action="File" Source="hri/hri_dsu_d21.h" IsConfig="false" Hash="LNXQp5z9gyBbuFodm3crWQ" />
-          <AcmeProjectActionInfo Action="File" Source="hri/hri_eic_d21.h" IsConfig="false" Hash="HWqiq3Cgj9hnO0zRL+d2SQ" />
-          <AcmeProjectActionInfo Action="File" Source="hri/hri_evsys_d21.h" IsConfig="false" Hash="CEq7q5/aH3mhPYW0NXr88A" />
-          <AcmeProjectActionInfo Action="File" Source="hri/hri_gclk_d21.h" IsConfig="false" Hash="7D1x+1S0kHABPM1aIXxKJA" />
-          <AcmeProjectActionInfo Action="File" Source="hri/hri_hmatrixb_d21.h" IsConfig="false" Hash="3HW35Am0M1lLmNEjWu42YQ" />
-          <AcmeProjectActionInfo Action="File" Source="hri/hri_i2s_d21.h" IsConfig="false" Hash="J6rEVrZdLdG/3EBQzud0Ag" />
-          <AcmeProjectActionInfo Action="File" Source="hri/hri_mtb_d21.h" IsConfig="false" Hash="HSbKzdabZz+C4fu8CfaP0w" />
-          <AcmeProjectActionInfo Action="File" Source="hri/hri_nvic_d21.h" IsConfig="false" Hash="l3rKTDJ7MN4RmHXT34+ArQ" />
-          <AcmeProjectActionInfo Action="File" Source="hri/hri_nvmctrl_d21.h" IsConfig="false" Hash="Ta5f1DN5GIQcHG6Q8wytsA" />
-          <AcmeProjectActionInfo Action="File" Source="hri/hri_pac_d21.h" IsConfig="false" Hash="aYKlnGkQaP4/f8pUHFxwMA" />
-          <AcmeProjectActionInfo Action="File" Source="hri/hri_pm_d21.h" IsConfig="false" Hash="kiVlvTS4ITwgk1M+itW43w" />
-          <AcmeProjectActionInfo Action="File" Source="hri/hri_port_d21.h" IsConfig="false" Hash="sgy8uGgCA6FvRa02HguR/w" />
-          <AcmeProjectActionInfo Action="File" Source="hri/hri_rtc_d21.h" IsConfig="false" Hash="z7tx73mrOXhBz6jNNOO+4w" />
-          <AcmeProjectActionInfo Action="File" Source="hri/hri_sercom_d21.h" IsConfig="false" Hash="JQhhT+E0gyflx5KAgr3y1w" />
-          <AcmeProjectActionInfo Action="File" Source="hri/hri_sysctrl_d21.h" IsConfig="false" Hash="zmEo3FSei1/HczckqZn4Cw" />
-          <AcmeProjectActionInfo Action="File" Source="hri/hri_systemcontrol_d21.h" IsConfig="false" Hash="Oj0UYucNQJFNSw14NbJ3xA" />
-          <AcmeProjectActionInfo Action="File" Source="hri/hri_systick_d21.h" IsConfig="false" Hash="b6/N1Xy8yBUBzRbFQJt0eQ" />
-          <AcmeProjectActionInfo Action="File" Source="hri/hri_tc_d21.h" IsConfig="false" Hash="3qPHAUeVLS0QN5aKvTsfiA" />
-          <AcmeProjectActionInfo Action="File" Source="hri/hri_tcc_d21.h" IsConfig="false" Hash="QA192KQHCCZc1sbOL1N+JQ" />
-          <AcmeProjectActionInfo Action="File" Source="hri/hri_usb_d21.h" IsConfig="false" Hash="RxhrdW3BEk3zWzOXVeshaQ" />
-          <AcmeProjectActionInfo Action="File" Source="hri/hri_wdt_d21.h" IsConfig="false" Hash="ruUMkugqrufLH89qsLNR9Q" />
+          <AcmeProjectActionInfo Action="File" Source="hri/hri_ac_d20.h" IsConfig="false" Hash="DPTeFgCH4hPT9mpuWXBm1g" />
+          <AcmeProjectActionInfo Action="File" Source="hri/hri_adc_d20.h" IsConfig="false" Hash="FxY9Dd2alOkzqA/OzAMLMg" />
+          <AcmeProjectActionInfo Action="File" Source="hri/hri_d20.h" IsConfig="false" Hash="mb5+skhm++y7AHPxPd1HRA" />
+          <AcmeProjectActionInfo Action="File" Source="hri/hri_dac_d20.h" IsConfig="false" Hash="5WNGFunOhz7qnnVsS9TP0Q" />
+          <AcmeProjectActionInfo Action="File" Source="hri/hri_dsu_d20.h" IsConfig="false" Hash="ouA8H4NrZntWoK8MeUy0rA" />
+          <AcmeProjectActionInfo Action="File" Source="hri/hri_eic_d20.h" IsConfig="false" Hash="x+92G5trknazmGDuSbz3EA" />
+          <AcmeProjectActionInfo Action="File" Source="hri/hri_evsys_d20.h" IsConfig="false" Hash="AZaxr0qkF6tYZxeZBK6V7w" />
+          <AcmeProjectActionInfo Action="File" Source="hri/hri_gclk_d20.h" IsConfig="false" Hash="J3RmeB5FR/EQdetuEyItnA" />
+          <AcmeProjectActionInfo Action="File" Source="hri/hri_nvic_d20.h" IsConfig="false" Hash="/otcDmvFLtqKqIUpvmosTg" />
+          <AcmeProjectActionInfo Action="File" Source="hri/hri_nvmctrl_d20.h" IsConfig="false" Hash="lWbtJ1aNI8bTON4Z1b6GvA" />
+          <AcmeProjectActionInfo Action="File" Source="hri/hri_pac_d20.h" IsConfig="false" Hash="4lXRcV/sfN81QskMp6Kl3w" />
+          <AcmeProjectActionInfo Action="File" Source="hri/hri_pm_d20.h" IsConfig="false" Hash="kCSVlnbSPzyQZUl5sTCJLA" />
+          <AcmeProjectActionInfo Action="File" Source="hri/hri_port_d20.h" IsConfig="false" Hash="Zw3zxWJHIkqkTwP161PGxQ" />
+          <AcmeProjectActionInfo Action="File" Source="hri/hri_rtc_d20.h" IsConfig="false" Hash="0Sip1gA6YrkhSiCjxAXGmQ" />
+          <AcmeProjectActionInfo Action="File" Source="hri/hri_sercom_d20.h" IsConfig="false" Hash="NC7efV+GTB6ERbEcmmMHJA" />
+          <AcmeProjectActionInfo Action="File" Source="hri/hri_sysctrl_d20.h" IsConfig="false" Hash="dqCpfU4rmQSySGpCQx8u8g" />
+          <AcmeProjectActionInfo Action="File" Source="hri/hri_systemcontrol_d20.h" IsConfig="false" Hash="VG5J5A3SFxkl/qXVKJW46g" />
+          <AcmeProjectActionInfo Action="File" Source="hri/hri_systick_d20.h" IsConfig="false" Hash="VVyXk1k2eHrbUo6ZdBA96w" />
+          <AcmeProjectActionInfo Action="File" Source="hri/hri_tc_d20.h" IsConfig="false" Hash="v4iBtmlsZVEJ7WY0nNXUFQ" />
+          <AcmeProjectActionInfo Action="File" Source="hri/hri_wdt_d20.h" IsConfig="false" Hash="CvxZhuVaogZGBinSJmwxJQ" />
           <AcmeProjectActionInfo Action="File" Source="tcpip_lite/ethernet_drivers/enc28j60.c" IsConfig="false" Hash="gvVpIGbC9zcXMY68B0nCYA" />
           <AcmeProjectActionInfo Action="File" Source="tcpip_lite/ethernet_drivers/enc28j60.h" IsConfig="false" Hash="Qkk4mo0xG1NSzoHf1mhAUw" />
           <AcmeProjectActionInfo Action="File" Source="tcpip_lite/ethernet_drivers/ethernet_driver.h" IsConfig="false" Hash="+koCq3RAx09NomJOMyFl3w" />
@@ -150,21 +148,13 @@
           <AcmeProjectActionInfo Action="File" Source="tcpip_lite/source/syslog.c" IsConfig="false" Hash="MPCdBJb1aEoKUCJ8dygt5g" />
           <AcmeProjectActionInfo Action="File" Source="tcpip_lite/source/tcpv4.c" IsConfig="false" Hash="k8S14ib0QrN1MvOPH/lJ0A" />
           <AcmeProjectActionInfo Action="File" Source="tcpip_lite/source/udpv4.c" IsConfig="false" Hash="XD6gYkwHxPa6SIQmawXgFw" />
-          <AcmeProjectActionInfo Action="File" Source="stdio_redirect/gcc/read.c" IsConfig="false" Hash="965gzdOr4sfKJQ4OpEJN/g" />
-          <AcmeProjectActionInfo Action="File" Source="stdio_redirect/gcc/write.c" IsConfig="false" Hash="gCAVrSOZuCMZ84vNa/WFxA" />
-          <AcmeProjectActionInfo Action="File" Source="stdio_redirect/iar/read.c" IsConfig="false" Hash="IpkgLxXTg/nDat19kCJ3gw" />
-          <AcmeProjectActionInfo Action="File" Source="stdio_redirect/iar/write.c" IsConfig="false" Hash="JTD9ZyU1GAbpub8mamr/ZA" />
-          <AcmeProjectActionInfo Action="File" Source="stdio_redirect/keil/Retarget.c" IsConfig="false" Hash="NzdDPGuEvGimitFm3wVXxw" />
-          <AcmeProjectActionInfo Action="File" Source="stdio_redirect/stdio_io.c" IsConfig="false" Hash="Nx8PfIAymK/f5AjLql/CyQ" />
-          <AcmeProjectActionInfo Action="File" Source="stdio_redirect/stdio_io.h" IsConfig="false" Hash="4X02f8UL8cjBHeGJM3BnHw" />
           <AcmeProjectActionInfo Action="File" Source="main.c" IsConfig="false" Hash="k0AH7j+BrmdFhBPzCCMptA" />
-          <AcmeProjectActionInfo Action="File" Source="driver_init.c" IsConfig="false" Hash="QhiOIXiSUjDrvdkxlEP8zw" />
-          <AcmeProjectActionInfo Action="File" Source="driver_init.h" IsConfig="false" Hash="aE2Rzb7YrchiUr/r+fz7fQ" />
-          <AcmeProjectActionInfo Action="File" Source="atmel_start_pins.h" IsConfig="false" Hash="4HaI4XHer4ayLMCJ5E/+wQ" />
-          <AcmeProjectActionInfo Action="File" Source="examples/driver_examples.h" IsConfig="false" Hash="KvT45ULvuqyppiLjviuTSw" />
-          <AcmeProjectActionInfo Action="File" Source="examples/driver_examples.c" IsConfig="false" Hash="9NIpM1/S4m3yx+9+QZTnzg" />
+          <AcmeProjectActionInfo Action="File" Source="driver_init.c" IsConfig="false" Hash="kXyh0YpZyr8XJkV/34QPvg" />
+          <AcmeProjectActionInfo Action="File" Source="driver_init.h" IsConfig="false" Hash="PLaSSajn7Uz6K3pCeORv1g" />
+          <AcmeProjectActionInfo Action="File" Source="atmel_start_pins.h" IsConfig="false" Hash="45Q+HrHzscDyjZ61QsYyjA" />
+          <AcmeProjectActionInfo Action="File" Source="examples/driver_examples.h" IsConfig="false" Hash="1DYO0RXYHA2Ogj38f/8dCQ" />
+          <AcmeProjectActionInfo Action="File" Source="examples/driver_examples.c" IsConfig="false" Hash="lTwCd+zLUf08gOCisK/cjA" />
           <AcmeProjectActionInfo Action="File" Source="hal/include/hal_timer.h" IsConfig="false" Hash="5pZVthtMl40VMvofOld2ng" />
-          <AcmeProjectActionInfo Action="File" Source="hal/include/hal_usart_sync.h" IsConfig="false" Hash="ZzIGSRyjZuxRzFAtNNt7sw" />
           <AcmeProjectActionInfo Action="File" Source="hal/include/hpl_missing_features.h" IsConfig="false" Hash="XsAvpgfutzkw0Y5SydYFaw" />
           <AcmeProjectActionInfo Action="File" Source="hal/include/hpl_pwm.h" IsConfig="false" Hash="1wL9C0Z542rKOnnyJpZ7Yg" />
           <AcmeProjectActionInfo Action="File" Source="hal/include/hpl_reset.h" IsConfig="false" Hash="+CqAZ9ApCgGvJmJ2q83zGA" />
@@ -179,64 +169,60 @@
           <AcmeProjectActionInfo Action="File" Source="hal/src/hal_ext_irq.c" IsConfig="false" Hash="Hi8BWrYBf6f91sJYhG9v3Q" />
           <AcmeProjectActionInfo Action="File" Source="hal/src/hal_spi_m_sync.c" IsConfig="false" Hash="Q0IudnTEWeoIkfQIoYIqxA" />
           <AcmeProjectActionInfo Action="File" Source="hal/src/hal_timer.c" IsConfig="false" Hash="F2MrEXhHq4umI9xpONnlGg" />
-          <AcmeProjectActionInfo Action="File" Source="hal/src/hal_usart_sync.c" IsConfig="false" Hash="VBVlAmBFEYTTUMHeIRFSxg" />
-          <AcmeProjectActionInfo Action="File" Source="hal/utils/include/parts.h" IsConfig="false" Hash="Mpqha0i6iKRli0QX8WeoBw" />
+          <AcmeProjectActionInfo Action="File" Source="hal/utils/include/parts.h" IsConfig="false" Hash="MfoGayz0XcEKPI59BfKE4Q" />
           <AcmeProjectActionInfo Action="File" Source="hpl/core/hpl_core_m0plus_base.c" IsConfig="false" Hash="AcX9qn6GCVzwrlYdWY3zOA" />
           <AcmeProjectActionInfo Action="File" Source="hpl/core/hpl_core_port.h" IsConfig="false" Hash="RXrDMMracCeflR1F9jWiGg" />
-          <AcmeProjectActionInfo Action="File" Source="hpl/core/hpl_init.c" IsConfig="false" Hash="J8Bch2EHfVo5EAMz3ZxY5g" />
-          <AcmeProjectActionInfo Action="File" Source="hpl/dmac/hpl_dmac.c" IsConfig="false" Hash="MoM5TbmRfJ3qJVn3o7mIwg" />
+          <AcmeProjectActionInfo Action="File" Source="hpl/core/hpl_init.c" IsConfig="false" Hash="uZ1d5irCWigkXsMIO1Dfsw" />
           <AcmeProjectActionInfo Action="File" Source="hpl/eic/hpl_eic.c" IsConfig="false" Hash="yuCn8DhGdkhILrb/NWo4sA" />
-          <AcmeProjectActionInfo Action="File" Source="hpl/gclk/hpl_gclk.c" IsConfig="false" Hash="zz1IsWaC1Iqn2bYLrBmGLg" />
+          <AcmeProjectActionInfo Action="File" Source="hpl/gclk/hpl_gclk.c" IsConfig="false" Hash="NtQ9ehLwgO43rrWhB72Fxg" />
           <AcmeProjectActionInfo Action="File" Source="hpl/gclk/hpl_gclk_base.h" IsConfig="false" Hash="XtS8huv0QZPSF9cvAeZ8RA" />
+          <AcmeProjectActionInfo Action="File" Source="hpl/nvmctrl/hpl_nvmctrl.c" IsConfig="false" Hash="2SYfzkvxEmCLOPB3omCaAw" />
           <AcmeProjectActionInfo Action="File" Source="hpl/pm/hpl_pm.c" IsConfig="false" Hash="R3wV7M4HtYcRCNz6RQOhCw" />
-          <AcmeProjectActionInfo Action="File" Source="hpl/pm/hpl_pm_base.h" IsConfig="false" Hash="T2mwlja7rLI0u564Rgn0Dw" />
+          <AcmeProjectActionInfo Action="File" Source="hpl/pm/hpl_pm_base.h" IsConfig="false" Hash="mu/cJkNmIO9+ePPxohrUiQ" />
           <AcmeProjectActionInfo Action="File" Source="hpl/port/hpl_gpio_base.h" IsConfig="false" Hash="XsyO6HptLFNEGxGJG040Iw" />
-          <AcmeProjectActionInfo Action="File" Source="hpl/sercom/hpl_sercom.c" IsConfig="false" Hash="dr5LuevJbM4AXs6Wy7Dpsg" />
-          <AcmeProjectActionInfo Action="File" Source="hpl/sysctrl/hpl_sysctrl.c" IsConfig="false" Hash="d4wIg1swqGafMtp4ATkI2w" />
+          <AcmeProjectActionInfo Action="File" Source="hpl/sercom/hpl_sercom.c" IsConfig="false" Hash="clDXj0A05kuk+Lb00kQtaA" />
+          <AcmeProjectActionInfo Action="File" Source="hpl/sysctrl/hpl_sysctrl.c" IsConfig="false" Hash="pr7bTfut1VhrZG+305XgtQ" />
           <AcmeProjectActionInfo Action="File" Source="hpl/systick/hpl_systick.c" IsConfig="false" Hash="YYWQVH26EDBDzYTUwepAcA" />
-          <AcmeProjectActionInfo Action="File" Source="hpl/tc/hpl_tc.c" IsConfig="false" Hash="ReUiR7Ahjj7Bj6j7lzJV0w" />
+          <AcmeProjectActionInfo Action="File" Source="hpl/tc/hpl_tc.c" IsConfig="false" Hash="8gDrqRZvEd13zSvhga0k/A" />
           <AcmeProjectActionInfo Action="File" Source="hpl/tc/hpl_tc_base.h" IsConfig="false" Hash="gjj5IyaZPy6sUReifzS1GQ" />
           <AcmeProjectActionInfo Action="File" Source="hpl/wdt/hpl_wdt.c" IsConfig="false" Hash="cyUihGSvkV7WL8KjKOKoGA" />
           <AcmeProjectActionInfo Action="File" Source="hpl/wdt/hpl_wdt_base.h" IsConfig="false" Hash="cYf18KazRj6YPAIVDHemBQ" />
           <AcmeProjectActionInfo Action="File" Source="tcpip_lite_start.c" IsConfig="false" Hash="FLou+JoNR7aVXzL0zAeQhQ" />
           <AcmeProjectActionInfo Action="File" Source="tcpip_lite_start.h" IsConfig="false" Hash="bTA+Btu3ODE+Hb4g9IPs6g" />
           <AcmeProjectActionInfo Action="File" Source="tcpip_lite/include/sys_arch.h" IsConfig="false" Hash="lmJfupnn0C+SwIYQ721ghw" />
-          <AcmeProjectActionInfo Action="File" Source="stdio_start.c" IsConfig="false" Hash="Udm/tXHHiC3fgblx5Ef8/w" />
-          <AcmeProjectActionInfo Action="File" Source="stdio_start.h" IsConfig="false" Hash="93xl+Vpm3WitiCoKaATDSg" />
-          <AcmeProjectActionInfo Action="File" Source="atmel_start.h" IsConfig="false" Hash="MIvfjvTxMumkrxUw1UYaPA" />
-          <AcmeProjectActionInfo Action="File" Source="atmel_start.c" IsConfig="false" Hash="vgwImuuZBFxUTk3SL1vFWQ" />
-          <AcmeProjectActionInfo Action="File" Source="config/hpl_dmac_config.h" IsConfig="true" Hash="epQJaS6fYVwOO2L9+1CkQg" />
-          <AcmeProjectActionInfo Action="File" Source="config/hpl_eic_config.h" IsConfig="true" Hash="wlRk9L+kPhL+SHTKh/80lw" />
-          <AcmeProjectActionInfo Action="File" Source="config/hpl_gclk_config.h" IsConfig="true" Hash="welfn8ibgo9mbF8VV7yksQ" />
+          <AcmeProjectActionInfo Action="File" Source="atmel_start.h" IsConfig="false" Hash="HzTJQlwoL1Q9VWgHkroRqQ" />
+          <AcmeProjectActionInfo Action="File" Source="atmel_start.c" IsConfig="false" Hash="L4QuASImsXvP7e+MZ/WQMQ" />
+          <AcmeProjectActionInfo Action="File" Source="config/hpl_eic_config.h" IsConfig="true" Hash="jem1ojUONQ9ii8nP5tQ2oA" />
+          <AcmeProjectActionInfo Action="File" Source="config/hpl_gclk_config.h" IsConfig="true" Hash="//r1QkzN8MHwoT69UV2+zQ" />
+          <AcmeProjectActionInfo Action="File" Source="config/hpl_nvmctrl_config.h" IsConfig="true" Hash="l5K9dhQ/DEXZQde+K7Oh/A" />
           <AcmeProjectActionInfo Action="File" Source="config/hpl_pm_config.h" IsConfig="true" Hash="GH0DautnKY3X7yLEFG4tgA" />
-          <AcmeProjectActionInfo Action="File" Source="config/hpl_sercom_config.h" IsConfig="true" Hash="2Rwr725nwJgEJQYXSIdTww" />
-          <AcmeProjectActionInfo Action="File" Source="config/hpl_sysctrl_config.h" IsConfig="true" Hash="nBdKBeil9ILQjDpYv8SEng" />
+          <AcmeProjectActionInfo Action="File" Source="config/hpl_sercom_config.h" IsConfig="true" Hash="bWbVR8rfG+J+uthOhQ8k/Q" />
+          <AcmeProjectActionInfo Action="File" Source="config/hpl_sysctrl_config.h" IsConfig="true" Hash="odMNXuS7+Rs6SfX9F4Wq4g" />
           <AcmeProjectActionInfo Action="File" Source="config/hpl_systick_config.h" IsConfig="true" Hash="tlT3lNDKWFe82MiGWfQzcA" />
-          <AcmeProjectActionInfo Action="File" Source="config/hpl_tc_config.h" IsConfig="true" Hash="Qn4ZzrAfte7YYPCwtW4qKQ" />
-          <AcmeProjectActionInfo Action="File" Source="config/hpl_wdt_config.h" IsConfig="true" Hash="CoVfB0lQUobhPLy7Cy/KXw" />
-          <AcmeProjectActionInfo Action="File" Source="config/peripheral_clk_config.h" IsConfig="true" Hash="biu8aeLTqWwW0ys1oLAGcA" />
+          <AcmeProjectActionInfo Action="File" Source="config/hpl_tc_config.h" IsConfig="true" Hash="yB+N/p8VWI0Wpor7jUxtFA" />
+          <AcmeProjectActionInfo Action="File" Source="config/hpl_wdt_config.h" IsConfig="true" Hash="CEooFQe894hXQEFvijK/7w" />
+          <AcmeProjectActionInfo Action="File" Source="config/peripheral_clk_config.h" IsConfig="true" Hash="eOLK3T/osnxMxDPlei6kvg" />
           <AcmeProjectActionInfo Action="File" Source="config/enc28j60_spiif_config.h" IsConfig="true" Hash="as438+XsISkPSbaemlPB7A" />
-          <AcmeProjectActionInfo Action="File" Source="config/tcpip_lite_config.h" IsConfig="true" Hash="dHwodg/uZ3xwQzcQm59VXg" />
-          <AcmeProjectActionInfo Action="File" Source="config/stdio_redirect_config.h" IsConfig="true" Hash="CKmkBk12sfr7mb+HRQBuzg" />
+          <AcmeProjectActionInfo Action="File" Source="config/tcpip_lite_config.h" IsConfig="true" Hash="rPinkEtMnufIXGpinmnKgg" />
         </AcmeActionInfos>
         <NonsecureFilesInfo />
       </AcmeProjectConfig>
     </AcmeProjectConfig>
-    <avrtool>com.atmel.avrdbg.tool.edbg</avrtool>
-    <avrtoolserialnumber>ATML2130021800009481</avrtoolserialnumber>
-    <avrdeviceexpectedsignature>0x10010300</avrdeviceexpectedsignature>
+    <avrtool>com.atmel.avrdbg.tool.atmelice</avrtool>
+    <avrtoolserialnumber>J42700054519</avrtoolserialnumber>
+    <avrdeviceexpectedsignature>0x1000140A</avrdeviceexpectedsignature>
     <avrtoolinterface>SWD</avrtoolinterface>
-    <com_atmel_avrdbg_tool_edbg>
+    <com_atmel_avrdbg_tool_atmelice>
       <ToolOptions>
         <InterfaceProperties>
           <SwdClock>2000000</SwdClock>
         </InterfaceProperties>
         <InterfaceName>SWD</InterfaceName>
       </ToolOptions>
-      <ToolType>com.atmel.avrdbg.tool.edbg</ToolType>
-      <ToolNumber>ATML2130021800009481</ToolNumber>
-      <ToolName>EDBG MSD</ToolName>
-    </com_atmel_avrdbg_tool_edbg>
+      <ToolType>com.atmel.avrdbg.tool.atmelice</ToolType>
+      <ToolNumber>J42700054519</ToolNumber>
+      <ToolName>Atmel-ICE</ToolName>
+    </com_atmel_avrdbg_tool_atmelice>
     <avrtoolinterfaceclock>2000000</avrtoolinterfaceclock>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
@@ -255,15 +241,16 @@
   <armgcc.compiler.directories.IncludePaths>
     <ListValues>
       <Value>%24(PackRepoDir)\arm\CMSIS\5.4.0\CMSIS\Core\Include\</Value>
+      <Value>../Component/winc1500</Value>
       <Value>../Config</Value>
       <Value>../</Value>
       <Value>../examples</Value>
       <Value>../hal/include</Value>
       <Value>../hal/utils/include</Value>
       <Value>../hpl/core</Value>
-      <Value>../hpl/dmac</Value>
       <Value>../hpl/eic</Value>
       <Value>../hpl/gclk</Value>
+      <Value>../hpl/nvmctrl</Value>
       <Value>../hpl/pm</Value>
       <Value>../hpl/port</Value>
       <Value>../hpl/sercom</Value>
@@ -274,8 +261,7 @@
       <Value>../hri</Value>
       <Value>../tcpip_lite/ethernet_drivers</Value>
       <Value>../tcpip_lite/include</Value>
-      <Value>../stdio_redirect</Value>
-      <Value>%24(PackRepoDir)\atmel\SAMD21_DFP\1.3.395\samd21a\include</Value>
+      <Value>%24(PackRepoDir)\atmel\SAMD20_DFP\1.3.165\samd20\include</Value>
     </ListValues>
   </armgcc.compiler.directories.IncludePaths>
   <armgcc.compiler.optimization.level>Optimize for size (-Os)</armgcc.compiler.optimization.level>
@@ -293,19 +279,21 @@
     </ListValues>
   </armgcc.linker.libraries.LibrarySearchPaths>
   <armgcc.linker.optimization.GarbageCollectUnusedSections>True</armgcc.linker.optimization.GarbageCollectUnusedSections>
-  <armgcc.linker.miscellaneous.LinkerFlags>-Tsamd21j18a_flash.ld</armgcc.linker.miscellaneous.LinkerFlags>
+  <armgcc.linker.memorysettings.ExternalRAM />
+  <armgcc.linker.miscellaneous.LinkerFlags>-Tsamd20e18_flash.ld</armgcc.linker.miscellaneous.LinkerFlags>
   <armgcc.assembler.general.IncludePaths>
     <ListValues>
       <Value>%24(PackRepoDir)\arm\CMSIS\5.4.0\CMSIS\Core\Include\</Value>
+      <Value>../Component/winc1500</Value>
       <Value>../Config</Value>
       <Value>../</Value>
       <Value>../examples</Value>
       <Value>../hal/include</Value>
       <Value>../hal/utils/include</Value>
       <Value>../hpl/core</Value>
-      <Value>../hpl/dmac</Value>
       <Value>../hpl/eic</Value>
       <Value>../hpl/gclk</Value>
+      <Value>../hpl/nvmctrl</Value>
       <Value>../hpl/pm</Value>
       <Value>../hpl/port</Value>
       <Value>../hpl/sercom</Value>
@@ -316,22 +304,22 @@
       <Value>../hri</Value>
       <Value>../tcpip_lite/ethernet_drivers</Value>
       <Value>../tcpip_lite/include</Value>
-      <Value>../stdio_redirect</Value>
-      <Value>%24(PackRepoDir)\atmel\SAMD21_DFP\1.3.395\samd21a\include</Value>
+      <Value>%24(PackRepoDir)\atmel\SAMD20_DFP\1.3.165\samd20\include</Value>
     </ListValues>
   </armgcc.assembler.general.IncludePaths>
   <armgcc.preprocessingassembler.general.IncludePaths>
     <ListValues>
       <Value>%24(PackRepoDir)\arm\CMSIS\5.4.0\CMSIS\Core\Include\</Value>
+      <Value>../Component/winc1500</Value>
       <Value>../Config</Value>
       <Value>../</Value>
       <Value>../examples</Value>
       <Value>../hal/include</Value>
       <Value>../hal/utils/include</Value>
       <Value>../hpl/core</Value>
-      <Value>../hpl/dmac</Value>
       <Value>../hpl/eic</Value>
       <Value>../hpl/gclk</Value>
+      <Value>../hpl/nvmctrl</Value>
       <Value>../hpl/pm</Value>
       <Value>../hpl/port</Value>
       <Value>../hpl/sercom</Value>
@@ -342,8 +330,7 @@
       <Value>../hri</Value>
       <Value>../tcpip_lite/ethernet_drivers</Value>
       <Value>../tcpip_lite/include</Value>
-      <Value>../stdio_redirect</Value>
-      <Value>%24(PackRepoDir)\atmel\SAMD21_DFP\1.3.395\samd21a\include</Value>
+      <Value>%24(PackRepoDir)\atmel\SAMD20_DFP\1.3.165\samd20\include</Value>
     </ListValues>
   </armgcc.preprocessingassembler.general.IncludePaths>
 </ArmGcc>
@@ -365,15 +352,16 @@
   <armgcc.compiler.directories.IncludePaths>
     <ListValues>
       <Value>%24(PackRepoDir)\arm\CMSIS\5.4.0\CMSIS\Core\Include\</Value>
+      <Value>../Component/winc1500</Value>
       <Value>../Config</Value>
       <Value>../</Value>
       <Value>../examples</Value>
       <Value>../hal/include</Value>
       <Value>../hal/utils/include</Value>
       <Value>../hpl/core</Value>
-      <Value>../hpl/dmac</Value>
       <Value>../hpl/eic</Value>
       <Value>../hpl/gclk</Value>
+      <Value>../hpl/nvmctrl</Value>
       <Value>../hpl/pm</Value>
       <Value>../hpl/port</Value>
       <Value>../hpl/sercom</Value>
@@ -384,9 +372,7 @@
       <Value>../hri</Value>
       <Value>../tcpip_lite/ethernet_drivers</Value>
       <Value>../tcpip_lite/include</Value>
-      <Value>../stdio_redirect</Value>
-      <Value>%24(PackRepoDir)\atmel\SAMD21_DFP\1.3.395\samd21a\include</Value>
-      <Value>../Components/Winc</Value>
+      <Value>%24(PackRepoDir)\atmel\SAMD20_DFP\1.3.165\samd20\include</Value>
     </ListValues>
   </armgcc.compiler.directories.IncludePaths>
   <armgcc.compiler.optimization.level>Optimize debugging experience (-Og)</armgcc.compiler.optimization.level>
@@ -406,19 +392,20 @@
   </armgcc.linker.libraries.LibrarySearchPaths>
   <armgcc.linker.optimization.GarbageCollectUnusedSections>True</armgcc.linker.optimization.GarbageCollectUnusedSections>
   <armgcc.linker.memorysettings.ExternalRAM />
-  <armgcc.linker.miscellaneous.LinkerFlags>-Tsamd21j18a_flash.ld</armgcc.linker.miscellaneous.LinkerFlags>
+  <armgcc.linker.miscellaneous.LinkerFlags>-Tsamd20e18_flash.ld</armgcc.linker.miscellaneous.LinkerFlags>
   <armgcc.assembler.general.IncludePaths>
     <ListValues>
       <Value>%24(PackRepoDir)\arm\CMSIS\5.4.0\CMSIS\Core\Include\</Value>
+      <Value>../Component/winc1500</Value>
       <Value>../Config</Value>
       <Value>../</Value>
       <Value>../examples</Value>
       <Value>../hal/include</Value>
       <Value>../hal/utils/include</Value>
       <Value>../hpl/core</Value>
-      <Value>../hpl/dmac</Value>
       <Value>../hpl/eic</Value>
       <Value>../hpl/gclk</Value>
+      <Value>../hpl/nvmctrl</Value>
       <Value>../hpl/pm</Value>
       <Value>../hpl/port</Value>
       <Value>../hpl/sercom</Value>
@@ -429,23 +416,23 @@
       <Value>../hri</Value>
       <Value>../tcpip_lite/ethernet_drivers</Value>
       <Value>../tcpip_lite/include</Value>
-      <Value>../stdio_redirect</Value>
-      <Value>%24(PackRepoDir)\atmel\SAMD21_DFP\1.3.395\samd21a\include</Value>
+      <Value>%24(PackRepoDir)\atmel\SAMD20_DFP\1.3.165\samd20\include</Value>
     </ListValues>
   </armgcc.assembler.general.IncludePaths>
   <armgcc.assembler.debugging.DebugLevel>Default (-g)</armgcc.assembler.debugging.DebugLevel>
   <armgcc.preprocessingassembler.general.IncludePaths>
     <ListValues>
       <Value>%24(PackRepoDir)\arm\CMSIS\5.4.0\CMSIS\Core\Include\</Value>
+      <Value>../Component/winc1500</Value>
       <Value>../Config</Value>
       <Value>../</Value>
       <Value>../examples</Value>
       <Value>../hal/include</Value>
       <Value>../hal/utils/include</Value>
       <Value>../hpl/core</Value>
-      <Value>../hpl/dmac</Value>
       <Value>../hpl/eic</Value>
       <Value>../hpl/gclk</Value>
+      <Value>../hpl/nvmctrl</Value>
       <Value>../hpl/pm</Value>
       <Value>../hpl/port</Value>
       <Value>../hpl/sercom</Value>
@@ -456,8 +443,7 @@
       <Value>../hri</Value>
       <Value>../tcpip_lite/ethernet_drivers</Value>
       <Value>../tcpip_lite/include</Value>
-      <Value>../stdio_redirect</Value>
-      <Value>%24(PackRepoDir)\atmel\SAMD21_DFP\1.3.395\samd21a\include</Value>
+      <Value>%24(PackRepoDir)\atmel\SAMD20_DFP\1.3.165\samd20\include</Value>
     </ListValues>
   </armgcc.preprocessingassembler.general.IncludePaths>
   <armgcc.preprocessingassembler.debugging.DebugLevel>Default (-Wa,-g)</armgcc.preprocessingassembler.debugging.DebugLevel>
@@ -483,16 +469,166 @@
     <Compile Include="atmel_start_pins.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="Config\enc28j60_spiif_config.h">
+    <Compile Include="Component\winc1500\bsp\include\nm_bsp.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="Config\hpl_dmac_config.h">
+    <Compile Include="Component\winc1500\bsp\include\nm_bsp_internal.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Component\winc1500\bsp\source\nm_bsp.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Component\winc1500\bus_wrapper\include\nm_bus_wrapper.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Component\winc1500\bus_wrapper\source\nm_bus_wrapper.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Component\winc1500\common\include\nm_common.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Component\winc1500\common\include\nm_debug.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Component\winc1500\common\source\nm_common.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Component\winc1500\driver\include\ecc_types.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Component\winc1500\driver\include\m2m_ate_mode.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Component\winc1500\driver\include\m2m_crypto.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Component\winc1500\driver\include\m2m_ota.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Component\winc1500\driver\include\m2m_periph.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Component\winc1500\driver\include\m2m_ssl.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Component\winc1500\driver\include\m2m_types.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Component\winc1500\driver\include\m2m_wifi.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Component\winc1500\driver\source\m2m_ate_mode.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Component\winc1500\driver\source\m2m_crypto.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Component\winc1500\driver\source\m2m_hif.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Component\winc1500\driver\source\m2m_hif.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Component\winc1500\driver\source\m2m_ota.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Component\winc1500\driver\source\m2m_periph.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Component\winc1500\driver\source\m2m_ssl.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Component\winc1500\driver\source\m2m_wifi.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Component\winc1500\driver\source\nmasic.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Component\winc1500\driver\source\nmasic.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Component\winc1500\driver\source\nmbus.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Component\winc1500\driver\source\nmbus.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Component\winc1500\driver\source\nmdrv.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Component\winc1500\driver\source\nmdrv.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Component\winc1500\driver\source\nmi2c.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Component\winc1500\driver\source\nmi2c.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Component\winc1500\driver\source\nmspi.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Component\winc1500\driver\source\nmspi.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Component\winc1500\driver\source\nmuart.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Component\winc1500\driver\source\nmuart.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Component\winc1500\programmer\programmer.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Component\winc1500\programmer\programmer_apis.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Component\winc1500\socket\include\m2m_socket_host_if.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Component\winc1500\socket\include\socket.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Component\winc1500\socket\source\socket.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Component\winc1500\socket\source\socket_internal.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Component\winc1500\spi_flash\include\flexible_flash.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Component\winc1500\spi_flash\include\spi_flash.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Component\winc1500\spi_flash\include\spi_flash_map.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Component\winc1500\spi_flash\source\flexible_flash.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Component\winc1500\spi_flash\source\spi_flash.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Component\winc1500\winc1500_config.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Component\winc1500\winc_init.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Component\winc1500\winc_init.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Config\enc28j60_spiif_config.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="Config\hpl_eic_config.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="Config\hpl_gclk_config.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Config\hpl_nvmctrl_config.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="Config\hpl_pm_config.h">
@@ -519,10 +655,19 @@
     <Compile Include="Config\RTE_Components.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="Config\stdio_redirect_config.h">
+    <Compile Include="Config\tcpip_lite_config.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="Config\tcpip_lite_config.h">
+    <Compile Include="Core\CmdFifo.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Core\Common.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Core\Debug.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Core\Debug.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="Core\Ethernet.c">
@@ -531,10 +676,31 @@
     <Compile Include="Core\Ethernet.h">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="Core\Flash.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Core\Flash.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Core\Http.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Core\Http.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Core\TcpParser.c">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="Core\Timer.c">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="Core\Timer.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Core\Timestamp.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Core\Timestamp.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="Core\Watchdog.c">
@@ -549,10 +715,10 @@
     <Compile Include="Core\Wifi.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="Device_Startup\startup_samd21.c">
+    <Compile Include="Device_Startup\startup_samd20.c">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="Device_Startup\system_samd21.c">
+    <Compile Include="Device_Startup\system_samd20.c">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="driver_init.c">
@@ -576,6 +742,9 @@
     <Compile Include="hal\include\hal_ext_irq.h">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="hal\include\hal_flash.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="hal\include\hal_gpio.h">
       <SubType>compile</SubType>
     </Compile>
@@ -594,9 +763,6 @@
     <Compile Include="hal\include\hal_timer.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="hal\include\hal_usart_sync.h">
-      <SubType>compile</SubType>
-    </Compile>
     <Compile Include="hal\include\hal_wdt.h">
       <SubType>compile</SubType>
     </Compile>
@@ -610,6 +776,9 @@
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="hal\include\hpl_ext_irq.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="hal\include\hpl_flash.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="hal\include\hpl_gpio.h">
@@ -687,6 +856,9 @@
     <Compile Include="hal\include\hpl_usart_sync.h">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="hal\include\hpl_user_area.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="hal\include\hpl_wdt.h">
       <SubType>compile</SubType>
     </Compile>
@@ -697,6 +869,9 @@
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="hal\src\hal_ext_irq.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="hal\src\hal_flash.c">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="hal\src\hal_gpio.c">
@@ -715,9 +890,6 @@
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="hal\src\hal_timer.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="hal\src\hal_usart_sync.c">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="hal\src\hal_wdt.c">
@@ -774,9 +946,6 @@
     <Compile Include="hpl\core\hpl_init.c">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="hpl\dmac\hpl_dmac.c">
-      <SubType>compile</SubType>
-    </Compile>
     <Compile Include="hpl\eic\hpl_eic.c">
       <SubType>compile</SubType>
     </Compile>
@@ -784,6 +953,9 @@
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="hpl\gclk\hpl_gclk_base.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="hpl\nvmctrl\hpl_nvmctrl.c">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="hpl\pm\hpl_pm.c">
@@ -816,103 +988,67 @@
     <Compile Include="hpl\wdt\hpl_wdt_base.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="hri\hri_ac_d21.h">
+    <Compile Include="hri\hri_ac_d20.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="hri\hri_adc_d21.h">
+    <Compile Include="hri\hri_adc_d20.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="hri\hri_d21.h">
+    <Compile Include="hri\hri_d20.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="hri\hri_dac_d21.h">
+    <Compile Include="hri\hri_dac_d20.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="hri\hri_dmac_d21.h">
+    <Compile Include="hri\hri_dsu_d20.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="hri\hri_dsu_d21.h">
+    <Compile Include="hri\hri_eic_d20.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="hri\hri_eic_d21.h">
+    <Compile Include="hri\hri_evsys_d20.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="hri\hri_evsys_d21.h">
+    <Compile Include="hri\hri_gclk_d20.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="hri\hri_gclk_d21.h">
+    <Compile Include="hri\hri_nvic_d20.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="hri\hri_hmatrixb_d21.h">
+    <Compile Include="hri\hri_nvmctrl_d20.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="hri\hri_i2s_d21.h">
+    <Compile Include="hri\hri_pac_d20.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="hri\hri_mtb_d21.h">
+    <Compile Include="hri\hri_pm_d20.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="hri\hri_nvic_d21.h">
+    <Compile Include="hri\hri_port_d20.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="hri\hri_nvmctrl_d21.h">
+    <Compile Include="hri\hri_rtc_d20.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="hri\hri_pac_d21.h">
+    <Compile Include="hri\hri_sercom_d20.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="hri\hri_pm_d21.h">
+    <Compile Include="hri\hri_sysctrl_d20.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="hri\hri_port_d21.h">
+    <Compile Include="hri\hri_systemcontrol_d20.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="hri\hri_rtc_d21.h">
+    <Compile Include="hri\hri_systick_d20.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="hri\hri_sercom_d21.h">
+    <Compile Include="hri\hri_tc_d20.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="hri\hri_sysctrl_d21.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="hri\hri_systemcontrol_d21.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="hri\hri_systick_d21.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="hri\hri_tcc_d21.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="hri\hri_tc_d21.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="hri\hri_usb_d21.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="hri\hri_wdt_d21.h">
+    <Compile Include="hri\hri_wdt_d20.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="main.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="stdio_redirect\gcc\read.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="stdio_redirect\gcc\write.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="stdio_redirect\stdio_io.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="stdio_redirect\stdio_io.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="stdio_start.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="stdio_start.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="tcpip_lite\ethernet_drivers\enc28j60.c">
@@ -998,11 +1134,28 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Components\" />
+    <Folder Include="Component\winc1500\" />
+    <Folder Include="Component\winc1500\bsp\" />
+    <Folder Include="Component\winc1500\bsp\include\" />
+    <Folder Include="Component\winc1500\bsp\source\" />
+    <Folder Include="Component\winc1500\bus_wrapper\" />
+    <Folder Include="Component\winc1500\bus_wrapper\include\" />
+    <Folder Include="Component\winc1500\bus_wrapper\source\" />
+    <Folder Include="Component\winc1500\common\" />
+    <Folder Include="Component\winc1500\common\include\" />
+    <Folder Include="Component\winc1500\common\source\" />
+    <Folder Include="Component\winc1500\driver\" />
+    <Folder Include="Component\winc1500\driver\include\" />
+    <Folder Include="Component\winc1500\driver\source\" />
+    <Folder Include="Component\winc1500\programmer\" />
+    <Folder Include="Component\winc1500\socket\" />
+    <Folder Include="Component\winc1500\socket\include\" />
+    <Folder Include="Component\winc1500\socket\source\" />
+    <Folder Include="Component\winc1500\spi_flash\" />
+    <Folder Include="Component\winc1500\spi_flash\include\" />
+    <Folder Include="Component\winc1500\spi_flash\source\" />
     <Folder Include="Config\" />
     <Folder Include="Device_Startup\" />
-    <Folder Include="App" />
-    <Folder Include="Core" />
     <Folder Include="documentation\" />
     <Folder Include="examples\" />
     <Folder Include="hal\" />
@@ -1014,9 +1167,9 @@
     <Folder Include="hal\utils\src\" />
     <Folder Include="hpl\" />
     <Folder Include="hpl\core\" />
-    <Folder Include="hpl\dmac\" />
     <Folder Include="hpl\eic\" />
     <Folder Include="hpl\gclk\" />
+    <Folder Include="hpl\nvmctrl\" />
     <Folder Include="hpl\pm\" />
     <Folder Include="hpl\port\" />
     <Folder Include="hpl\sercom\" />
@@ -1024,25 +1177,26 @@
     <Folder Include="hpl\systick\" />
     <Folder Include="hpl\tc\" />
     <Folder Include="hpl\wdt\" />
+    <Folder Include="App" />
+    <Folder Include="Core" />
+    <Folder Include="Component" />
     <Folder Include="hri\" />
-    <Folder Include="stdio_redirect\" />
-    <Folder Include="stdio_redirect\gcc\" />
     <Folder Include="tcpip_lite\" />
     <Folder Include="tcpip_lite\ethernet_drivers\" />
     <Folder Include="tcpip_lite\include\" />
     <Folder Include="tcpip_lite\source\" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Device_Startup\samd21j18a_flash.ld">
+    <None Include="Component\winc1500\WINC1500_SW_API.chm">
       <SubType>compile</SubType>
     </None>
-    <None Include="Device_Startup\samd21j18a_sram.ld">
+    <None Include="Device_Startup\samd20e18_flash.ld">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="Device_Startup\samd20e18_sram.ld">
       <SubType>compile</SubType>
     </None>
     <None Include="documentation\enc28j60_spiif.rst">
-      <SubType>compile</SubType>
-    </None>
-    <None Include="documentation\stdio.rst">
       <SubType>compile</SubType>
     </None>
     <None Include="documentation\tcpip_lite.rst">
@@ -1051,13 +1205,13 @@
     <None Include="hal\documentation\ext_irq.rst">
       <SubType>compile</SubType>
     </None>
+    <None Include="hal\documentation\flash.rst">
+      <SubType>compile</SubType>
+    </None>
     <None Include="hal\documentation\spi_master_sync.rst">
       <SubType>compile</SubType>
     </None>
     <None Include="hal\documentation\timer.rst">
-      <SubType>compile</SubType>
-    </None>
-    <None Include="hal\documentation\usart_sync.rst">
       <SubType>compile</SubType>
     </None>
     <None Include="hal\documentation\wdt.rst">

@@ -35,10 +35,6 @@
 #include <hpl_init.h>
 #include <hpl_gclk_base.h>
 #include <hpl_pm_config.h>
-#include <hpl_pm_base.h>
-
-#include <hpl_dma.h>
-#include <hpl_dmac_config.h>
 
 /* Referenced GCLKs (out of 0~7), should be initialized firstly
  */
@@ -60,10 +56,4 @@ void _init_chip(void)
 #endif
 	_sysctrl_init_referenced_generators();
 	_gclk_init_generators_by_fref(_GCLK_INIT_LAST);
-
-#if CONF_DMAC_ENABLE
-	_pm_enable_bus_clock(PM_BUS_AHB, DMAC);
-	_pm_enable_bus_clock(PM_BUS_APBB, DMAC);
-	_dma_init();
-#endif
 }

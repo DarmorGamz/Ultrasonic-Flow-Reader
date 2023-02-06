@@ -13,31 +13,18 @@
 #include <hpl_gclk_base.h>
 #include <hpl_pm_base.h>
 
-struct spi_m_sync_descriptor WIRELESS_SPI;
 struct spi_m_sync_descriptor ETHERNET_SPI;
+struct spi_m_sync_descriptor WIRELESS_SPI;
 struct timer_descriptor      TIMER_0;
 struct timer_descriptor      TICK_TIMER;
 
-struct usart_sync_descriptor DEBUG_0;
+struct flash_descriptor FLASH_0;
 
 struct wdt_descriptor WDT_0;
 
 void EXTERNAL_IRQ_0_init(void)
 {
 	_gclk_enable_channel(EIC_GCLK_ID, CONF_GCLK_EIC_SRC);
-
-	// Set pin direction to input
-	gpio_set_pin_direction(WIRELESS_IRQ, GPIO_DIRECTION_IN);
-
-	gpio_set_pin_pull_mode(WIRELESS_IRQ,
-	                       // <y> Pull configuration
-	                       // <id> pad_pull_config
-	                       // <GPIO_PULL_OFF"> Off
-	                       // <GPIO_PULL_UP"> Pull-up
-	                       // <GPIO_PULL_DOWN"> Pull-down
-	                       GPIO_PULL_OFF);
-
-	gpio_set_pin_function(WIRELESS_IRQ, PINMUX_PB04A_EIC_EXTINT4);
 
 	// Set pin direction to input
 	gpio_set_pin_direction(ETHERNET_IRQ, GPIO_DIRECTION_IN);
@@ -48,20 +35,14 @@ void EXTERNAL_IRQ_0_init(void)
 	                       // <GPIO_PULL_OFF"> Off
 	                       // <GPIO_PULL_UP"> Pull-up
 	                       // <GPIO_PULL_DOWN"> Pull-down
-	                       GPIO_PULL_OFF);
+	                       GPIO_PULL_UP);
 
-	gpio_set_pin_function(ETHERNET_IRQ, PINMUX_PB14A_EIC_EXTINT14);
-
-	ext_irq_init();
-}
-
-void WIRELESS_SPI_PORT_init(void)
-{
+	gpio_set_pin_function(ETHERNET_IRQ, PINMUX_PA14A_EIC_EXTINT14);
 
 	// Set pin direction to input
-	gpio_set_pin_direction(WIRELESS_MISO, GPIO_DIRECTION_IN);
+	gpio_set_pin_direction(WIRELESS_IRQn, GPIO_DIRECTION_IN);
 
-	gpio_set_pin_pull_mode(WIRELESS_MISO,
+	gpio_set_pin_pull_mode(WIRELESS_IRQn,
 	                       // <y> Pull configuration
 	                       // <id> pad_pull_config
 	                       // <GPIO_PULL_OFF"> Off
@@ -69,50 +50,27 @@ void WIRELESS_SPI_PORT_init(void)
 	                       // <GPIO_PULL_DOWN"> Pull-down
 	                       GPIO_PULL_UP);
 
-	gpio_set_pin_function(WIRELESS_MISO, PINMUX_PA04D_SERCOM0_PAD0);
+	gpio_set_pin_function(WIRELESS_IRQn, PINMUX_PA15A_EIC_EXTINT15);
 
-	gpio_set_pin_level(WIRELESS_MOSI,
-	                   // <y> Initial level
-	                   // <id> pad_initial_level
-	                   // <false"> Low
-	                   // <true"> High
-	                   true);
-
-	// Set pin direction to output
-	gpio_set_pin_direction(WIRELESS_MOSI, GPIO_DIRECTION_OUT);
-
-	gpio_set_pin_function(WIRELESS_MOSI, PINMUX_PA06D_SERCOM0_PAD2);
-
-	gpio_set_pin_level(WIRELESS_SCK,
-	                   // <y> Initial level
-	                   // <id> pad_initial_level
-	                   // <false"> Low
-	                   // <true"> High
-	                   false);
-
-	// Set pin direction to output
-	gpio_set_pin_direction(WIRELESS_SCK, GPIO_DIRECTION_OUT);
-
-	gpio_set_pin_function(WIRELESS_SCK, PINMUX_PA07D_SERCOM0_PAD3);
+	ext_irq_init();
 }
 
-void WIRELESS_SPI_CLOCK_init(void)
+void FLASH_0_CLOCK_init(void)
 {
-	_pm_enable_bus_clock(PM_BUS_APBC, SERCOM0);
-	_gclk_enable_channel(SERCOM0_GCLK_ID_CORE, CONF_GCLK_SERCOM0_CORE_SRC);
+
+	_pm_enable_bus_clock(PM_BUS_APBB, NVMCTRL);
 }
 
-void WIRELESS_SPI_init(void)
+void FLASH_0_init(void)
 {
-	WIRELESS_SPI_CLOCK_init();
-	spi_m_sync_init(&WIRELESS_SPI, SERCOM0);
-	WIRELESS_SPI_PORT_init();
+	FLASH_0_CLOCK_init();
+	flash_init(&FLASH_0, NVMCTRL);
 }
 
 void ETHERNET_SPI_PORT_init(void)
 {
 
-	gpio_set_pin_level(ETHERNET_MISO,
+	gpio_set_pin_level(ETHERNET_MOSI,
 	                   // <y> Initial level
 	                   // <id> pad_initial_level
 	                   // <false"> Low
@@ -120,14 +78,14 @@ void ETHERNET_SPI_PORT_init(void)
 	                   false);
 
 	// Set pin direction to output
-	gpio_set_pin_direction(ETHERNET_MISO, GPIO_DIRECTION_OUT);
+	gpio_set_pin_direction(ETHERNET_MOSI, GPIO_DIRECTION_OUT);
 
-	gpio_set_pin_function(ETHERNET_MISO, PINMUX_PA16C_SERCOM1_PAD0);
+	gpio_set_pin_function(ETHERNET_MOSI, PINMUX_PA08C_SERCOM0_PAD0);
 
 	// Set pin direction to input
-	gpio_set_pin_direction(ETHERNET_MOSI, GPIO_DIRECTION_IN);
+	gpio_set_pin_direction(ETHERNET_MISO, GPIO_DIRECTION_IN);
 
-	gpio_set_pin_pull_mode(ETHERNET_MOSI,
+	gpio_set_pin_pull_mode(ETHERNET_MISO,
 	                       // <y> Pull configuration
 	                       // <id> pad_pull_config
 	                       // <GPIO_PULL_OFF"> Off
@@ -135,7 +93,7 @@ void ETHERNET_SPI_PORT_init(void)
 	                       // <GPIO_PULL_DOWN"> Pull-down
 	                       GPIO_PULL_OFF);
 
-	gpio_set_pin_function(ETHERNET_MOSI, PINMUX_PA18C_SERCOM1_PAD2);
+	gpio_set_pin_function(ETHERNET_MISO, PINMUX_PA09C_SERCOM0_PAD1);
 
 	gpio_set_pin_level(ETHERNET_SCK,
 	                   // <y> Initial level
@@ -147,41 +105,74 @@ void ETHERNET_SPI_PORT_init(void)
 	// Set pin direction to output
 	gpio_set_pin_direction(ETHERNET_SCK, GPIO_DIRECTION_OUT);
 
-	gpio_set_pin_function(ETHERNET_SCK, PINMUX_PA19C_SERCOM1_PAD3);
+	gpio_set_pin_function(ETHERNET_SCK, PINMUX_PA07D_SERCOM0_PAD3);
 }
 
 void ETHERNET_SPI_CLOCK_init(void)
 {
-	_pm_enable_bus_clock(PM_BUS_APBC, SERCOM1);
-	_gclk_enable_channel(SERCOM1_GCLK_ID_CORE, CONF_GCLK_SERCOM1_CORE_SRC);
+	_pm_enable_bus_clock(PM_BUS_APBC, SERCOM0);
+	_gclk_enable_channel(SERCOM0_GCLK_ID_CORE, CONF_GCLK_SERCOM0_CORE_SRC);
 }
 
 void ETHERNET_SPI_init(void)
 {
 	ETHERNET_SPI_CLOCK_init();
-	spi_m_sync_init(&ETHERNET_SPI, SERCOM1);
+	spi_m_sync_init(&ETHERNET_SPI, SERCOM0);
 	ETHERNET_SPI_PORT_init();
 }
 
-void DEBUG_0_PORT_init(void)
+void WIRELESS_SPI_PORT_init(void)
 {
 
-	gpio_set_pin_function(VIRTUAL_TX, PINMUX_PA22C_SERCOM3_PAD0);
+	gpio_set_pin_level(WIRELESS_MOSI,
+	                   // <y> Initial level
+	                   // <id> pad_initial_level
+	                   // <false"> Low
+	                   // <true"> High
+	                   false);
 
-	gpio_set_pin_function(VIRTUAL_RX, PINMUX_PA23C_SERCOM3_PAD1);
+	// Set pin direction to output
+	gpio_set_pin_direction(WIRELESS_MOSI, GPIO_DIRECTION_OUT);
+
+	gpio_set_pin_function(WIRELESS_MOSI, PINMUX_PA16C_SERCOM1_PAD0);
+
+	// Set pin direction to input
+	gpio_set_pin_direction(WIRELESS_MISO, GPIO_DIRECTION_IN);
+
+	gpio_set_pin_pull_mode(WIRELESS_MISO,
+	                       // <y> Pull configuration
+	                       // <id> pad_pull_config
+	                       // <GPIO_PULL_OFF"> Off
+	                       // <GPIO_PULL_UP"> Pull-up
+	                       // <GPIO_PULL_DOWN"> Pull-down
+	                       GPIO_PULL_OFF);
+
+	gpio_set_pin_function(WIRELESS_MISO, PINMUX_PA17C_SERCOM1_PAD1);
+
+	gpio_set_pin_level(WIRELESS_SCK,
+	                   // <y> Initial level
+	                   // <id> pad_initial_level
+	                   // <false"> Low
+	                   // <true"> High
+	                   false);
+
+	// Set pin direction to output
+	gpio_set_pin_direction(WIRELESS_SCK, GPIO_DIRECTION_OUT);
+
+	gpio_set_pin_function(WIRELESS_SCK, PINMUX_PA31D_SERCOM1_PAD3);
 }
 
-void DEBUG_0_CLOCK_init(void)
+void WIRELESS_SPI_CLOCK_init(void)
 {
-	_pm_enable_bus_clock(PM_BUS_APBC, SERCOM3);
-	_gclk_enable_channel(SERCOM3_GCLK_ID_CORE, CONF_GCLK_SERCOM3_CORE_SRC);
+	_pm_enable_bus_clock(PM_BUS_APBC, SERCOM1);
+	_gclk_enable_channel(SERCOM1_GCLK_ID_CORE, CONF_GCLK_SERCOM1_CORE_SRC);
 }
 
-void DEBUG_0_init(void)
+void WIRELESS_SPI_init(void)
 {
-	DEBUG_0_CLOCK_init();
-	usart_sync_init(&DEBUG_0, SERCOM3, (void *)NULL);
-	DEBUG_0_PORT_init();
+	WIRELESS_SPI_CLOCK_init();
+	spi_m_sync_init(&WIRELESS_SPI, SERCOM1);
+	WIRELESS_SPI_PORT_init();
 }
 
 void delay_driver_init(void)
@@ -196,10 +187,10 @@ void delay_driver_init(void)
  */
 static void TIMER_0_init(void)
 {
-	_pm_enable_bus_clock(PM_BUS_APBC, TC3);
-	_gclk_enable_channel(TC3_GCLK_ID, CONF_GCLK_TC3_SRC);
+	_pm_enable_bus_clock(PM_BUS_APBC, TC0);
+	_gclk_enable_channel(TC0_GCLK_ID, CONF_GCLK_TC0_SRC);
 
-	timer_init(&TIMER_0, TC3, _tc_get_timer());
+	timer_init(&TIMER_0, TC0, _tc_get_timer());
 }
 
 /**
@@ -233,20 +224,6 @@ void system_init(void)
 
 	// GPIO on PA02
 
-	gpio_set_pin_level(ETHERNET_CS,
-	                   // <y> Initial level
-	                   // <id> pad_initial_level
-	                   // <false"> Low
-	                   // <true"> High
-	                   true);
-
-	// Set pin direction to output
-	gpio_set_pin_direction(ETHERNET_CS, GPIO_DIRECTION_OUT);
-
-	gpio_set_pin_function(ETHERNET_CS, GPIO_PIN_FUNCTION_OFF);
-
-	// GPIO on PA20
-
 	gpio_set_pin_level(ETHERNET_RESET,
 	                   // <y> Initial level
 	                   // <id> pad_initial_level
@@ -259,7 +236,35 @@ void system_init(void)
 
 	gpio_set_pin_function(ETHERNET_RESET, GPIO_PIN_FUNCTION_OFF);
 
-	// GPIO on PB05
+	// GPIO on PA03
+
+	gpio_set_pin_level(WIRELESS_RESETn,
+	                   // <y> Initial level
+	                   // <id> pad_initial_level
+	                   // <false"> Low
+	                   // <true"> High
+	                   false);
+
+	// Set pin direction to output
+	gpio_set_pin_direction(WIRELESS_RESETn, GPIO_DIRECTION_OUT);
+
+	gpio_set_pin_function(WIRELESS_RESETn, GPIO_PIN_FUNCTION_OFF);
+
+	// GPIO on PA04
+
+	gpio_set_pin_level(WIRELESS_WAKE,
+	                   // <y> Initial level
+	                   // <id> pad_initial_level
+	                   // <false"> Low
+	                   // <true"> High
+	                   false);
+
+	// Set pin direction to output
+	gpio_set_pin_direction(WIRELESS_WAKE, GPIO_DIRECTION_OUT);
+
+	gpio_set_pin_function(WIRELESS_WAKE, GPIO_PIN_FUNCTION_OFF);
+
+	// GPIO on PA05
 
 	gpio_set_pin_level(WIRELESS_EN,
 	                   // <y> Initial level
@@ -273,23 +278,9 @@ void system_init(void)
 
 	gpio_set_pin_function(WIRELESS_EN, GPIO_PIN_FUNCTION_OFF);
 
-	// GPIO on PB06
+	// GPIO on PA11
 
-	gpio_set_pin_level(WIRELESS_RESET,
-	                   // <y> Initial level
-	                   // <id> pad_initial_level
-	                   // <false"> Low
-	                   // <true"> High
-	                   false);
-
-	// Set pin direction to output
-	gpio_set_pin_direction(WIRELESS_RESET, GPIO_DIRECTION_OUT);
-
-	gpio_set_pin_function(WIRELESS_RESET, GPIO_PIN_FUNCTION_OFF);
-
-	// GPIO on PB07
-
-	gpio_set_pin_level(WIRELESS_CS,
+	gpio_set_pin_level(ETHERNET_CS,
 	                   // <y> Initial level
 	                   // <id> pad_initial_level
 	                   // <false"> Low
@@ -297,17 +288,73 @@ void system_init(void)
 	                   true);
 
 	// Set pin direction to output
-	gpio_set_pin_direction(WIRELESS_CS, GPIO_DIRECTION_OUT);
+	gpio_set_pin_direction(ETHERNET_CS, GPIO_DIRECTION_OUT);
 
-	gpio_set_pin_function(WIRELESS_CS, GPIO_PIN_FUNCTION_OFF);
+	gpio_set_pin_function(ETHERNET_CS, GPIO_PIN_FUNCTION_OFF);
+
+	// GPIO on PA18
+
+	gpio_set_pin_level(PA18,
+	                   // <y> Initial level
+	                   // <id> pad_initial_level
+	                   // <false"> Low
+	                   // <true"> High
+	                   false);
+
+	// Set pin direction to output
+	gpio_set_pin_direction(PA18, GPIO_DIRECTION_OUT);
+
+	gpio_set_pin_function(PA18, GPIO_PIN_FUNCTION_OFF);
+
+	// GPIO on PA19
+
+	gpio_set_pin_level(WIRELESS_CSn,
+	                   // <y> Initial level
+	                   // <id> pad_initial_level
+	                   // <false"> Low
+	                   // <true"> High
+	                   false);
+
+	// Set pin direction to output
+	gpio_set_pin_direction(WIRELESS_CSn, GPIO_DIRECTION_OUT);
+
+	gpio_set_pin_function(WIRELESS_CSn, GPIO_PIN_FUNCTION_OFF);
+
+	// GPIO on PA22
+
+	gpio_set_pin_level(LED_GREEN,
+	                   // <y> Initial level
+	                   // <id> pad_initial_level
+	                   // <false"> Low
+	                   // <true"> High
+	                   false);
+
+	// Set pin direction to output
+	gpio_set_pin_direction(LED_GREEN, GPIO_DIRECTION_OUT);
+
+	gpio_set_pin_function(LED_GREEN, GPIO_PIN_FUNCTION_OFF);
+
+	// GPIO on PA23
+
+	gpio_set_pin_level(LED_RED,
+	                   // <y> Initial level
+	                   // <id> pad_initial_level
+	                   // <false"> Low
+	                   // <true"> High
+	                   false);
+
+	// Set pin direction to output
+	gpio_set_pin_direction(LED_RED, GPIO_DIRECTION_OUT);
+
+	gpio_set_pin_function(LED_RED, GPIO_PIN_FUNCTION_OFF);
 
 	EXTERNAL_IRQ_0_init();
 
-	WIRELESS_SPI_init();
+	FLASH_0_init();
 
 	ETHERNET_SPI_init();
 
-	DEBUG_0_init();
+	WIRELESS_SPI_init();
 
 	delay_driver_init();
 

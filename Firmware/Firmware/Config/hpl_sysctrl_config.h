@@ -42,6 +42,20 @@
 #define CONF_XOSC32K_STARTUP_TIME_2000092MCS 6
 #define CONF_XOSC32K_STARTUP_TIME_4000092MCS 7
 
+#ifndef SYSCTRL_OSC8M_PRESC_0_Val
+#define SYSCTRL_OSC8M_PRESC_0_Val 0x0ul /**< \brief (SYSCTRL_OSC8M) 1 */
+#define SYSCTRL_OSC8M_PRESC_1_Val 0x1ul /**< \brief (SYSCTRL_OSC8M) 2 */
+#define SYSCTRL_OSC8M_PRESC_2_Val 0x2ul /**< \brief (SYSCTRL_OSC8M) 4 */
+#define SYSCTRL_OSC8M_PRESC_3_Val 0x3ul /**< \brief (SYSCTRL_OSC8M) 8 */
+#endif
+#ifndef SYSCTRL_XOSC_GAIN_0_Val
+#define SYSCTRL_XOSC_GAIN_0_Val 0x0ul /**< \brief (SYSCTRL_XOSC) 2MHz */
+#define SYSCTRL_XOSC_GAIN_1_Val 0x1ul /**< \brief (SYSCTRL_XOSC) 4MHz */
+#define SYSCTRL_XOSC_GAIN_2_Val 0x2ul /**< \brief (SYSCTRL_XOSC) 8MHz */
+#define SYSCTRL_XOSC_GAIN_3_Val 0x3ul /**< \brief (SYSCTRL_XOSC) 16MHz */
+#define SYSCTRL_XOSC_GAIN_4_Val 0x4ul /**< \brief (SYSCTRL_XOSC) 30MHz */
+#endif
+
 // <e> 8MHz Internal Oscillator Configuration
 // <i> Indicates whether configuration for OSC8M is enabled or not
 // <id> enable_osc8m
@@ -436,20 +450,6 @@
 #define CONF_DFLL_ENABLE 0
 #endif
 
-// <q> Wait Lock
-// <i> Indicates whether Wait Lock is Enables or not
-// <id> dfll48m_arch_waitlock
-#ifndef CONF_DFLL_WAITLOCK
-#define CONF_DFLL_WAITLOCK 0
-#endif
-
-// <q> Bypass Coarse Lock
-// <i> Indicates whether Bypass coarse lock is enabled or not
-// <id> dfll48m_arch_bplckc
-#ifndef CONF_DFLL_BPLCKC
-#define CONF_DFLL_BPLCKC 0
-#endif
-
 // <q> Quick Lock Disable
 // <i> Quick Lock Disable
 // <id> dfll48m_arch_qldis
@@ -480,22 +480,6 @@
 // <id> dfll48m_arch_runstdby
 #ifndef CONF_DFLL_RUNSTDBY
 #define CONF_DFLL_RUNSTDBY 0
-#endif
-
-// <q> USB Clock Recovery Mode
-// <i> USB Clock Recovery Mode
-// <id> dfll48m_arch_usbcrm
-#ifndef CONF_DFLL_USBCRM
-#define CONF_DFLL_USBCRM 0
-#endif
-
-#if CONF_DFLL_USBCRM == 1
-#if CONF_DFLL_QLDIS == 1
-#warning QLDIS must be cleared to speed up the lock phase
-#endif
-#if CONF_DFLL_CCDIS == 0
-#warning CCDIS should be set to speed up the lock phase
-#endif
 #endif
 
 // <q> Lose Lock After Wake
@@ -578,100 +562,6 @@
 
 // </h>
 // </e>
-
-// <e> DPLL Configuration
-// <i> Indicates whether configuration for DPLL is enabled or not
-// <id> enable_fdpll96m
-#ifndef CONF_DPLL_CONFIG
-#define CONF_DPLL_CONFIG 0
-#endif
-
-// <y> Reference Clock Source
-// <GCLK_GENCTRL_SRC_XOSC32K"> 32kHz External Crystal Oscillator (XOSC32K)
-// <GCLK_GENCTRL_SRC_XOSC"> External Crystal Oscillator 0.4-32MHz (XOSC)
-// <GCLK_CLKCTRL_GEN_GCLK0_Val"> Generic clock generator 0
-// <GCLK_CLKCTRL_GEN_GCLK1_Val"> Generic clock generator 1
-// <GCLK_CLKCTRL_GEN_GCLK2_Val"> Generic clock generator 2
-// <GCLK_CLKCTRL_GEN_GCLK3_Val"> Generic clock generator 3
-// <GCLK_CLKCTRL_GEN_GCLK4_Val"> Generic clock generator 4
-// <GCLK_CLKCTRL_GEN_GCLK5_Val"> Generic clock generator 5
-// <GCLK_CLKCTRL_GEN_GCLK6_Val"> Generic clock generator 6
-// <GCLK_CLKCTRL_GEN_GCLK7_Val"> Generic clock generator 7
-// <i> Select the clock source.
-// <id> fdpll96m_ref_clock
-#ifndef CONF_DPLL_GCLK
-#define CONF_DPLL_GCLK GCLK_CLKCTRL_GEN_GCLK3_Val
-#endif
-
-#if (CONF_DPLL_GCLK == GCLK_GENCTRL_SRC_XOSC32K)
-#define CONF_DPLL_REFCLK SYSCTRL_DPLLCTRLB_REFCLK_REF0_Val
-#elif (CONF_DPLL_GCLK == GCLK_GENCTRL_SRC_XOSC)
-#define CONF_DPLL_REFCLK SYSCTRL_DPLLCTRLB_REFCLK_REF1_Val
-#else
-#define CONF_DPLL_REFCLK SYSCTRL_DPLLCTRLB_REFCLK_GCLK_Val
-#endif
-
-// <h> DPLL Control
-// <q> ON Demand
-// <i> Enable On Demand
-// <i> If this bit is 0: The DFLL is always on, if enabled.
-// <i> If this bit is 1: the DFLL will only be running when requested by a peripheral.
-// <id> fdpll96m_arch_ondemand
-#ifndef CONF_DPLL_ONDEMAND
-#define CONF_DPLL_ONDEMAND 1
-#endif
-
-// <q> Run In Standby
-// <i> Run In standby Mode
-// <i> If this bit is 0: The DFLL is disabled in standby sleep mode.
-// <i> If this bit is 1: The DFLL is not stopped in standby sleep mode.
-// <id> fdpll96m_arch_runstdby
-#ifndef CONF_DPLL_RUNSTDBY
-#define CONF_DPLL_RUNSTDBY 0
-#endif
-
-// <q> DPLL Enable
-// <i> Indicates whether DPLL is enabled or not
-// <id> fdpll96m_arch_enable
-#ifndef CONF_DPLL_ENABLE
-#define CONF_DPLL_ENABLE 0
-#endif
-
-// <q> Lock ByPass
-// <i> Enabling it makes the CLK_FDPLL96M always running otherwise it will be turned off when lock signal is low
-// <id> fdpll96m_arch_lbypass
-#ifndef CONF_DPLL_LBYPASS
-#define CONF_DPLL_LBYPASS 0
-#endif
-
-// <o>Clock Divider <0-2047>
-// <i> Clock Division Factor (Applicable if reference clock is XOSC)
-// <id> fdpll96m_clock_div
-#ifndef CONF_DPLL_DIV
-#define CONF_DPLL_DIV 0
-#endif
-
-// <o>DPLL LDRFRAC<0-15>
-// <i> Set the  fractional part of the frequency multiplier.
-// <id> fdpll96m_ldrfrac
-#ifndef CONF_DPLL_LDRFRAC
-#define CONF_DPLL_LDRFRAC 13
-#endif
-
-// <o>DPLL LDR <0-4095>
-// <i> Set the  integer part of the frequency multiplier.
-// <id> fdpll96m_ldr
-#ifndef CONF_DPLL_LDR
-#define CONF_DPLL_LDR 1463
-#endif
-
-// </h>
-// </e>
-
-#define CONF_DPLL_LTIME SYSCTRL_DPLLCTRLB_LTIME_DEFAULT_Val
-#define CONF_DPLL_WUF 0
-#define CONF_DPLL_LPEN 0
-#define CONF_DPLL_FILTER SYSCTRL_DPLLCTRLB_FILTER_DEFAULT_Val
 
 // <<< end of configuration section >>>
 

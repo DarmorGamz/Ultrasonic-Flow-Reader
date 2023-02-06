@@ -64,6 +64,7 @@ const udp_handler_t UDP_CallBackTable[] = {
     {65532, &DEMO_UDP_IdlePkt},
     {DEST_PORT, &DEMO_UDP_Recv},
 #endif
+	{4096, &DNS_Handler},
     {68, &DHCP_Handler} // a catcher to manage the DHCP process
 };
 
@@ -77,6 +78,7 @@ error_msg UDP_Start(uint32_t destIP, uint16_t srcPort, uint16_t dstPort)
 
 	// Start IPv4 Packet to Write IPv4 Header
 	ret = IPv4_Start(destIP, UDP);
+	
 	if (ret == SUCCESS) {
 		// Start to Count the UDP payload length Bytes
 		ETH_ResetByteCount();

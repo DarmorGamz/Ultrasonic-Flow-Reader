@@ -51,7 +51,7 @@ MICROCHIP PROVIDES THIS SOFTWARE CONDITIONALLY UPON YOUR ACCEPTANCE OF THESE TER
 //#define ETH_IRQ_LOW()           ((ETH_IRQ == 0)?1:0)
 
 volatile ethernetDriver_t    ethData;
-const mac48Address_t *       eth_MAC;
+static mac48Address_t        eth_MAC;
 static uint16_t              nextPacketPointer;
 static receiveStatusVector_t rxPacketStatusVector;
 sfr_bank_t                   lastBank;
@@ -76,8 +76,6 @@ static uint16_t ENC28_PhyRead(enc28j60_phy_registers_t a);
 static void     ENC28_PhyWrite(enc28j60_phy_registers_t a, uint16_t d);
 
 static void ENC28_BankSel(enc28j60_registers_t);
-
-static uint16_t checksumCalculation(uint16_t, uint16_t, uint16_t);
 
 uint16_t TXPacketSize;
 
@@ -107,6 +105,7 @@ static void ENC28_BankSel(enc28j60_registers_t r)
 		ETH_NCS_HIGH();
 	}
 }
+
 
 /**
  * Ethernet Initialization - Initializes TX/RX Buffer, MAC and PHY
@@ -149,28 +148,31 @@ void ETH_Init(void)
 	// Configure the receive filter
 	ENC28_Wcr8(J60_ERXFCON, 0b10101001); // UCEN,OR,CRCEN,MPEN,BCEN (unicast,crc,magic packet,broadcast)
 
-	// what is my MAC address?
-	eth_MAC = MAC_getAddress();
+	//// what is my MAC address?
+	//eth_MAC = MAC_getAddress();
 
 	// Initialize the MAC
 	ENC28_Wcr8(J60_MACON1, 0x0D); // TXPAUS, RXPAUS, MARXEN
-	ENC28_Wcr8(J60_MACON3, 0x22); // Pad < 60 bytes, Enable CRC, Frame Check, Half Duplex
+	//ENC28_Wcr8(J60_MACON3, 0x32); // Pad < 60 bytes, Enable CRC, Frame Check, Half Duplex
+	ENC28_Wcr8(J60_MACON3, 0xB2); // VLAN padded to 64 bytes (others pad to 60 bytes), Enable CRC, Frame Check, Half Duplex
 	ENC28_Wcr8(J60_MACON4, 0x40); // DEFER set
 	ENC28_Wcr16(J60_MAIPGL, 0x0c12);
 	ENC28_Wcr8(J60_MABBIPG, 0x12);
 	ENC28_Wcr16(J60_MAMXFLL, MAX_TX_PACKET);
-	ENC28_Wcr8(J60_MAADR1, eth_MAC->mac_array[0]);
-	NOP();
-	ENC28_Wcr8(J60_MAADR2, eth_MAC->mac_array[1]);
-	NOP();
-	ENC28_Wcr8(J60_MAADR3, eth_MAC->mac_array[2]);
-	NOP();
-	ENC28_Wcr8(J60_MAADR4, eth_MAC->mac_array[3]);
-	NOP();
-	ENC28_Wcr8(J60_MAADR5, eth_MAC->mac_array[4]);
-	NOP();
-	ENC28_Wcr8(J60_MAADR6, eth_MAC->mac_array[5]);
-	NOP();
+    ENC28_Wcr8(J60_ECOCON, 0x00); // RNG: Disable the clock out output to reduce EMI generation
+    // RNG: MAC registers are flakey when clocked < 8MHz... since MAC is tied to serial, over-ride with application set MAC
+	ENC28_Wcr8(J60_MAADR1, eth_MAC.mac_array[0]);
+	//NOP();
+	ENC28_Wcr8(J60_MAADR2, eth_MAC.mac_array[1]);
+	//NOP();
+	ENC28_Wcr8(J60_MAADR3, eth_MAC.mac_array[2]);
+	//NOP();
+	ENC28_Wcr8(J60_MAADR4, eth_MAC.mac_array[3]);
+	//NOP();
+	ENC28_Wcr8(J60_MAADR5, eth_MAC.mac_array[4]);
+	//NOP();
+	ENC28_Wcr8(J60_MAADR6, eth_MAC.mac_array[5]);
+	//NOP();
 
 	ENC28_Wcr8(J60_ECON1, 0x04); // RXEN enabled
 
@@ -592,12 +594,12 @@ error_msg ETH_WriteStart(const mac48Address_t *dest_mac, uint16_t type)
 	ETH_SPI_WRITE8(dest_mac->mac_array[3]);
 	ETH_SPI_WRITE8(dest_mac->mac_array[4]);
 	ETH_SPI_WRITE8(dest_mac->mac_array[5]);
-	ETH_SPI_WRITE8(eth_MAC->mac_array[0]);
-	ETH_SPI_WRITE8(eth_MAC->mac_array[1]);
-	ETH_SPI_WRITE8(eth_MAC->mac_array[2]);
-	ETH_SPI_WRITE8(eth_MAC->mac_array[3]);
-	ETH_SPI_WRITE8(eth_MAC->mac_array[4]);
-	ETH_SPI_WRITE8(eth_MAC->mac_array[5]);
+	ETH_SPI_WRITE8(eth_MAC.mac_array[0]);
+	ETH_SPI_WRITE8(eth_MAC.mac_array[1]);
+	ETH_SPI_WRITE8(eth_MAC.mac_array[2]);
+	ETH_SPI_WRITE8(eth_MAC.mac_array[3]);
+	ETH_SPI_WRITE8(eth_MAC.mac_array[4]);
+	ETH_SPI_WRITE8(eth_MAC.mac_array[5]);
 	ETH_SPI_WRITE8(type >> 8);
 	ETH_SPI_WRITE8(type & 0x0FF);
 	ETH_NCS_HIGH();
@@ -694,6 +696,8 @@ error_msg ETH_Copy(uint16_t len)
 	uint16_t timer;
 	uint16_t temp_len;
 
+    if (len==0) return SUCCESS; // nothing to copy
+
 	timer = 2 * len;
 	// Wait until module is idle
 	while ((ENC28_Rcr8(J60_ECON1) & 0x20) != 0 && --timer)
@@ -776,7 +780,7 @@ static uint16_t ETH_ComputeChecksum(uint16_t len, uint16_t seed)
  */
 uint16_t ETH_TxComputeChecksum(uint16_t position, uint16_t length, uint16_t seed)
 {
-	uint32_t cksm;
+	uint32_t cksm = 0;
 
 	//    cksm = seed;
 	position += 1; /* sizeof(Control_Byte) */
@@ -838,12 +842,21 @@ uint16_t ETH_RxComputeChecksum(uint16_t len, uint16_t seed)
  */
 void ETH_GetMAC(uint8_t *macAddr)
 {
+#if 1
+
+    // RNG: MAC registers are flakey when clocked < 8MHz... since MAC is tied to serial, over-ride with application set MAC
+    memcpy(macAddr, (uint8_t*)&eth_MAC.mac_array[0], 6);
+
+#else
+
 	*macAddr++ = ENC28_Rcr8(J60_MAADR1);
 	*macAddr++ = ENC28_Rcr8(J60_MAADR2);
 	*macAddr++ = ENC28_Rcr8(J60_MAADR3);
 	*macAddr++ = ENC28_Rcr8(J60_MAADR4);
 	*macAddr++ = ENC28_Rcr8(J60_MAADR5);
 	*macAddr++ = ENC28_Rcr8(J60_MAADR6);
+
+#endif
 }
 
 /**
@@ -878,3 +891,16 @@ uint16_t ETH_GetByteCount(void)
 
 	return (wptr - ethData.saveWRPT);
 }
+
+
+
+
+/**This function was added by Eyedro to set the MAC address BEFORE initializing the stack and performing DHCP requests
+ *
+ * @param pau8MAC
+ *      MAC address to use
+ */
+void ETH_InitMAC(uint8_t *pau8MAC) {
+    memcpy((uint8_t*)&eth_MAC.mac_array[0], pau8MAC, 6);
+}
+

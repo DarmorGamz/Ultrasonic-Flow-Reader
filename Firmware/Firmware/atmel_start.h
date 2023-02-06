@@ -7,7 +7,6 @@ extern "C" {
 
 #include "driver_init.h"
 #include "tcpip_lite_start.h"
-#include "stdio_start.h"
 
 /**
  * Initializes MCU, drivers and middleware in the project

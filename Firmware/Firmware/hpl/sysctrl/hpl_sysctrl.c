@@ -160,7 +160,7 @@ void _sysctrl_init_referenced_generators(void)
 
 #if CONF_DFLL_CONFIG == 1
 
-#if CONF_DFLL_USBCRM != 1 && CONF_DFLL_MODE != CONF_DFLL_OPEN_LOOP_MODE
+#if CONF_DFLL_MODE != CONF_DFLL_OPEN_LOOP_MODE
 	hri_gclk_write_CLKCTRL_reg(GCLK,
 	                           GCLK_CLKCTRL_ID(0) | GCLK_CLKCTRL_GEN(CONF_DFLL_GCLK) | (1 << GCLK_CLKCTRL_CLKEN_Pos));
 #endif
@@ -174,46 +174,20 @@ void _sysctrl_init_referenced_generators(void)
 	                                  | SYSCTRL_DFLLMUL_MUL(CONF_DFLL_MUL));
 	hri_sysctrl_write_DFLLVAL_reg(hw, CONF_DFLLVAL);
 
-	hri_sysctrl_dfllctrl_reg_t tmp =
-
-	    (CONF_DFLL_WAITLOCK << SYSCTRL_DFLLCTRL_WAITLOCK_Pos) | (CONF_DFLL_BPLCKC << SYSCTRL_DFLLCTRL_BPLCKC_Pos)
-	    | (CONF_DFLL_QLDIS << SYSCTRL_DFLLCTRL_QLDIS_Pos) | (CONF_DFLL_CCDIS << SYSCTRL_DFLLCTRL_CCDIS_Pos)
-	    | (CONF_DFLL_RUNSTDBY << SYSCTRL_DFLLCTRL_RUNSTDBY_Pos) | (CONF_DFLL_USBCRM << SYSCTRL_DFLLCTRL_USBCRM_Pos)
-	    | (CONF_DFLL_LLAW << SYSCTRL_DFLLCTRL_LLAW_Pos) | (CONF_DFLL_STABLE << SYSCTRL_DFLLCTRL_STABLE_Pos)
-	    | (CONF_DFLL_MODE << SYSCTRL_DFLLCTRL_MODE_Pos) | (CONF_DFLL_ENABLE << SYSCTRL_DFLLCTRL_ENABLE_Pos);
+	hri_sysctrl_dfllctrl_reg_t tmp
+	    = (CONF_DFLL_QLDIS << SYSCTRL_DFLLCTRL_QLDIS_Pos) | (CONF_DFLL_CCDIS << SYSCTRL_DFLLCTRL_CCDIS_Pos)
+	      | (CONF_DFLL_RUNSTDBY << SYSCTRL_DFLLCTRL_RUNSTDBY_Pos) | (CONF_DFLL_LLAW << SYSCTRL_DFLLCTRL_LLAW_Pos)
+	      | (CONF_DFLL_STABLE << SYSCTRL_DFLLCTRL_STABLE_Pos) | (CONF_DFLL_MODE << SYSCTRL_DFLLCTRL_MODE_Pos)
+	      | (CONF_DFLL_ENABLE << SYSCTRL_DFLLCTRL_ENABLE_Pos);
 
 	hri_sysctrl_write_DFLLCTRL_reg(hw, tmp);
-#endif
-
-#if CONF_DPLL_CONFIG == 1
-#if CONF_DPLL_REFCLK == SYSCTRL_DPLLCTRLB_REFCLK_GCLK_Val
-	hri_gclk_write_CLKCTRL_reg(GCLK,
-	                           GCLK_CLKCTRL_ID(1) | GCLK_CLKCTRL_GEN(CONF_DPLL_GCLK) | (1 << GCLK_CLKCTRL_CLKEN_Pos));
-#endif
-
-	hri_sysctrl_write_DPLLCTRLA_reg(hw,
-	                                (CONF_DPLL_RUNSTDBY << SYSCTRL_DPLLCTRLA_RUNSTDBY_Pos)
-	                                    | (CONF_DPLL_ENABLE << SYSCTRL_DPLLCTRLA_ENABLE_Pos));
-	hri_sysctrl_write_DPLLRATIO_reg(
-	    hw, SYSCTRL_DPLLRATIO_LDRFRAC(CONF_DPLL_LDRFRAC) | SYSCTRL_DPLLRATIO_LDR(CONF_DPLL_LDR));
-	hri_sysctrl_write_DPLLCTRLB_reg(
-	    hw,
-	    SYSCTRL_DPLLCTRLB_DIV(CONF_DPLL_DIV) | (CONF_DPLL_LBYPASS << SYSCTRL_DPLLCTRLB_LBYPASS_Pos)
-	        | SYSCTRL_DPLLCTRLB_LTIME(CONF_DPLL_LTIME) | SYSCTRL_DPLLCTRLB_REFCLK(CONF_DPLL_REFCLK)
-	        | (CONF_DPLL_WUF << SYSCTRL_DPLLCTRLB_WUF_Pos) | (CONF_DPLL_LPEN << SYSCTRL_DPLLCTRLB_LPEN_Pos)
-	        | SYSCTRL_DPLLCTRLB_FILTER(CONF_DPLL_FILTER));
 #endif
 
 #if CONF_DFLL_CONFIG == 1
 #if CONF_DFLL_ENABLE == 1
 	if (hri_sysctrl_get_DFLLCTRL_MODE_bit(hw)) {
-
-#if CONF_DFLL_USBCRM == 0
 		hri_sysctrl_pclksr_reg_t status_mask
 		    = SYSCTRL_PCLKSR_DFLLRDY | SYSCTRL_PCLKSR_DFLLLCKF | SYSCTRL_PCLKSR_DFLLLCKC;
-#else
-		hri_sysctrl_pclksr_reg_t status_mask = SYSCTRL_PCLKSR_DFLLRDY;
-#endif
 
 		while (hri_sysctrl_get_PCLKSR_reg(hw, status_mask) != status_mask)
 			;
@@ -224,17 +198,6 @@ void _sysctrl_init_referenced_generators(void)
 #endif
 #if CONF_DFLL_ONDEMAND == 1
 	hri_sysctrl_set_DFLLCTRL_ONDEMAND_bit(hw);
-#endif
-#endif
-
-#if CONF_DPLL_CONFIG == 1
-#if CONF_DPLL_ENABLE == 1
-	while (!(hri_sysctrl_get_DPLLSTATUS_ENABLE_bit(hw) || hri_sysctrl_get_DPLLSTATUS_LOCK_bit(hw)
-	         || hri_sysctrl_get_DPLLSTATUS_CLKRDY_bit(hw)))
-		;
-#endif
-#if CONF_DPLL_ONDEMAND == 1
-	hri_sysctrl_set_DPLLCTRLA_ONDEMAND_bit(hw);
 #endif
 #endif
 

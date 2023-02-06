@@ -39,8 +39,8 @@
  *
  * \acme_license_stop
  *
- * Project: DCA_Firmware
- * Target:  ATSAMD21J18A 
+ * Project: DCA_FIRMWARE
+ * Target:  ATSAMD20E18 
  *
  **/
 

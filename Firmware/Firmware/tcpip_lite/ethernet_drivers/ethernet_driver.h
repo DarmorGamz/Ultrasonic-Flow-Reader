@@ -87,6 +87,10 @@ extern volatile ethernetDriver_t ethData;
 #define ETH_linkCheck() ethData.up
 #define ETH_linkChanged() ethData.linkChange
 
+
+void ETH_InitMAC(uint8_t *);    // This function was added by Eyedro to set the MAC address BEFORE initializing the stack and performing DHCP requests
+
+
 void ETH_Init(void);            // setup the ethernet and get it running
 void ETH_EventHandler(void);    // Manage the MAC events.  Poll this or put it in the ISR
 void ETH_NextPacketUpdate();    // Update the pointers for the next available RX packets

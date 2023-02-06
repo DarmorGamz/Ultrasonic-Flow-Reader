@@ -6,17 +6,69 @@ App\DcaApp.c
 
 atmel_start.c
 
+Component\winc1500\bsp\source\nm_bsp.c
+
+Component\winc1500\bus_wrapper\source\nm_bus_wrapper.c
+
+Component\winc1500\common\source\nm_common.c
+
+Component\winc1500\driver\source\m2m_ate_mode.c
+
+Component\winc1500\driver\source\m2m_crypto.c
+
+Component\winc1500\driver\source\m2m_hif.c
+
+Component\winc1500\driver\source\m2m_ota.c
+
+Component\winc1500\driver\source\m2m_periph.c
+
+Component\winc1500\driver\source\m2m_ssl.c
+
+Component\winc1500\driver\source\m2m_wifi.c
+
+Component\winc1500\driver\source\nmasic.c
+
+Component\winc1500\driver\source\nmbus.c
+
+Component\winc1500\driver\source\nmdrv.c
+
+Component\winc1500\driver\source\nmi2c.c
+
+Component\winc1500\driver\source\nmspi.c
+
+Component\winc1500\driver\source\nmuart.c
+
+Component\winc1500\socket\source\socket.c
+
+Component\winc1500\spi_flash\source\flexible_flash.c
+
+Component\winc1500\spi_flash\source\spi_flash.c
+
+Component\winc1500\winc_init.c
+
+Core\CmdFifo.c
+
+Core\Debug.c
+
 Core\Ethernet.c
 
+Core\Flash.c
+
+Core\Http.c
+
+Core\TcpParser.c
+
 Core\Timer.c
+
+Core\Timestamp.c
 
 Core\Watchdog.c
 
 Core\Wifi.c
 
-Device_Startup\startup_samd21.c
+Device_Startup\startup_samd20.c
 
-Device_Startup\system_samd21.c
+Device_Startup\system_samd20.c
 
 driver_init.c
 
@@ -27,6 +79,8 @@ hal\src\hal_atomic.c
 hal\src\hal_delay.c
 
 hal\src\hal_ext_irq.c
+
+hal\src\hal_flash.c
 
 hal\src\hal_gpio.c
 
@@ -39,8 +93,6 @@ hal\src\hal_sleep.c
 hal\src\hal_spi_m_sync.c
 
 hal\src\hal_timer.c
-
-hal\src\hal_usart_sync.c
 
 hal\src\hal_wdt.c
 
@@ -56,11 +108,11 @@ hpl\core\hpl_core_m0plus_base.c
 
 hpl\core\hpl_init.c
 
-hpl\dmac\hpl_dmac.c
-
 hpl\eic\hpl_eic.c
 
 hpl\gclk\hpl_gclk.c
+
+hpl\nvmctrl\hpl_nvmctrl.c
 
 hpl\pm\hpl_pm.c
 
@@ -75,14 +127,6 @@ hpl\tc\hpl_tc.c
 hpl\wdt\hpl_wdt.c
 
 main.c
-
-stdio_redirect\gcc\read.c
-
-stdio_redirect\gcc\write.c
-
-stdio_redirect\stdio_io.c
-
-stdio_start.c
 
 tcpip_lite\ethernet_drivers\enc28j60.c
 

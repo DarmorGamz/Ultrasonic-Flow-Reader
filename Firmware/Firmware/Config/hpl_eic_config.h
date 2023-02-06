@@ -193,7 +193,7 @@
 // <e> Interrupt 4 Settings
 // <id> eic_arch_enable_irq_setting4
 #ifndef CONF_EIC_ENABLE_IRQ_SETTING4
-#define CONF_EIC_ENABLE_IRQ_SETTING4 1
+#define CONF_EIC_ENABLE_IRQ_SETTING4 0
 #endif
 
 // <q> External Interrupt 4 Event Output Enable
@@ -227,7 +227,7 @@
 // <i> This defines input sense trigger
 // <id> eic_arch_sense4
 #ifndef CONF_EIC_SENSE4
-#define CONF_EIC_SENSE4 EIC_NMICTRL_NMISENSE_FALL_Val
+#define CONF_EIC_SENSE4 EIC_NMICTRL_NMISENSE_NONE_Val
 #endif
 // </e>
 
@@ -603,7 +603,7 @@
 // <e> Interrupt 14 Settings
 // <id> eic_arch_enable_irq_setting14
 #ifndef CONF_EIC_ENABLE_IRQ_SETTING14
-#define CONF_EIC_ENABLE_IRQ_SETTING14 1
+#define CONF_EIC_ENABLE_IRQ_SETTING14 0
 #endif
 
 // <q> External Interrupt 14 Event Output Enable
@@ -637,7 +637,7 @@
 // <i> This defines input sense trigger
 // <id> eic_arch_sense14
 #ifndef CONF_EIC_SENSE14
-#define CONF_EIC_SENSE14 EIC_NMICTRL_NMISENSE_FALL_Val
+#define CONF_EIC_SENSE14 EIC_NMICTRL_NMISENSE_NONE_Val
 #endif
 // </e>
 
@@ -683,7 +683,7 @@
 // </e>
 
 #ifndef CONFIG_EIC_EXTINT_MAP
-#define CONFIG_EIC_EXTINT_MAP {4, PIN_PB04}, {14, PIN_PB14},
+#define CONFIG_EIC_EXTINT_MAP {14, PIN_PA14}, {15, PIN_PA15},
 #endif
 
 // <<< end of configuration section >>>
