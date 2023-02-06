@@ -2,12 +2,12 @@
 
   (uuid 67f2a737-bb68-49ef-a19f-3611f140fba6)
 
-  (paper "A4")
+  (paper "USLetter")
 
   (title_block
     (title "ATWINC1500-MR Control Circuit With Antenna")
-    (date "2022-10-20")
-    (rev "3")
+    (date "2023-01-18")
+    (rev "v1.3")
     (company "DCA")
   )
 
