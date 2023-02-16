@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Hubballi&display=swap');
 :root {
-    --header-footer: #202020
+    --header-footer: #202020;
+    --highlight: #303134
 }
 * {
     box-sizing: border-box;
@@ -36,9 +37,9 @@ nav {
     display: block;
     width: 4rem; 
     height: 4rem;
-    background-color: aqua;
+    background-color: white;
     padding: 0.25rem;
-    border: 0.0625rem solid aqua;
+    border: 0.0625rem solid var(--highlight);
     border-radius: 50%;
 }
 .nav-logo a{
@@ -60,7 +61,7 @@ nav {
 .rnav-item {
     list-style: none;
     margin-right: 2rem;
-
+    color: white;
     font-size: 1.25rem;
 }
 .rnav-item a {
@@ -71,8 +72,8 @@ nav {
 }
 .rnav-item a:hover {
     font-weight: bold;
-    background-color: aqua;
-    border: 0.0625rem solid aqua;
+    background-color: var(--highlight);
+    border: 0.0625rem solid var(--highlight);
     border-radius: 1rem;
-    color: var(--header-footer);
+    color: white;
 }
