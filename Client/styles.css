@@ -77,3 +77,34 @@ nav {
     border-radius: 1rem;
     color: white;
 }
+
+/*-----------------------*/
+/*    Numbers Styling    */
+/*-----------------------*/
+
+.numlabel {
+    text-align: center;
+    margin: 2rem;
+}
+.number-display {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    height: 95vh;
+}
+.number {
+    background-color: lightgrey;
+    font-size: 25vh;
+    padding: 1rem 5rem;
+}
+
+/*--------------------------*/
+/*    About Page Styling    */
+/*--------------------------*/
+
+.about {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 95vh;
+}
