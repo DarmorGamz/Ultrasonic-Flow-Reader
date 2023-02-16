@@ -1,0 +1,78 @@
+@import url('https://fonts.googleapis.com/css2?family=Hubballi&display=swap');
+:root {
+    --header-footer: #202020
+}
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Hubballi', cursive;
+}
+/*-----------------------*/
+/*    Nav Bar Styling    */
+/*-----------------------*/
+nav {
+    background-color: var(--header-footer);
+    padding: 1rem 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 999;
+}
+.lnav {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2rem;
+}
+.lnav-item {
+    list-style: none;
+    margin-left: 1rem;
+}
+.nav-logo img{
+    display: block;
+    width: 4rem; 
+    height: 4rem;
+    background-color: aqua;
+    padding: 0.25rem;
+    border: 0.0625rem solid aqua;
+    border-radius: 50%;
+}
+.nav-logo a{
+    display: block;
+}
+.nav-name div{
+    padding: 0.25rem;
+}
+.nav-name a {
+    text-decoration: none;
+    color: white;
+}
+.rnav {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}
+.rnav-item {
+    list-style: none;
+    margin-right: 2rem;
+
+    font-size: 1.25rem;
+}
+.rnav-item a {
+    text-decoration: none;
+    color: white;
+    padding: 0.5rem 1rem;
+    border: 0.0625rem solid var(--header-footer);
+}
+.rnav-item a:hover {
+    font-weight: bold;
+    background-color: aqua;
+    border: 0.0625rem solid aqua;
+    border-radius: 1rem;
+    color: var(--header-footer);
+}
