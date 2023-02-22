@@ -8,8 +8,9 @@ https://www.digikey.ca/en/products/detail/texas-instruments/LM193DR/372668 <br>
 **(2x)** Switch - MAX4528CSA+ <br>
 https://www.digikey.ca/en/products/detail/analog-devices-inc-maxim-integrated/MAX4528CSA/1780400 <br>
 
-**(1x)** 555 Timer - LM555CMMX/NOPB  <br>
-https://www.digikey.ca/en/products/detail/texas-instruments/LM555CMMX-NOPB/367274 <br>
+**(1x)** 555 Timer - ~~LM555CMMX/NOPB~~ LM555CMX/NOPB<br>
+~~https://www.digikey.ca/en/products/detail/texas-instruments/LM555CMMX-NOPB/367274~~ <br>
+https://www.digikey.ca/en/products/detail/texas-instruments/LM555CMX-NOPB/334887 <br>
 
 **(1x)** Inverter - SN74AHC1G04DBVR <br>
 https://www.digikey.ca/en/products/detail/texas-instruments/SN74AHC1G04DBVR/276733 <br>
