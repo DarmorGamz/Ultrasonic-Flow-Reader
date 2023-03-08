@@ -1,7 +1,7 @@
 <?php
 
 // Includes
-require_once './Private/Globals.php';
+require_once '/var/www/html/Private/Globals.php';
 
 final class ApiAccess {
     // Methods
@@ -11,6 +11,9 @@ final class ApiAccess {
      * Constructor.
      */
     final public function __construct() {
+        // Init vars.
+        $this->aResp['Errors'] = [];
+        $this->aResp['DateMsUtc'] = time();
         $this->ProcCmd();
     }
     /**
@@ -34,18 +37,114 @@ final class ApiAccess {
         }
 
         $sCmd = '';
-        if(empty($this->aIpVar['Cmd'])) return false;
+        if(empty($this->aIpVar['Cmd'])) { return false; }
         $sCmd = $this->aIpVar['Cmd'];
         $this->aResp['Cmd'] = $sCmd;
 
         switch($sCmd) {
-            case 'setData':
-
+            case "getdata":
+                if(!$this->getdata()) { $this->SetError(1, "DataGsad Failed."); return false; }
                 break;
-            default: // Not a valid enpoint.
+            case "Login":
+            case "Signup":
+            case "User.Get":
+            case "User.Add":
+            case "User.Set":
+            case "User.Del":
+                if($sCmd == "Login") $sCmd = "User.Get";
+                if($sCmd == "Signup") $sCmd = "User.Add";
+                if(!$this->UserGsad($sCmd)) { $this->SetError(1, "UserGsad Failed."); return false; }
+                break;
+            default: // Not a valid endpoint.
+                $this->SetError(1, "Cmd not found."); return false;
                 break;
         }
 
+        // Return Success.
+        return true;
+    }
+
+    private function UserGsad(string $sCmd) : bool {
+        require_once ROOTPATH.'/Private/User/User.php';
+        $oUser = new User();
+
+        // Init vars.
+        $aVarsIn = $aVarsOut = [];
+
+        if($sCmd == 'User.Get') {
+            // Init vars.
+            $sEmail = $sPwd = '';
+            if(!$this->GetInputVar('Email', $sEmail) || !$this->GetInputVar('Password', $sPwd)) { $this->SetError(2, "Invalid Input vars."); return false; }
+
+            // Set Vars.
+            $aVarsIn['Email'] = $sEmail; $aVarsIn['Password'] = $sPwd;
+            if(!$oUser->UserGsad("User.Get", $aVarsIn, $aVarsOut) || empty($aVarsOut['UserInfo'])) { $this->SetError(2, "User.Get Failed."); return false; }
+            $aUserInfo = $aVarsOut['UserInfo'];
+            unset($aUserInfo['Password']); // Security idk.
+
+            // Set Response.
+            $this->aResp['UserInfo'] = $aUserInfo;
+        } elseif($sCmd == 'User.Add') {
+            // Init vars.
+            $sEmail = $sPwd = '';
+            if(!$this->GetInputVar('Email', $sEmail) || !$this->GetInputVar('Password', $sPwd)) { $this->SetError(2, "Invalid Input vars."); return false; }
+
+            // Set Vars.
+            $aVarsIn['Email'] = $sEmail; $aVarsIn['Password'] = $sPwd;
+            if(!$oUser->UserGsad("User.Add", $aVarsIn, $aVarsOut) || empty($aVarsOut['UserInfo'])) { $this->SetError(2, "User.Add Failed."); return false; }
+            $aUserInfo = $aVarsOut['UserInfo'];
+            unset($aUserInfo['Password']); // Security idk.
+
+            // Set Response.
+            $this->aResp['UserInfo'] = $aUserInfo;
+        } elseif($sCmd == 'User.Set') {
+            if(!$oUser->UserGsad("User.Set", $aVarsIn, $aVarsOut)) { $this->SetError(2, "User.Set Failed."); return false; }
+        } elseif($sCmd == 'User.Del') {
+            if(!$oUser->UserGsad("User.Del", $aVarsIn, $aVarsOut)) { $this->SetError(2, "User.Del Failed."); return false; }
+        } else { return false; }
+
+        // Return Success.
+        return true;
+    }
+
+    private function getdata() : bool {
+        // Init vars.
+        $aVarsIn = $aVarsOut = [];
+
+        $aVarsOut['Volume1Min'] = rand(0, 100);
+        $aVarsOut['Volume1Hr'] = $aVarsOut['Volume1Min']*60;
+        $aVarsOut['VolumeTotal'] = $aVarsOut['Volume1Hr']*30;
+        $aVarsOut['FlowSpeed'] = 0;
+
+        // Set Response.
+        $this->aResp['Data'] = $aVarsOut;
+
+        // Return Success.
+        return true;
+    }
+
+    final private function SetError(int $iCode, string $errorMsg): void {
+        $this->aResp['Errors'][] = [$iCode, $errorMsg];
+    }
+
+    final private function GetInputVar(string $IpVar, &$IpVarOut): bool {
+        switch($IpVar) {
+            case "Email":
+                // Checks if Email is valid.
+                if((!isset($this->aIpVar['Email'])) || (!filter_var($this->aIpVar['Email'], FILTER_VALIDATE_EMAIL)) || strlen($this->aIpVar['Email']) > 100) return false;
+                // Returns the valid email.
+                $IpVarOut = $this->aIpVar['Email'];
+                break;
+            case "Password":
+                // Checks if Email is valid.
+                if(!isset($this->aIpVar['Password']) || empty($this->aIpVar['Password']) || strlen($this->aIpVar['Password']) > 25) return false;
+                // Returns the valid email.
+                $IpVarOut = $this->aIpVar['Password'];
+                break;
+            default:
+                return false;
+                break;
+        }
         // Return Success.
         return true;
     }
@@ -55,7 +154,6 @@ final class ApiAccess {
         $sResp = json_encode($this->aResp);
         // Add text/plain header so receiving application knows the type of data
         header('Content-Type: application/json');
-        //header('Content-Type: application/json');
 
         // Return response
         echo($sResp);
