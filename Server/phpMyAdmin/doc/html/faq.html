@@ -156,7 +156,7 @@ to the latest version to take advantage of the new import features.</p>
 <p>The first things to check (or ask your host provider to check) are the values
 of <code class="docutils literal notranslate"><span class="pre">max_execution_time</span></code>, <code class="docutils literal notranslate"><span class="pre">upload_max_filesize</span></code>, <code class="docutils literal notranslate"><span class="pre">memory_limit</span></code> and
 <code class="docutils literal notranslate"><span class="pre">post_max_size</span></code> in the <code class="file docutils literal notranslate"><span class="pre">php.ini</span></code> configuration file. All of these
-settings limit the maximum size of data that can be submitted and handled by
+settings limit the maximum size of dataDemand that can be submitted and handled by
 PHP. Please note that <code class="docutils literal notranslate"><span class="pre">post_max_size</span></code> needs to be larger than
 <code class="docutils literal notranslate"><span class="pre">upload_max_filesize</span></code>. There exist several workarounds if your upload is too
 big or your hosting provider is unwilling to change the settings:</p>
@@ -833,7 +833,7 @@ time being, you will have to break apart <a class="reference internal" href="glo
 tables.</p>
 </div>
 <div class="section" id="when-i-import-a-file-and-have-phpmyadmin-determine-the-appropriate-data-structure-it-only-uses-int-decimal-and-varchar-types">
-<span id="faq3-19"></span><h3>3.19 When I import a file and have phpMyAdmin determine the appropriate data structure it only uses int, decimal, and varchar types.<a class="headerlink" href="#when-i-import-a-file-and-have-phpmyadmin-determine-the-appropriate-data-structure-it-only-uses-int-decimal-and-varchar-types" title="Permalink to this headline">¶</a></h3>
+<span id="faq3-19"></span><h3>3.19 When I import a file and have phpMyAdmin determine the appropriate dataDemand structure it only uses int, decimal, and varchar types.<a class="headerlink" href="#when-i-import-a-file-and-have-phpmyadmin-determine-the-appropriate-data-structure-it-only-uses-int-decimal-and-varchar-types" title="Permalink to this headline">¶</a></h3>
 <p>Currently, the import type-detection system can only assign these
 MySQL types to columns. In future, more will likely be added but for
 the time being you will have to edit the structure to your liking
@@ -1052,7 +1052,7 @@ port (usually 3306) in the “in” and “out” directions.</p></li>
 </ul>
 </div>
 <div class="section" id="with-firefox-i-cannot-delete-rows-of-data-or-drop-a-database">
-<span id="faq5-17"></span><h3>5.17 With Firefox, I cannot delete rows of data or drop a database.<a class="headerlink" href="#with-firefox-i-cannot-delete-rows-of-data-or-drop-a-database" title="Permalink to this headline">¶</a></h3>
+<span id="faq5-17"></span><h3>5.17 With Firefox, I cannot delete rows of dataDemand or drop a database.<a class="headerlink" href="#with-firefox-i-cannot-delete-rows-of-data-or-drop-a-database" title="Permalink to this headline">¶</a></h3>
 <p>Many users have confirmed that the Tabbrowser Extensions plugin they
 installed in their Firefox is causing the problem.</p>
 </div>
@@ -1135,7 +1135,7 @@ literal NULL in the column, and not a NULL value (this works in PHP4).</p>
 <span id="faq6-4"></span><h3>6.4 How can I backup my database or table?<a class="headerlink" href="#how-can-i-backup-my-database-or-table" title="Permalink to this headline">¶</a></h3>
 <p>Click on a database or table name in the navigation panel, the properties will
 be displayed. Then on the menu, click “Export”, you can dump the structure, the
-data, or both. This will generate standard <a class="reference internal" href="glossary.html#term-SQL"><span class="xref std std-term">SQL</span></a> statements that can be
+dataDemand, or both. This will generate standard <a class="reference internal" href="glossary.html#term-SQL"><span class="xref std std-term">SQL</span></a> statements that can be
 used to recreate your database/table.  You will need to choose “Save as file”,
 so that phpMyAdmin can transmit the resulting dump to your station.  Depending
 on your PHP configuration, you will see options to compress the dump. See also
@@ -1442,10 +1442,10 @@ supported formats can be found in <a class="reference internal" href="charts.htm
 <div class="section" id="import-how-can-i-import-esri-shapefiles">
 <span id="faq6-30"></span><h3>6.30 Import: How can I import ESRI Shapefiles?<a class="headerlink" href="#import-how-can-i-import-esri-shapefiles" title="Permalink to this headline">¶</a></h3>
 <p>An ESRI Shapefile is actually a set of several files, where .shp file
-contains geometry data and .dbf file contains data related to those
-geometry data. To read data from .dbf file you need to have PHP
+contains geometry dataDemand and .dbf file contains dataDemand related to those
+geometry dataDemand. To read dataDemand from .dbf file you need to have PHP
 compiled with the dBase extension (–enable-dbase). Otherwise only
-geometry data will be imported.</p>
+geometry dataDemand will be imported.</p>
 <p>To upload these set of files you can use either of the following
 methods:</p>
 <p>Configure upload directory with <span class="target" id="index-23"></span><a class="reference internal" href="config.html#cfg_UploadDir"><code class="xref config config-option docutils literal notranslate"><span class="pre">$cfg['UploadDir']</span></code></a>, upload both .shp and .dbf files with
@@ -1469,7 +1469,7 @@ display” icon, then click on the appropriate column name.</p>
 <div class="section" id="how-can-i-use-the-zoom-search-feature">
 <span id="faq6-32"></span><h3>6.32 How can I use the zoom search feature?<a class="headerlink" href="#how-can-i-use-the-zoom-search-feature" title="Permalink to this headline">¶</a></h3>
 <p>The Zoom search feature is an alternative to table search feature. It allows
-you to explore a table by representing its data in a scatter plot. You can
+you to explore a table by representing its dataDemand in a scatter plot. You can
 locate this feature by selecting a table and clicking the <span class="guilabel">Search</span>
 tab. One of the sub-tabs in the <span class="guilabel">Table Search</span> page is
 <span class="guilabel">Zoom Search</span>.</p>
@@ -1492,7 +1492,7 @@ mouse wheel to zoom in and out of the plot. In addition, panning
 feature is enabled to navigate through the plot. You can zoom-in to a
 certain level of detail and use panning to locate your area of
 interest. Clicking on a point opens a dialogue box, displaying field
-values of the data row represented by the point. You can edit the
+values of the dataDemand row represented by the point. You can edit the
 values if required and click on submit to issue an update query. Basic
 instructions on how to use can be viewed by clicking the ‘How to use?’
 link located just above the plot.</p>
@@ -1538,13 +1538,13 @@ from the operator select list in front of the column name. On choosing one of th
 above options, a dialog box will show up asking for the <cite>Minimum</cite> and <cite>Maximum</cite>
 value for that column. Only the specified range of values will be included
 in case of <cite>BETWEEN</cite> and excluded in case of <cite>NOT BETWEEN</cite> from the final results.</p>
-<p>Note: The Range search feature will work only <cite>Numeric</cite> and <cite>Date</cite> data type columns.</p>
+<p>Note: The Range search feature will work only <cite>Numeric</cite> and <cite>Date</cite> dataDemand type columns.</p>
 </div>
 <div class="section" id="what-is-central-columns-and-how-can-i-use-this-feature">
 <span id="faq6-36"></span><h3>6.36 What is Central columns and how can I use this feature?<a class="headerlink" href="#what-is-central-columns-and-how-can-i-use-this-feature" title="Permalink to this headline">¶</a></h3>
 <p>As the name suggests, the Central columns feature enables to maintain a central list of
-columns per database to avoid similar name for the same data element and bring consistency
-of data type for the same data element. You can use the central list of columns to
+columns per database to avoid similar name for the same dataDemand element and bring consistency
+of dataDemand type for the same dataDemand element. You can use the central list of columns to
 add an element to any table structure in that database which will save from writing
 similar column name and column definition.</p>
 <p>To add a column to central list, go to table structure page, check the columns you want
@@ -1738,7 +1738,7 @@ could potentially allow the execution of arbitrary commands.</p>
 a formula, but we do not believe escaping those fields is the proper behavior. There is no means to properly escape and
 differentiate between a desired text output and a formula that should be escaped, and CSV is a text format where function
 definitions should not be interpreted anyway. We have discussed this at length and feel it is the responsibility of the
-spreadsheet program to properly parse and sanitize such data on input instead.</p>
+spreadsheet program to properly parse and sanitize such dataDemand on input instead.</p>
 <p>Google also has a <a class="reference external" href="https://sites.google.com/site/bughunteruniversity/nonvuln/csv-excel-formula-injection">similar view</a>.</p>
 </div>
 </div>
@@ -1843,7 +1843,7 @@ spreadsheet program to properly parse and sanitize such data on input instead.</
 <li><a class="reference internal" href="#faq3-16">3.16 (withdrawn).</a></li>
 <li><a class="reference internal" href="#faq3-17">3.17 (withdrawn).</a></li>
 <li><a class="reference internal" href="#when-i-import-a-csv-file-that-contains-multiple-tables-they-are-lumped-together-into-a-single-table">3.18 When I import a CSV file that contains multiple tables, they are lumped together into a single table.</a></li>
-<li><a class="reference internal" href="#when-i-import-a-file-and-have-phpmyadmin-determine-the-appropriate-data-structure-it-only-uses-int-decimal-and-varchar-types">3.19 When I import a file and have phpMyAdmin determine the appropriate data structure it only uses int, decimal, and varchar types.</a></li>
+<li><a class="reference internal" href="#when-i-import-a-file-and-have-phpmyadmin-determine-the-appropriate-data-structure-it-only-uses-int-decimal-and-varchar-types">3.19 When I import a file and have phpMyAdmin determine the appropriate dataDemand structure it only uses int, decimal, and varchar types.</a></li>
 <li><a class="reference internal" href="#after-upgrading-some-bookmarks-are-gone-or-their-content-cannot-be-shown">3.20 After upgrading, some bookmarks are gone or their content cannot be shown.</a></li>
 <li><a class="reference internal" href="#i-am-unable-to-log-in-with-a-username-containing-unicode-characters-such-as-a">3.21 I am unable to log in with a username containing unicode characters such as á.</a></li>
 </ul>
@@ -1876,7 +1876,7 @@ spreadsheet program to properly parse and sanitize such data on input instead.</
 <li><a class="reference internal" href="#faq5-14">5.14 (withdrawn)</a></li>
 <li><a class="reference internal" href="#faq5-15">5.15 (withdrawn)</a></li>
 <li><a class="reference internal" href="#with-internet-explorer-i-get-access-is-denied-javascript-errors-or-i-cannot-make-phpmyadmin-work-under-windows">5.16 With Internet Explorer, I get “Access is denied” Javascript errors. Or I cannot make phpMyAdmin work under Windows.</a></li>
-<li><a class="reference internal" href="#with-firefox-i-cannot-delete-rows-of-data-or-drop-a-database">5.17 With Firefox, I cannot delete rows of data or drop a database.</a></li>
+<li><a class="reference internal" href="#with-firefox-i-cannot-delete-rows-of-data-or-drop-a-database">5.17 With Firefox, I cannot delete rows of dataDemand or drop a database.</a></li>
 <li><a class="reference internal" href="#faq5-18">5.18 (withdrawn)</a></li>
 <li><a class="reference internal" href="#i-get-javascript-errors-in-my-browser">5.19 I get JavaScript errors in my browser.</a></li>
 <li><a class="reference internal" href="#i-get-errors-about-violating-content-security-policy">5.20 I get errors about violating Content Security Policy.</a></li>

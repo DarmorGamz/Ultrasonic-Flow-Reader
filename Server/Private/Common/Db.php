@@ -1,6 +1,6 @@
 <?php
 // Includes.
-require_once '/var/www/html//Private/Globals.php';
+require_once '/var/www/html/Private/Globals.php';
 
 // Ensure this file is being included by a parent file and not directly accessed
 if(!defined('_PEXEC')) die('Direct Access to this location is not allowed.');

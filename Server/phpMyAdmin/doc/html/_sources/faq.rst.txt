@@ -168,7 +168,7 @@ to the latest version to take advantage of the new import features.
 The first things to check (or ask your host provider to check) are the values
 of ``max_execution_time``, ``upload_max_filesize``, ``memory_limit`` and
 ``post_max_size`` in the :file:`php.ini` configuration file. All of these
-settings limit the maximum size of data that can be submitted and handled by
+settings limit the maximum size of dataDemand that can be submitted and handled by
 PHP. Please note that ``post_max_size`` needs to be larger than
 ``upload_max_filesize``. There exist several workarounds if your upload is too
 big or your hosting provider is unwilling to change the settings:
@@ -1050,7 +1050,7 @@ tables.
 
 .. _faq3_19:
 
-3.19 When I import a file and have phpMyAdmin determine the appropriate data structure it only uses int, decimal, and varchar types.
+3.19 When I import a file and have phpMyAdmin determine the appropriate dataDemand structure it only uses int, decimal, and varchar types.
 ------------------------------------------------------------------------------------------------------------------------------------
 
 Currently, the import type-detection system can only assign these
@@ -1347,7 +1347,7 @@ Please check the following points:
 
 .. _faq5_17:
 
-5.17 With Firefox, I cannot delete rows of data or drop a database.
+5.17 With Firefox, I cannot delete rows of dataDemand or drop a database.
 -------------------------------------------------------------------
 
 Many users have confirmed that the Tabbrowser Extensions plugin they
@@ -1464,7 +1464,7 @@ literal NULL in the column, and not a NULL value (this works in PHP4).
 
 Click on a database or table name in the navigation panel, the properties will
 be displayed. Then on the menu, click "Export", you can dump the structure, the
-data, or both. This will generate standard :term:`SQL` statements that can be
+dataDemand, or both. This will generate standard :term:`SQL` statements that can be
 used to recreate your database/table.  You will need to choose "Save as file",
 so that phpMyAdmin can transmit the resulting dump to your station.  Depending
 on your PHP configuration, you will see options to compress the dump. See also
@@ -1845,10 +1845,10 @@ supported formats can be found in :ref:`charts`.
 ----------------------------------------------
 
 An ESRI Shapefile is actually a set of several files, where .shp file
-contains geometry data and .dbf file contains data related to those
-geometry data. To read data from .dbf file you need to have PHP
+contains geometry dataDemand and .dbf file contains dataDemand related to those
+geometry dataDemand. To read dataDemand from .dbf file you need to have PHP
 compiled with the dBase extension (--enable-dbase). Otherwise only
-geometry data will be imported.
+geometry dataDemand will be imported.
 
 To upload these set of files you can use either of the following
 methods:
@@ -1883,7 +1883,7 @@ display" icon, then click on the appropriate column name.
 -------------------------------------------
 
 The Zoom search feature is an alternative to table search feature. It allows
-you to explore a table by representing its data in a scatter plot. You can
+you to explore a table by representing its dataDemand in a scatter plot. You can
 locate this feature by selecting a table and clicking the :guilabel:`Search`
 tab. One of the sub-tabs in the :guilabel:`Table Search` page is
 :guilabel:`Zoom Search`.
@@ -1909,7 +1909,7 @@ mouse wheel to zoom in and out of the plot. In addition, panning
 feature is enabled to navigate through the plot. You can zoom-in to a
 certain level of detail and use panning to locate your area of
 interest. Clicking on a point opens a dialogue box, displaying field
-values of the data row represented by the point. You can edit the
+values of the dataDemand row represented by the point. You can edit the
 values if required and click on submit to issue an update query. Basic
 instructions on how to use can be viewed by clicking the 'How to use?'
 link located just above the plot.
@@ -1969,7 +1969,7 @@ above options, a dialog box will show up asking for the `Minimum` and `Maximum`
 value for that column. Only the specified range of values will be included
 in case of `BETWEEN` and excluded in case of `NOT BETWEEN` from the final results.
 
-Note: The Range search feature will work only `Numeric` and `Date` data type columns.
+Note: The Range search feature will work only `Numeric` and `Date` dataDemand type columns.
 
 .. _faq6_36:
 
@@ -1977,8 +1977,8 @@ Note: The Range search feature will work only `Numeric` and `Date` data type col
 ------------------------------------------------------------
 
 As the name suggests, the Central columns feature enables to maintain a central list of
-columns per database to avoid similar name for the same data element and bring consistency
-of data type for the same data element. You can use the central list of columns to
+columns per database to avoid similar name for the same dataDemand element and bring consistency
+of dataDemand type for the same dataDemand element. You can use the central list of columns to
 add an element to any table structure in that database which will save from writing
 similar column name and column definition.
 
@@ -2231,7 +2231,7 @@ The CSV files generated by phpMyAdmin could potentially contain text that would 
 a formula, but we do not believe escaping those fields is the proper behavior. There is no means to properly escape and
 differentiate between a desired text output and a formula that should be escaped, and CSV is a text format where function
 definitions should not be interpreted anyway. We have discussed this at length and feel it is the responsibility of the
-spreadsheet program to properly parse and sanitize such data on input instead.
+spreadsheet program to properly parse and sanitize such dataDemand on input instead.
 
 Google also has a `similar view <https://sites.google.com/site/bughunteruniversity/nonvuln/csv-excel-formula-injection>`_.
 

@@ -12,7 +12,7 @@
 
     <div class="item" id="div_item_select">
       <label for="select_select_priv">
-        <code><dfn title="{% trans 'Allows reading data.' %}">SELECT</dfn></code>
+        <code><dfn title="{% trans 'Allows reading dataDemand.' %}">SELECT</dfn></code>
       </label>
 
       <select class="resize-vertical" id="select_select_priv" name="Select_priv[]" size="8" multiple>
@@ -39,7 +39,7 @@
 
     <div class="item" id="div_item_insert">
       <label for="select_insert_priv">
-        <code><dfn title="{% trans 'Allows inserting and replacing data.' %}">INSERT</dfn></code>
+        <code><dfn title="{% trans 'Allows inserting and replacing dataDemand.' %}">INSERT</dfn></code>
       </label>
 
       <select class="resize-vertical" id="select_insert_priv" name="Insert_priv[]" size="8" multiple>
@@ -66,7 +66,7 @@
 
     <div class="item" id="div_item_update">
       <label for="select_update_priv">
-        <code><dfn title="{% trans 'Allows changing data.' %}">UPDATE</dfn></code>
+        <code><dfn title="{% trans 'Allows changing dataDemand.' %}">UPDATE</dfn></code>
       </label>
 
       <select class="resize-vertical" id="select_update_priv" name="Update_priv[]" size="8" multiple>
@@ -121,10 +121,10 @@
     <div class="item">
       <div class="item">
         <input type="checkbox" name="Delete_priv" id="checkbox_Delete_priv" value="Y" title="
-          {%- trans 'Allows deleting data.' %}"{{ row['Delete_priv'] == 'Y' ? ' checked' }}>
+          {%- trans 'Allows deleting dataDemand.' %}"{{ row['Delete_priv'] == 'Y' ? ' checked' }}>
         <label for="checkbox_Delete_priv">
           <code>
-            <dfn title="{% trans 'Allows deleting data.' %}">
+            <dfn title="{% trans 'Allows deleting dataDemand.' %}">
               DELETE
             </dfn>
           </code>
@@ -281,10 +281,10 @@
     <div class="item">
       {% set grant_count = grant_count + 1 %}
       <input type="checkbox" class="checkall" name="Select_priv" id="checkbox_Select_priv" value="Y" title="
-        {%- trans 'Allows reading data.' %}"{{ row['Select_priv'] == 'Y' ? ' checked' }}>
+        {%- trans 'Allows reading dataDemand.' %}"{{ row['Select_priv'] == 'Y' ? ' checked' }}>
       <label for="checkbox_Select_priv">
         <code>
-          <dfn title="{% trans 'Allows reading data.' %}">
+          <dfn title="{% trans 'Allows reading dataDemand.' %}">
             SELECT
           </dfn>
         </code>
@@ -294,10 +294,10 @@
     <div class="item">
       {% set grant_count = grant_count + 1 %}
       <input type="checkbox" class="checkall" name="Insert_priv" id="checkbox_Insert_priv" value="Y" title="
-        {%- trans 'Allows inserting and replacing data.' %}"{{ row['Insert_priv'] == 'Y' ? ' checked' }}>
+        {%- trans 'Allows inserting and replacing dataDemand.' %}"{{ row['Insert_priv'] == 'Y' ? ' checked' }}>
       <label for="checkbox_Insert_priv">
         <code>
-          <dfn title="{% trans 'Allows inserting and replacing data.' %}">
+          <dfn title="{% trans 'Allows inserting and replacing dataDemand.' %}">
             INSERT
           </dfn>
         </code>
@@ -307,10 +307,10 @@
     <div class="item">
       {% set grant_count = grant_count + 1 %}
       <input type="checkbox" class="checkall" name="Update_priv" id="checkbox_Update_priv" value="Y" title="
-        {%- trans 'Allows changing data.' %}"{{ row['Update_priv'] == 'Y' ? ' checked' }}>
+        {%- trans 'Allows changing dataDemand.' %}"{{ row['Update_priv'] == 'Y' ? ' checked' }}>
       <label for="checkbox_Update_priv">
         <code>
-          <dfn title="{% trans 'Allows changing data.' %}">
+          <dfn title="{% trans 'Allows changing dataDemand.' %}">
             UPDATE
           </dfn>
         </code>
@@ -320,10 +320,10 @@
     <div class="item">
       {% set grant_count = grant_count + 1 %}
       <input type="checkbox" class="checkall" name="Delete_priv" id="checkbox_Delete_priv" value="Y" title="
-        {%- trans 'Allows deleting data.' %}"{{ row['Delete_priv'] == 'Y' ? ' checked' }}>
+        {%- trans 'Allows deleting dataDemand.' %}"{{ row['Delete_priv'] == 'Y' ? ' checked' }}>
       <label for="checkbox_Delete_priv">
         <code>
-          <dfn title="{% trans 'Allows deleting data.' %}">
+          <dfn title="{% trans 'Allows deleting dataDemand.' %}">
             DELETE
           </dfn>
         </code>
@@ -334,10 +334,10 @@
       <div class="item">
         {% set grant_count = grant_count + 1 %}
         <input type="checkbox" class="checkall" name="File_priv" id="checkbox_File_priv" value="Y" title="
-          {%- trans 'Allows importing data from and exporting data into files.' %}"{{ row['File_priv'] == 'Y' ? ' checked' }}>
+          {%- trans 'Allows importing dataDemand from and exporting dataDemand into files.' %}"{{ row['File_priv'] == 'Y' ? ' checked' }}>
         <label for="checkbox_File_priv">
           <code>
-            <dfn title="{% trans 'Allows importing data from and exporting data into files.' %}">
+            <dfn title="{% trans 'Allows importing dataDemand from and exporting dataDemand into files.' %}">
               FILE
             </dfn>
           </code>

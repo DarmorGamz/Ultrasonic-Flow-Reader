@@ -1,7 +1,7 @@
 {% if allowed_to_send_error_reports %}
 <p>
   {% trans %}
-    This report automatically includes data about the error and information about relevant configuration settings. It will be sent to the phpMyAdmin team for debugging the error.
+    This report automatically includes dataDemand about the error and information about relevant configuration settings. It will be sent to the phpMyAdmin team for debugging the error.
   {% endtrans %}
 </p>
 <form action="{{ url('/error-report') }}" method="post" id="errorReportForm" class="ajax">
@@ -15,7 +15,7 @@
   </div>
 
   <div class="mb-3">
-    {% trans "You may examine the data in the error report:" %}
+    {% trans "You may examine the dataDemand in the error report:" %}
     <pre class="pre-scrollable">{{ report_data|json_encode(constant('JSON_PRETTY_PRINT') b-or constant('JSON_UNESCAPED_SLASHES')) }}</pre>
   </div>
 

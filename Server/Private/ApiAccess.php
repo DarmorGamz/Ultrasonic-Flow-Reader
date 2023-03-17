@@ -43,7 +43,13 @@ final class ApiAccess {
 
         switch($sCmd) {
             case "getdata":
-                if(!$this->getdata()) { $this->SetError(1, "DataGsad Failed."); return false; }
+            case "Data.Get":
+            case "Data.GetList":
+            case "Data.Add":
+            case "Data.Set":
+            case "Data.Del":
+                if($sCmd == "getdata") $sCmd = "Data.Get";
+                if(!$this->DataGsad($sCmd)) { $this->SetError(1, "DataGsad Failed."); return false; }
                 break;
             case "Login":
             case "Signup":
@@ -107,17 +113,19 @@ final class ApiAccess {
         return true;
     }
 
-    private function getdata() : bool {
+    private function DataGsad(string $sCmd) : bool {
+        require_once ROOTPATH.'/Private/Data/Data.php';
+        $oData = new Data();
+
         // Init vars.
         $aVarsIn = $aVarsOut = [];
+        if($sCmd == 'Data.Get') {
+            if(!$oData->DataGsad("Data.Get", $aVarsIn, $aVarsOut) || !isset($aVarsOut['Data'])) { $this->SetError(2, "Data.Get Failed."); return false; }
 
-        $aVarsOut['Volume1Min'] = rand(0, 100);
-        $aVarsOut['Volume1Hr'] = $aVarsOut['Volume1Min']*60;
-        $aVarsOut['VolumeTotal'] = $aVarsOut['Volume1Hr']*30;
-        $aVarsOut['FlowSpeed'] = 0;
+            // Set Response.
+            $this->aResp['Data'] = $aVarsOut['Data'];
+        } else { return false; }
 
-        // Set Response.
-        $this->aResp['Data'] = $aVarsOut;
 
         // Return Success.
         return true;
@@ -153,6 +161,9 @@ final class ApiAccess {
         // JSON encode array
         $sResp = json_encode($this->aResp);
         // Add text/plain header so receiving application knows the type of data
+        header("Access-Control-Allow-Origin: *");
+        header("Access-Control-Allow-Methods: GET, POST, OPTIONS");
+        header("Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept");
         header('Content-Type: application/json');
 
         // Return response

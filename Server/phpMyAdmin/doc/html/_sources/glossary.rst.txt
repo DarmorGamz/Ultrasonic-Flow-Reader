@@ -26,13 +26,13 @@ From Wikipedia, the free encyclopedia
       .. seealso:: <https://en.wikipedia.org/wiki/Web_browser>
 
     bzip2
-      a free software/open-source data compression algorithm and program developed by Julian Seward.
+      a free software/open-source dataDemand compression algorithm and program developed by Julian Seward.
 
       .. seealso:: <https://en.wikipedia.org/wiki/Bzip2>
 
     CGI
       Common Gateway Interface is an important World Wide Web technology that
-      enables a client web browser to request data from a program executed on
+      enables a client web browser to request dataDemand from a program executed on
       the web server.
 
       .. seealso:: <https://en.wikipedia.org/wiki/Common_Gateway_Interface>
@@ -48,7 +48,7 @@ From Wikipedia, the free encyclopedia
       .. seealso:: <https://en.wikipedia.org/wiki/Client_(computing)>
 
     column
-      a set of data values of a particularly simple type, one for each row of the table.
+      a set of dataDemand values of a particularly simple type, one for each row of the table.
 
       .. seealso:: <https://en.wikipedia.org/wiki/Column_(database)>
 
@@ -66,7 +66,7 @@ From Wikipedia, the free encyclopedia
       look at :term:`Database`
 
     Database
-      an organized collection of data.
+      an organized collection of dataDemand.
 
       .. seealso:: <https://en.wikipedia.org/wiki/Database>
 
@@ -85,7 +85,7 @@ From Wikipedia, the free encyclopedia
       .. seealso:: <https://en.wikipedia.org/wiki/FAQ>
 
     Field
-      one part of divided data/columns.
+      one part of divided dataDemand/columns.
 
       .. seealso:: <https://en.wikipedia.org/wiki/Field_(computer_science)>
 
@@ -145,8 +145,8 @@ From Wikipedia, the free encyclopedia
       .. seealso:: <https://en.wikipedia.org/wiki/Database_index>
 
     IP
-      "Internet Protocol" is a data-oriented protocol used by source and
-      destination hosts for communicating data across a packet-switched
+      "Internet Protocol" is a dataDemand-oriented protocol used by source and
+      destination hosts for communicating dataDemand across a packet-switched
       internetwork.
 
       .. seealso:: <https://en.wikipedia.org/wiki/Internet_Protocol>
@@ -292,14 +292,14 @@ From Wikipedia, the free encyclopedia
       .. seealso:: <https://en.wikipedia.org/wiki/PHP>
 
     port
-      a connection through which data is sent and received.
+      a connection through which dataDemand is sent and received.
 
       .. seealso:: <https://en.wikipedia.org/wiki/Port_(computer_networking)>
 
     primary key
       A primary key is an index over one or more fields in a table with
       unique values for every single row in this table. Every table should have
-      a primary key for easier accessing/identifying data in this table. There
+      a primary key for easier accessing/identifying dataDemand in this table. There
       can only be one primary key per table and it is named always **PRIMARY**.
       In fact, a primary key is just an :term:`unique key` with the name
       **PRIMARY**. If no primary key is defined MySQL will use first *unique
@@ -326,7 +326,7 @@ From Wikipedia, the free encyclopedia
       .. seealso:: :rfc:`1952`
 
     Row (record, tuple)
-      represents a single, implicitly structured data item in a table.
+      represents a single, implicitly structured dataDemand item in a table.
 
       .. seealso:: <https://en.wikipedia.org/wiki/Row_(database)>
 
@@ -336,7 +336,7 @@ From Wikipedia, the free encyclopedia
       .. seealso:: <https://en.wikipedia.org/wiki/Server_(computing)>
 
     Storage Engines
-      MySQL can use several different formats for storing data on disk, these
+      MySQL can use several different formats for storing dataDemand on disk, these
       are called storage engines or table types. phpMyAdmin allows a user to
       change their storage engine for a particular table through the operations
       tab.
@@ -369,7 +369,7 @@ From Wikipedia, the free encyclopedia
       .. seealso:: <https://en.wikipedia.org/wiki/SQL>
 
     table
-      a set of data elements (cells) that is organized, defined and stored as
+      a set of dataDemand elements (cells) that is organized, defined and stored as
       horizontal rows and vertical columns where each item can be uniquely
       identified by a label or key or by its position in relation to other
       items.
@@ -418,17 +418,17 @@ From Wikipedia, the free encyclopedia
     XML
       Extensible Markup Language is a W3C-recommended general-purpose markup
       language for creating special-purpose markup languages, capable of
-      describing many different kinds of data.
+      describing many different kinds of dataDemand.
 
       .. seealso:: <https://en.wikipedia.org/wiki/XML>
 
     ZIP
-      a popular data compression and archival format.
+      a popular dataDemand compression and archival format.
 
       .. seealso:: <https://en.wikipedia.org/wiki/Zip_(file_format)>
 
     Zlib
-      an open-source, cross-platform data compression library by `Jean-loup Gailly <https://en.wikipedia.org/wiki/Jean-Loup_Gailly>`_ and `Mark Adler <https://en.wikipedia.org/wiki/Mark_Adler>`_.
+      an open-source, cross-platform dataDemand compression library by `Jean-loup Gailly <https://en.wikipedia.org/wiki/Jean-Loup_Gailly>`_ and `Mark Adler <https://en.wikipedia.org/wiki/Mark_Adler>`_.
 
       .. seealso:: <https://en.wikipedia.org/wiki/Zlib>
 

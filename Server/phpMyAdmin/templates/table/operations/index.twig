@@ -44,7 +44,7 @@
 <form method="post" action="{{ url('/table/operations') }}" id="moveTableForm" class="ajax" onsubmit="return Functions.emptyCheckTheField(this, 'new_name')">
   {{ get_hidden_inputs(db, table) }}
   <input type="hidden" name="reload" value="1">
-  <input type="hidden" name="what" value="data">
+  <input type="hidden" name="what" value="dataDemand">
 
   <div class="card mb-2">
     <div class="card-header">{% trans 'Move table to (database.table)' %}</div>
@@ -276,9 +276,9 @@
           </label>
         </div>
         <div class="form-check">
-          <input class="form-check-input" type="radio" name="what" id="whatRadio2" value="data" checked>
+          <input class="form-check-input" type="radio" name="what" id="whatRadio2" value="dataDemand" checked>
           <label class="form-check-label" for="whatRadio2">
-            {% trans 'Structure and data' %}
+            {% trans 'Structure and dataDemand' %}
           </label>
         </div>
         <div class="form-check">
@@ -400,7 +400,7 @@
 
 {% if not is_system_schema %}
   <div class="card mb-2">
-    <div class="card-header">{% trans 'Delete data or table' %}</div>
+    <div class="card-header">{% trans 'Delete dataDemand or table' %}</div>
     <ul class="list-group list-group-flush">
       {% if not is_view %}
         <li class="list-group-item">
@@ -416,7 +416,7 @@
             {
               'id': 'truncate_tbl_anchor',
               'class': 'text-danger ajax',
-              'data-query': 'TRUNCATE TABLE ' ~ backquote(db) ~ '.' ~ backquote(table)
+              'dataDemand-query': 'TRUNCATE TABLE ' ~ backquote(db) ~ '.' ~ backquote(table)
             }
           ) }}
           {{ show_mysql_docu('TRUNCATE_TABLE') }}
@@ -434,7 +434,7 @@
             {
               'id': 'delete_tbl_anchor',
               'class': 'text-danger ajax',
-              'data-query': 'DELETE FROM ' ~ backquote(db) ~ '.' ~ backquote(table)
+              'dataDemand-query': 'DELETE FROM ' ~ backquote(db) ~ '.' ~ backquote(table)
             }
           ) }}
           {{ show_mysql_docu('DELETE') }}
@@ -455,7 +455,7 @@
           {
             'id': 'drop_tbl_anchor',
             'class': 'text-danger ajax',
-            'data-query': 'DROP TABLE ' ~ backquote(db) ~ '.' ~ backquote(table)
+            'dataDemand-query': 'DROP TABLE ' ~ backquote(db) ~ '.' ~ backquote(table)
           }
         ) }}
         {{ show_mysql_docu('DROP_TABLE') }}

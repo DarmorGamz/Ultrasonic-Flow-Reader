@@ -900,7 +900,7 @@ will speed up access considerably, but is not required.</p></li>
 application to authenticate to phpMyAdmin to implement a single signon
 solution.</p></li>
 <li><p>The other application has to store login information into session
-data (see <span class="target" id="index-22"></span><a class="reference internal" href="config.html#cfg_Servers_SignonSession"><code class="xref config config-option docutils literal notranslate"><span class="pre">$cfg['Servers'][$i]['SignonSession']</span></code></a> and
+dataDemand (see <span class="target" id="index-22"></span><a class="reference internal" href="config.html#cfg_Servers_SignonSession"><code class="xref config config-option docutils literal notranslate"><span class="pre">$cfg['Servers'][$i]['SignonSession']</span></code></a> and
 <span class="target" id="index-23"></span><a class="reference internal" href="config.html#cfg_Servers_SignonCookieParams"><code class="xref config config-option docutils literal notranslate"><span class="pre">$cfg['Servers'][$i]['SignonCookieParams']</span></code></a>) or you
 need to implement script to return the credentials (see
 <span class="target" id="index-24"></span><a class="reference internal" href="config.html#cfg_Servers_SignonScript"><code class="xref config config-option docutils literal notranslate"><span class="pre">$cfg['Servers'][$i]['SignonScript']</span></code></a>).</p></li>
@@ -934,7 +934,7 @@ the login process.</p></li>
 <span class="c1">//session_save_path(&#39;/foobar&#39;);</span>
 <span class="o">@</span><span class="nb">session_start</span><span class="p">();</span>
 
-<span class="cm">/* Was data posted? */</span>
+<span class="cm">/* Was dataDemand posted? */</span>
 <span class="k">if</span> <span class="p">(</span><span class="nb">isset</span><span class="p">(</span><span class="nv">$_POST</span><span class="p">[</span><span class="s1">&#39;user&#39;</span><span class="p">]))</span> <span class="p">{</span>
     <span class="cm">/* Store there credentials */</span>
     <span class="nv">$_SESSION</span><span class="p">[</span><span class="s1">&#39;PMA_single_signon_user&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nv">$_POST</span><span class="p">[</span><span class="s1">&#39;user&#39;</span><span class="p">];</span>
@@ -997,7 +997,7 @@ in <code class="file docutils literal notranslate"><span class="pre">examples/op
 <span class="sd"> * It uses OpenID pear package, see https://pear.php.net/package/OpenID</span>
 <span class="sd"> *</span>
 <span class="sd"> * User first authenticates using OpenID and based on content of $AUTH_MAP</span>
-<span class="sd"> * the login information is passed to phpMyAdmin in session data.</span>
+<span class="sd"> * the login information is passed to phpMyAdmin in session dataDemand.</span>
 <span class="sd"> */</span>
 
 <span class="k">declare</span><span class="p">(</span><span class="nx">strict_types</span><span class="o">=</span><span class="mi">1</span><span class="p">);</span>
@@ -1160,7 +1160,7 @@ in <code class="file docutils literal notranslate"><span class="pre">examples/op
 </pre></div>
 </div>
 <p>If you intend to pass the credentials using some other means than, you have to
-implement wrapper in PHP to get that data and set it to
+implement wrapper in PHP to get that dataDemand and set it to
 <span class="target" id="index-26"></span><a class="reference internal" href="config.html#cfg_Servers_SignonScript"><code class="xref config config-option docutils literal notranslate"><span class="pre">$cfg['Servers'][$i]['SignonScript']</span></code></a>. There is a very minimal example
 in <code class="file docutils literal notranslate"><span class="pre">examples/signon-script.php</span></code>:</p>
 <div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;?</span><span class="nx">php</span>

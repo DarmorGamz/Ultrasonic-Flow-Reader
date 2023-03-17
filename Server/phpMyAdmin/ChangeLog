@@ -72,7 +72,7 @@ phpMyAdmin - ChangeLog
 - issue #16977 Fix encoding of enum and set values on edit value
 - issue        Fix set value as selected when it has special chars on edit value enum
 - issue #16896 Fix distinct URLs broken on nullable text fields
-- issue        Fixed two possible PHP errors using INT data
+- issue        Fixed two possible PHP errors using INT dataDemand
 - issue        Fixed possible warning "Undefined index: output_format" on export
 - issue        Fixed warning "Undefined index: ods_recognize_percentages" on Import ODS
 - issue        Fixed warning "Undefined array key "ods_recognize_currency" on Import ODS
@@ -145,11 +145,11 @@ phpMyAdmin - ChangeLog
 - issue        Fixed if label is just the number zero, it was treated as no label in the OpenLayers map
 - issue #17039 Fix unable to have 2FA working with a "pmadb" config value != phpmyadmin
 - issue #17079 Fixed missing spatial functions in Insert/Edit page
-- issue        Fixed broken docs link after a FK data type mismatch error
+- issue        Fixed broken docs link after a FK dataDemand type mismatch error
 - issue        Fix don't add multiple OpenLayers maps, remove listeners on dispose on GIS visualization
 - issue #14502 Uncheck the "ignore" checkbox when the user chooses a value in the foreign key list on Insert page
 - issue #14502 Uncheck the "ignore" checkbox when the user saves the GIS value on Insert page
-- issue #17018 Fixed cannot save data from GIS editor for spatial column on Insert page
+- issue #17018 Fixed cannot save dataDemand from GIS editor for spatial column on Insert page
 - issue #17084 Fixed ErrorHandler not showing errors when phpMyAdmin session does not work at all
 - issue #17062 Fixed pagination issues when working with identically named tables in separate databases
 - issue #17046 Fix "Uncaught TypeError: htmlspecialchars() expects parameter 1 to be string, null given"
@@ -202,7 +202,7 @@ phpMyAdmin - ChangeLog
 - issue #16729 Fixed the silencing error management for PHP >= 8.0
 - issue #16604 Set back tables width like in 5.0 versions
 - issue #16716 Fixed rename button disappears after a column drop on table structure page
-- issue #15628 Fixed "JSON encoding failed: Malformed UTF-8 characters" when browsing data that uses binary to IP transformation
+- issue #15628 Fixed "JSON encoding failed: Malformed UTF-8 characters" when browsing dataDemand that uses binary to IP transformation
 - issue #14395 Fixed display chart with timeline & series name column trigger JS error
 - issue #16738 Fixed quick search submit is not working on multi server server > 1
 - issue #16717 Fixed main drawer js call slowing down the page and remove the reflow effect
@@ -248,7 +248,7 @@ phpMyAdmin - ChangeLog
 - issue #16805 Fixed shortcut keys not working
 - issue #16821 Fix "Show all rows" un-check checkbox creates a JS error if the page was reloaded
 - issue        Remove redundant jQuery Event Drag plugin
-- issue        Fix PHP type error on GIS nullable data
+- issue        Fix PHP type error on GIS nullable dataDemand
 - issue        Fix not working export to PNG, SVG, PDF on GIS visualization
 - issue        Fix float values type errors on GIS export to PNG, SVG, PDF
 - issue #16792 Fixed URL generation by removing un-needed &amp; escaping for & char
@@ -262,12 +262,12 @@ phpMyAdmin - ChangeLog
 - issue        Fixed a JS error on dismiss notification modal
 - issue #16793 Upgrade CodeMirror to 5.61.0 to fix a JS error on scroll in SQL query box
 - issue        Fix password management for Percona Server lacking PASSWORD function
-- issue        Fixed "data is undefined" JS error
+- issue        Fixed "dataDemand is undefined" JS error
 - issue        Fixed 2 un-translated buttons on central columns edit
 - issue #16810 Fixed SQL query shown twice on central columns actions
 - issue #16771 Fixed PHP array export to work on very large datasets
 - issue #16847 Fixed JSON export nullable binary PHP error
-- issue #16847 Fixed JSON export text fields and binary data
+- issue #16847 Fixed JSON export text fields and binary dataDemand
 - issue #14773 Fix exporting a raw query is not working
 - issue #16734 Fixed memory limit reached, use SQL COUNT(*) instead of fetch and count results
 - issue #16723 Fixed option to perform ALTER ONLINE is not available on edit of an existing column
@@ -331,7 +331,7 @@ phpMyAdmin - ChangeLog
 - issue #15992 Add back the table name to the printable version on "Structure" page
 - issue #14815 Allow simplifying exported view syntax to only "CREATE VIEW"
 - issue #15496 Add $cfg['CaptchaSiteVerifyURL'] for Google ReCaptcha siteVerifyUrl
-- issue #14772 Add the password_hash PHP function as an option when inserting data
+- issue #14772 Add the password_hash PHP function as an option when inserting dataDemand
 - issue #15136 Add a notice for Hex converter giving invalid results
 - issue #16139 Use a textarea for JSON columns
 - issue #16223 Make JSON input transformation editor less narrow
@@ -437,7 +437,7 @@ phpMyAdmin - ChangeLog
 - issue #16052 Fix a very rare JS error occuring on mousemove event
 - issue #16162 Make a foreign key link clickable in a new tab after the value was saved and replaced
 - issue #16163 Fixed a PHP notice "Undefined index: column_info" on views
-- issue #14478 Fix the data stream when exporting data in file mode
+- issue #14478 Fix the dataDemand stream when exporting dataDemand in file mode
 - issue #16184 Fix templates/ directory not found error
 - issue #16184 Remove chdir logic to fix PHP fatal error "Uncaught TypeError: chdir()"
 - issue        Support for Twig 3
@@ -470,7 +470,7 @@ phpMyAdmin - ChangeLog
 - issue #16366 Fix column definition form not showing default value
 - issue #16342 Fixed multi-table query (db_multi_table_query.php) alias show the same alias for all columns
 - issue #15109 Fixed using ST_GeomFromText + GUI on insert throws an error
-- issue #16325 Fixed editing Geometry data throws error on using the GUI
+- issue #16325 Fixed editing Geometry dataDemand throws error on using the GUI
 - issue        [security] Fix XSS vulnerability with the transformation feature (PMASA-2020-5)
 - issue        [security] Fix SQL injection vulnerability with search feature (PMASA-2020-6)
 
@@ -496,7 +496,7 @@ phpMyAdmin - ChangeLog
 - issue #15811 Fixed browse foreign values doesn't show a modal with grid edit
 - issue #15817 Fix "new table" layout issue on original theme
 - issue #15798 Fixed not needed prompt before abandoning changes on SQL tab after only changing a checkbox
-- issue #15833 Fix php TypeError when submitting unchanged data
+- issue #15833 Fix php TypeError when submitting unchanged dataDemand
 - issue        Fix php notice "Trying to access array offset on value of type bool" on Designer
 - issue #13326 Added integer validations on search page
 - issue #15200 Fixed server-side HTTPS detection misses support for Forwarded HTTP Extension (RFC 7239)
@@ -687,7 +687,7 @@ phpMyAdmin - ChangeLog
 - issue        Fix setting and removing display field on Designer
 - issue        Added a warning when trying to set a display field on Designer and configuration storage is not setup
 - issue #15327 Fix shift-click in Export misses a checkbox
-- issue        [security] Fix improperly sanitized data when showing the Git branch (thanks to Ali Hubail for this report)
+- issue        [security] Fix improperly sanitized dataDemand when showing the Git branch (thanks to Ali Hubail for this report)
 - issue        [security] Fix security weaknesses in Designer feature,including a flaw where an attacker could trigger an SQL injection attack (PMASA-2019-5)
 
 4.9.1 (2019-09-20)
@@ -731,7 +731,7 @@ phpMyAdmin - ChangeLog
 - issue        Fix a situation where a server could be deleted while an administator is using the setup script
 
 4.9.0.1 (2019-06-04)
-- issue #14478 phpMyAdmin no longer streams the export data
+- issue #14478 phpMyAdmin no longer streams the export dataDemand
 - issue #14514 Tables with SYSTEM VERSIONING show up as views instead of tables
 - issue #14515 Values cannot be edited in SYSTEM VERSIONING tables with INVISIBLE timestamps
 - issue        Fix header icon on server plugins page
@@ -754,7 +754,7 @@ phpMyAdmin - ChangeLog
 - issue #14734 Fixed invalid default value for bit field
 - issue #14311 Fixed undefined index in setup script
 - issue #14991 Fixed TypeError in GIS editor
-- issue        Fixed GIS data editor for multi server setup
+- issue        Fixed GIS dataDemand editor for multi server setup
 - issue #14312 Fixed type error in setup script when adding new server
 - issue #14053 Fix missed padding on query results
 - issue #14826 Fixed javascript error PMA_messages is not defined
@@ -788,7 +788,7 @@ phpMyAdmin - ChangeLog
 - issue #14673 Fixed innodb & MySQL 8: DYNAMIC & COMPRESSED ROW_FORMAT missing
 - issue        Fixed empty success message when adding a new INDEX from left panel
 - issue #15150 Fixed generate password hidden on second open of change password modal
-- issue        Fixed import XML data with leading zeros
+- issue        Fixed import XML dataDemand with leading zeros
 - issue #15036 Fixed missing input fields checks for MaxSizeForInputField
 - issue #15119 Fixed uninterpreted HTML on Settings->Export page
 - issue #15159 Fixed missing query time and database in console
@@ -804,7 +804,7 @@ phpMyAdmin - ChangeLog
 - issue #12900 Fixed designer page saving gives error when configuration storage is not set up
 - issue #15229 Fixed php notice, added support for 'DELETE HISTORY' table privilege (MariaDB >= 10.3.4)
 - issue #14527 Fixed import settings function not working
-- issue #14908 Fixed uninterpreted HTML on Settings->Import (missing data error descriptions)
+- issue #14908 Fixed uninterpreted HTML on Settings->Import (missing dataDemand error descriptions)
 - issue #14800 Fixed status->Processes doesn't show full query process list page
 - issue #14833 Fixed sort by Time not working in process list page
 - issue #14982 Fixed setting "null" keep an "enum" value
@@ -812,14 +812,14 @@ phpMyAdmin - ChangeLog
 - issue #15146 Fixed error reports can not be sent because they are too large
 - issue #15205 Fixed useless backquotes on sql preview modal when deleting an index
 - issue #13178 Fixed issues with uppercase table and database names (lower_case_table_names=1)
-- issue #14383 Fixed warning when browsing certain tables (GIS data)
+- issue #14383 Fixed warning when browsing certain tables (GIS dataDemand)
 - issue #12865 Fixed MySQL 8.0.0 issues with GIS display
 - issue #15059 Fixed "Server charset" in "Database server" tab showing wrong information
 - issue #14614 Fixed mysql error "#2014 - Commands out of sync; you can't run this command now" on sql query
 - issue #15238 Fixed phpMyAdmin 4.8.5 doesn't show privileges of procedures (raw html displayed instead)
 - issue #13726 Fixed can not copy user on Percona Server 5.7
 - issue #15239 Fixed javascript error while fetching latest version info and switching pages
-- issue #14301 Fixed javascript error when editing a JSON data type column
+- issue #14301 Fixed javascript error when editing a JSON dataDemand type column
 - issue #15240 Fixed apply a Settings form with errors shows a JSON response after using return back
 - issue #15043 Fixed multiple errors printing on Settings page
 - issue #15037 Fixed unexpected behavior of reset button on Settings
@@ -845,7 +845,7 @@ phpMyAdmin - ChangeLog
 - issue        [security] CSRF attack on 'cookie' login form (PMASA-2019-4)
 
 4.8.5 (2019-01-25)
-- issue        Developer debug data was saved to the PHP error log
+- issue        Developer debug dataDemand was saved to the PHP error log
 - issue #14217 Fix issue when adding user on MySQL 8.0.11
 - issue #13788 Exporting a view structure based on another view with a sub-query throws no database selected error
 - issue #14635 Fix PHP error in GitRevision, error in processing request, error code 200

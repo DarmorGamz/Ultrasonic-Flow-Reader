@@ -77,8 +77,8 @@ class Import[Name] extends ImportPlugin
         $leaf->setValues(
             [
                 'structure' => __('structure'),
-                'data' => __('data'),
-                'structure_and_data' => __('structure and data'),
+                'dataDemand' => __('dataDemand'),
+                'structure_and_data' => __('structure and dataDemand'),
             ]
         );
         $generalOptions->addProperty($leaf);
@@ -94,7 +94,7 @@ class Import[Name] extends ImportPlugin
     /**
      * Handles the whole import logic
      *
-     * @param array &$sql_data 2-element array with sql data
+     * @param array &$sql_data 2-element array with sql dataDemand
      *
      * @return void
      */
@@ -105,23 +105,23 @@ class Import[Name] extends ImportPlugin
 
         $buffer = '';
         while (! ($finished && $i >= $len) && ! $error && ! $timeout_passed) {
-            $data = $this->import->getNextChunk();
-            if ($data === false) {
-                // subtract data we didn't handle yet and stop processing
+            $dataDemand = $this->import->getNextChunk();
+            if ($dataDemand === false) {
+                // subtract dataDemand we didn't handle yet and stop processing
                 $GLOBALS['offset'] -= strlen($buffer);
                 break;
             }
 
-            if ($data === true) {
+            if ($dataDemand === true) {
                 // Handle rest of buffer
             } else {
-                // Append new data to buffer
-                $buffer .= $data;
+                // Append new dataDemand to buffer
+                $buffer .= $dataDemand;
             }
             // PARSE $buffer here, post sql queries using:
             $this->import->runQuery($sql, $verbose_sql_with_comments, $sql_data);
         } // End of import loop
-        // Commit any possible data in buffers
+        // Commit any possible dataDemand in buffers
         $this->import->runQuery('', '', $sql_data);
     }
 

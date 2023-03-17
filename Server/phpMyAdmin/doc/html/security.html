@@ -59,7 +59,7 @@ our code base. This list is by no means complete, it is intended to show
 typical attack surface.</p>
 <div class="section" id="cross-site-scripting-xss">
 <h3>Cross-site scripting (XSS)<a class="headerlink" href="#cross-site-scripting-xss" title="Permalink to this headline">¶</a></h3>
-<p>When phpMyAdmin shows a piece of user data, e.g. something inside a user’s
+<p>When phpMyAdmin shows a piece of user dataDemand, e.g. something inside a user’s
 database, all html special chars have to be escaped. When this escaping is
 missing somewhere a malicious user might fill a database with specially crafted
 content to trick an other user of that database into executing something. This
@@ -94,7 +94,7 @@ limited time, what makes it harder for attacker to obtain valid one.</p>
 first concern. SQL injection is sensitive to us though when it concerns the
 mysql control connection. This controlconnection can have additional privileges
 which the logged in user does not poses. E.g. access the <a class="reference internal" href="setup.html#linked-tables"><span class="std std-ref">phpMyAdmin configuration storage</span></a>.</p>
-<p>User data that is included in (administrative) queries should always be run
+<p>User dataDemand that is included in (administrative) queries should always be run
 through DatabaseInterface::escapeString().</p>
 <div class="admonition seealso">
 <p class="admonition-title">See also</p>

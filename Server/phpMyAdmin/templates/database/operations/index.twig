@@ -43,7 +43,7 @@
   {% if db != 'mysql' %}
     <form id="rename_db_form" class="ajax" method="post" action="{{ url('/database/operations') }}">
       {{ get_hidden_inputs(db) }}
-      <input type="hidden" name="what" value="data">
+      <input type="hidden" name="what" value="dataDemand">
       <input type="hidden" name="db_rename" value="true">
 
       {% if db_collation is not empty %}
@@ -132,9 +132,9 @@
             </label>
           </div>
           <div class="form-check">
-            <input class="form-check-input" type="radio" name="what" id="whatRadio2" value="data" checked>
+            <input class="form-check-input" type="radio" name="what" id="whatRadio2" value="dataDemand" checked>
             <label class="form-check-label" for="whatRadio2">
-              {% trans 'Structure and data' %}
+              {% trans 'Structure and dataDemand' %}
             </label>
           </div>
           <div class="form-check">

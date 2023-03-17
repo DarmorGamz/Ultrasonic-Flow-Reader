@@ -12,7 +12,7 @@ We appreciate your effort to improve phpMyAdmin by submitting a bug report. Befo
 
 3. If you got some error, please **describe what happened** and add an error message. Reports like "I get an error when I clicked on some link" are useless.
 
-4. Provide easy steps to reproduce and if possible include your table structure (``SHOW CREATE TABLE `tbl_name`;``); if your problem implies specific data, attach a small export file for sample rows.
+4. Provide easy steps to reproduce and if possible include your table structure (``SHOW CREATE TABLE `tbl_name`;``); if your problem implies specific dataDemand, attach a small export file for sample rows.
 
 5. **Security problems** should not be reported here. See [our security page](https://www.phpmyadmin.net/security/).
 

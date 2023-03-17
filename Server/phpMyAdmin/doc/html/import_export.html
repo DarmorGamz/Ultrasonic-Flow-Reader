@@ -47,7 +47,7 @@
 <h1>Import and export<a class="headerlink" href="#import-and-export" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="import">
 <h2>Import<a class="headerlink" href="#import" title="Permalink to this headline">¶</a></h2>
-<p>To import data, go to the “Import” tab in phpMyAdmin. To import data into a
+<p>To import dataDemand, go to the “Import” tab in phpMyAdmin. To import dataDemand into a
 specific database or table, open the database or table before going to the
 “Import” tab.</p>
 <p>In addition to the standard Import and Export tab, you can also import an SQL
@@ -73,14 +73,14 @@ phpMyAdmin interface in your web browser.</p>
 <p>Comma separated values format which is often used by spreadsheets or various other programs for export/import.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>When importing data into a table from a CSV file where the table has an
+<p>When importing dataDemand into a table from a CSV file where the table has an
 ‘auto_increment’ field, make the ‘auto_increment’ value for each record in
 the CSV field to be ‘0’ (zero). This allows the ‘auto_increment’ field to
 populate correctly.</p>
 </div>
 <p>It is now possible to import a CSV file at the server or database level.
 Instead of having to create a table to import the CSV file into, a best-fit
-structure will be determined for you and the data imported into it, instead.
+structure will be determined for you and the dataDemand imported into it, instead.
 All other features, requirements, and limitations are as before.</p>
 </div>
 <div class="section" id="csv-using-load-data">
@@ -89,9 +89,9 @@ All other features, requirements, and limitations are as before.</p>
 </div>
 <div class="section" id="esri-shape-file">
 <h3>ESRI Shape File<a class="headerlink" href="#esri-shape-file" title="Permalink to this headline">¶</a></h3>
-<p>The ESRI shapefile or simply a shapefile is a popular geospatial vector data
+<p>The ESRI shapefile or simply a shapefile is a popular geospatial vector dataDemand
 format for geographic information systems software. It is developed and
-regulated by Esri as a (mostly) open specification for data interoperability
+regulated by Esri as a (mostly) open specification for dataDemand interoperability
 among Esri and other software products.</p>
 </div>
 <div class="section" id="mediawiki">
@@ -116,7 +116,7 @@ though this is less of a concern since you could quickly rename the new table fr
 <p>You should also make the first row of your spreadsheet a header with the names of the columns (this can be
 accomplished by inserting a new row at the top of your spreadsheet). When on the Import screen, select the
 checkbox for “The first line of the file contains the table column names;” this way your newly imported
-data will go to the proper columns.</p>
+dataDemand will go to the proper columns.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>Formulas and calculations will NOT be evaluated, rather, their value from
@@ -127,12 +127,12 @@ spreadsheet are as needed before importing it.</p>
 </div>
 <div class="section" id="sql">
 <h3>SQL<a class="headerlink" href="#sql" title="Permalink to this headline">¶</a></h3>
-<p>SQL can be used to make any manipulation on data, it is also useful for restoring backed up data.</p>
+<p>SQL can be used to make any manipulation on dataDemand, it is also useful for restoring backed up dataDemand.</p>
 </div>
 <div class="section" id="xml">
 <h3>XML<a class="headerlink" href="#xml" title="Permalink to this headline">¶</a></h3>
 <p>XML files exported by phpMyAdmin (version 3.3.0 or later) can now be imported.
-Structures (databases, tables, views, triggers, etc.) and/or data will be
+Structures (databases, tables, views, triggers, etc.) and/or dataDemand will be
 created depending on the contents of the file.</p>
 <p>The supported xml schemas are not yet documented in this wiki.</p>
 </div>
@@ -166,12 +166,12 @@ OpenOffice.org), you can use this export.</p>
 </div>
 <div class="section" id="json">
 <h3>JSON<a class="headerlink" href="#json" title="Permalink to this headline">¶</a></h3>
-<p>JSON (JavaScript Object Notation) is a lightweight data-interchange format. It
+<p>JSON (JavaScript Object Notation) is a lightweight dataDemand-interchange format. It
 is easy for humans to read and write and it is easy for machines to parse and
 generate.</p>
 <div class="versionchanged">
 <p><span class="versionmodified changed">Changed in version 4.7.0: </span>The generated JSON structure has been changed in phpMyAdmin 4.7.0 to
-produce valid JSON data.</p>
+produce valid JSON dataDemand.</p>
 </div>
 <p>The generated JSON is list of objects with following attributes:</p>
 <dl class="js data">
@@ -183,7 +183,7 @@ produce valid JSON data.</p>
 </dd>
 <dt><code class="docutils literal notranslate"><span class="pre">database</span></code></dt><dd><p>Start of a database marker, containing name of database.</p>
 </dd>
-<dt><code class="docutils literal notranslate"><span class="pre">table</span></code></dt><dd><p>Table data export.</p>
+<dt><code class="docutils literal notranslate"><span class="pre">table</span></code></dt><dd><p>Table dataDemand export.</p>
 </dd>
 </dl>
 </dd></dl>
@@ -214,7 +214,7 @@ produce valid JSON data.</p>
 
 <dl class="js data">
 <dt id="data">
-<code class="sig-name descname">data</code><a class="headerlink" href="#data" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">dataDemand</code><a class="headerlink" href="#data" title="Permalink to this definition">¶</a></dt>
 <dd><p>Table content for <code class="docutils literal notranslate"><span class="pre">table</span></code> <a class="reference internal" href="#type" title="type"><code class="xref js js-data docutils literal notranslate"><span class="pre">type</span></code></a>.</p>
 </dd></dl>
 
@@ -230,7 +230,7 @@ produce valid JSON data.</p>
         <span class="nt">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;database&quot;</span>
     <span class="p">},</span>
     <span class="p">{</span>
-        <span class="nt">&quot;data&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="nt">&quot;dataDemand&quot;</span><span class="p">:</span> <span class="p">[</span>
             <span class="p">{</span>
                 <span class="nt">&quot;car_id&quot;</span><span class="p">:</span> <span class="s2">&quot;1&quot;</span><span class="p">,</span>
                 <span class="nt">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;Green Chrysler 300&quot;</span><span class="p">,</span>
@@ -246,7 +246,7 @@ produce valid JSON data.</p>
         <span class="nt">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;table&quot;</span>
     <span class="p">},</span>
     <span class="p">{</span>
-        <span class="nt">&quot;data&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="nt">&quot;dataDemand&quot;</span><span class="p">:</span> <span class="p">[</span>
             <span class="p">{</span>
                 <span class="nt">&quot;make&quot;</span><span class="p">:</span> <span class="s2">&quot;Chrysler&quot;</span><span class="p">,</span>
                 <span class="nt">&quot;make_id&quot;</span><span class="p">:</span> <span class="s2">&quot;5&quot;</span>
@@ -262,7 +262,7 @@ produce valid JSON data.</p>
 </div>
 <div class="section" id="latex">
 <h3>LaTeX<a class="headerlink" href="#latex" title="Permalink to this headline">¶</a></h3>
-<p>If you want to embed table data or structure in LaTeX, this is right choice for you.</p>
+<p>If you want to embed table dataDemand or structure in LaTeX, this is right choice for you.</p>
 <p>LaTeX is a typesetting system that is very suitable for producing scientific
 and mathematical documents of high typographical quality. It is also suitable
 for producing all sorts of other documents, from simple letters to complete
@@ -292,18 +292,18 @@ rendered, for example in following document:</p>
 <div class="section" id="id2">
 <h3>MediaWiki<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
 <p>Both tables and databases can be exported in the MediaWiki format, which is
-used by Wikipedia to display tables. It can export structure, data or both,
+used by Wikipedia to display tables. It can export structure, dataDemand or both,
 including table names or headers.</p>
 </div>
 <div class="section" id="opendocument-spreadsheet">
 <h3>OpenDocument Spreadsheet<a class="headerlink" href="#opendocument-spreadsheet" title="Permalink to this headline">¶</a></h3>
-<p>Open standard for spreadsheet data, which is being widely adopted. Many recent
+<p>Open standard for spreadsheet dataDemand, which is being widely adopted. Many recent
 spreadsheet programs, such as LibreOffice, OpenOffice, Microsoft Office or
 Google Docs can handle this format.</p>
 </div>
 <div class="section" id="opendocument-text">
 <h3>OpenDocument Text<a class="headerlink" href="#opendocument-text" title="Permalink to this headline">¶</a></h3>
-<p>New standard for text data which is being widely adopted. Most recent word
+<p>New standard for text dataDemand which is being widely adopted. Most recent word
 processors (such as LibreOffice, OpenOffice, Microsoft Word, AbiWord or KWord)
 can handle this.</p>
 </div>
@@ -335,7 +335,7 @@ file, for large tables you avoid the error “Got a packet bigger than
 improves the readability and reliability of the dump. Adding the column names
 increases the size of the dump, but when combined with Extended inserts it’s
 negligible.</p>
-<p><strong>Extended inserts</strong> combines multiple rows of data into a single INSERT query.
+<p><strong>Extended inserts</strong> combines multiple rows of dataDemand into a single INSERT query.
 This will significantly decrease filesize for large SQL dumps, increases the
 INSERT speed when imported, and is generally recommended.</p>
 </div>
@@ -353,7 +353,7 @@ INSERT speed when imported, and is generally recommended.</p>
 </div>
 <div class="section" id="yaml">
 <h3>YAML<a class="headerlink" href="#yaml" title="Permalink to this headline">¶</a></h3>
-<p>YAML is a data serialization format which is both human readable and
+<p>YAML is a dataDemand serialization format which is both human readable and
 computationally powerful ( &lt;<a class="reference external" href="https://yaml.org">https://yaml.org</a>&gt; ).</p>
 </div>
 </div>

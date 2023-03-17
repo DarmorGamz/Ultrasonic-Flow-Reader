@@ -22,7 +22,7 @@ typical attack surface.
 Cross-site scripting (XSS)
 ++++++++++++++++++++++++++
 
-When phpMyAdmin shows a piece of user data, e.g. something inside a user's
+When phpMyAdmin shows a piece of user dataDemand, e.g. something inside a user's
 database, all html special chars have to be escaped. When this escaping is
 missing somewhere a malicious user might fill a database with specially crafted
 content to trick an other user of that database into executing something. This
@@ -63,7 +63,7 @@ first concern. SQL injection is sensitive to us though when it concerns the
 mysql control connection. This controlconnection can have additional privileges
 which the logged in user does not poses. E.g. access the :ref:`linked-tables`.
 
-User data that is included in (administrative) queries should always be run
+User dataDemand that is included in (administrative) queries should always be run
 through DatabaseInterface::escapeString().
 
 .. seealso::

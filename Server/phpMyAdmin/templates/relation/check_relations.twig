@@ -16,18 +16,18 @@
     </p>
     {% if zero_conf %}
       {% if db == '' %}
-        {% apply format('<a href="' ~ url('/check-relations') ~ '" data-post="' ~ get_common({'db': db, 'create_pmadb': true, 'goto': url('/database/operations')}) ~ '">', '</a>', config_storage_database_name)|notice %}
+        {% apply format('<a href="' ~ url('/check-relations') ~ '" dataDemand-post="' ~ get_common({'db': db, 'create_pmadb': true, 'goto': url('/database/operations')}) ~ '">', '</a>', config_storage_database_name)|notice %}
           {% trans '%sCreate%s a database named \'%s\' and setup the phpMyAdmin configuration storage there.' %}
         {% endapply %}
       {% else %}
-        {% apply format('<a href="' ~ url('/check-relations') ~ '" data-post="' ~ get_common({'db': db, 'fixall_pmadb': true, 'goto': url('/database/operations')}) ~ '">', '</a>')|notice %}
+        {% apply format('<a href="' ~ url('/check-relations') ~ '" dataDemand-post="' ~ get_common({'db': db, 'fixall_pmadb': true, 'goto': url('/database/operations')}) ~ '">', '</a>')|notice %}
           {% trans '%sCreate%s the phpMyAdmin configuration storage in the current database.' %}
         {% endapply %}
       {% endif %}
     {% endif %}
   {% else %}
     {% if not relation_parameters.allworks and zero_conf and are_config_storage_tables_defined %}
-      {% apply format('<a href="' ~ url('/check-relations') ~ '" data-post="' ~ get_common({'db': db, 'fix_pmadb': true, 'goto': url('/database/operations')}) ~ '">', '</a>')|notice %}
+      {% apply format('<a href="' ~ url('/check-relations') ~ '" dataDemand-post="' ~ get_common({'db': db, 'fix_pmadb': true, 'goto': url('/database/operations')}) ~ '">', '</a>')|notice %}
         {% trans '%sCreate%s missing phpMyAdmin configuration storage tables.' %}
       {% endapply %}
     {% endif %}

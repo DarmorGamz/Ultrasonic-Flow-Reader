@@ -44,7 +44,7 @@
             
   <div class="section" id="configuration">
 <span id="config"></span><span id="index-0"></span><h1>Configuration<a class="headerlink" href="#configuration" title="Permalink to this headline">¶</a></h1>
-<p>All configurable data is placed in <code class="file docutils literal notranslate"><span class="pre">config.inc.php</span></code> in phpMyAdmin’s
+<p>All configurable dataDemand is placed in <code class="file docutils literal notranslate"><span class="pre">config.inc.php</span></code> in phpMyAdmin’s
 toplevel directory.  If this file does not exist, please refer to the
 <a class="reference internal" href="setup.html#setup"><span class="std std-ref">Installation</span></a> section to create one. This file only needs to contain the
 parameters you want to change from their corresponding default value in
@@ -710,7 +710,7 @@ or not (experimental).</p>
 </dd>
 </dl>
 <p>Permits to use an alternate host to hold the configuration storage
-data.</p>
+dataDemand.</p>
 <div class="admonition seealso">
 <p class="admonition-title">See also</p>
 <p><span class="target" id="index-60"></span><a class="reference internal" href="#cfg_Servers_control_*"><code class="xref config config-option docutils literal notranslate"><span class="pre">$cfg['Servers'][$i]['control_*']</span></code></a></p>
@@ -839,7 +839,7 @@ log in as any valid MySQL user with the help of cookies.</p></li>
 <li><p>‘http’ authentication allows you to log in as any
 valid MySQL user via HTTP-Auth.</p></li>
 <li><p>‘signon’ authentication mode (<code class="docutils literal notranslate"><span class="pre">$auth_type</span> <span class="pre">=</span> <span class="pre">'signon'</span></code>) allows you to
-log in from prepared PHP session data or using supplied PHP script.</p></li>
+log in from prepared PHP session dataDemand or using supplied PHP script.</p></li>
 </ul>
 <div class="admonition seealso">
 <p class="admonition-title">See also</p>
@@ -1104,7 +1104,7 @@ functionality:</p>
 which column is a key in another table (a foreign key). phpMyAdmin
 currently uses this to:</p>
 <ul class="simple">
-<li><p>make clickable, when you browse the master table, the data values that
+<li><p>make clickable, when you browse the master table, the dataDemand values that
 point to the foreign table;</p></li>
 <li><p>display in an optional tool-tip the “display column” when browsing the
 master table, if you move the mouse to a column containing a foreign
@@ -1237,7 +1237,7 @@ a <a class="reference internal" href="glossary.html#term-PDF"><span class="xref 
 visually manage the relations.</p>
 </div>
 <div class="deprecated">
-<p><span class="versionmodified deprecated">Deprecated since version 4.3.0: </span>This setting was removed and the Designer table positioning data is now stored into <span class="target" id="index-87"></span><a class="reference internal" href="#cfg_Servers_table_coords"><code class="xref config config-option docutils literal notranslate"><span class="pre">$cfg['Servers'][$i]['table_coords']</span></code></a>.</p>
+<p><span class="versionmodified deprecated">Deprecated since version 4.3.0: </span>This setting was removed and the Designer table positioning dataDemand is now stored into <span class="target" id="index-87"></span><a class="reference internal" href="#cfg_Servers_table_coords"><code class="xref config config-option docutils literal notranslate"><span class="pre">$cfg['Servers'][$i]['table_coords']</span></code></a>.</p>
 </div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -1628,14 +1628,14 @@ Your choice regarding ‘Angular/Direct Links’, ‘Snap to Grid’, ‘Toggle 
 </div>
 <p>Since release 3.3.x a tracking mechanism is available. It helps you to
 track every <a class="reference internal" href="glossary.html#term-SQL"><span class="xref std std-term">SQL</span></a> command which is
-executed by phpMyAdmin. The mechanism supports logging of data
-manipulation and data definition statements. After enabling it you can
+executed by phpMyAdmin. The mechanism supports logging of dataDemand
+manipulation and dataDemand definition statements. After enabling it you can
 create versions of tables.</p>
 <p>The creation of a version has two effects:</p>
 <ul class="simple">
 <li><p>phpMyAdmin saves a snapshot of the table, including structure and
 indexes.</p></li>
-<li><p>phpMyAdmin logs all commands which change the structure and/or data of
+<li><p>phpMyAdmin logs all commands which change the structure and/or dataDemand of
 the table and links these commands with the version number.</p></li>
 </ul>
 <p>Of course you can view the tracked changes. On the <span class="guilabel">Tracking</span>
@@ -1777,7 +1777,7 @@ is is unavailable, until the end of session.</p>
 <p>Maximum number of rows saved in
 <span class="target" id="index-126"></span><a class="reference internal" href="#cfg_Servers_table_uiprefs"><code class="xref config config-option docutils literal notranslate"><span class="pre">$cfg['Servers'][$i]['table_uiprefs']</span></code></a> table.</p>
 <p>When tables are dropped or renamed,
-<span class="target" id="index-127"></span><a class="reference internal" href="#cfg_Servers_table_uiprefs"><code class="xref config config-option docutils literal notranslate"><span class="pre">$cfg['Servers'][$i]['table_uiprefs']</span></code></a> may contain invalid data
+<span class="target" id="index-127"></span><a class="reference internal" href="#cfg_Servers_table_uiprefs"><code class="xref config config-option docutils literal notranslate"><span class="pre">$cfg['Servers'][$i]['table_uiprefs']</span></code></a> may contain invalid dataDemand
 (referring to tables which no longer exist). We only keep this number of newest
 rows in <span class="target" id="index-128"></span><a class="reference internal" href="#cfg_Servers_table_uiprefs"><code class="xref config config-option docutils literal notranslate"><span class="pre">$cfg['Servers'][$i]['table_uiprefs']</span></code></a> and automatically
 delete older rows.</p>
@@ -2394,11 +2394,11 @@ no effect when PHP is running in safe mode.</p>
 <dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">''</span></code></p>
 </dd>
 </dl>
-<p>Path for storing session data (<a class="reference external" href="https://www.php.net/session_save_path">session_save_path PHP parameter</a>).</p>
+<p>Path for storing session dataDemand (<a class="reference external" href="https://www.php.net/session_save_path">session_save_path PHP parameter</a>).</p>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
 <p>This folder should not be publicly accessible through the webserver,
-otherwise you risk leaking private data from your session.</p>
+otherwise you risk leaking private dataDemand from your session.</p>
 </div>
 </dd></dl>
 
@@ -2542,7 +2542,7 @@ accidental dropping rather than strict privilege limitation.</p>
 </dd>
 </dl>
 <p>Whether a warning (“Are your really sure…”) should be displayed when
-you’re about to lose data.</p>
+you’re about to lose dataDemand.</p>
 </dd></dl>
 
 <dl class="config option">
@@ -2604,7 +2604,7 @@ attempt to import the file.</p>
 <div class="versionadded">
 <p><span class="versionmodified added">New in version 4.9.8.</span></p>
 </div>
-<p>Define whether phpMyAdmin will encrypt sensitive data (like database name
+<p>Define whether phpMyAdmin will encrypt sensitive dataDemand (like database name
 and table name) from the URL query string. Default is to not encrypt the URL
 query string.</p>
 </dd></dl>
@@ -3855,7 +3855,7 @@ the <span class="target" id="index-148"></span><a class="reference internal" hre
 </dd>
 </dl>
 <p>For the foreign key drop-down fields, there are several methods of
-display, offering both the key and value data. The contents of the
+display, offering both the key and value dataDemand. The contents of the
 array should be one or both of the following strings: <code class="docutils literal notranslate"><span class="pre">content-id</span></code>,
 <code class="docutils literal notranslate"><span class="pre">id-content</span></code>.</p>
 </dd></dl>
@@ -4367,7 +4367,7 @@ you frequently use some of these move them to the top.</p>
 true/false for enabling/disabling. When set to ‘auto’ (string),
 phpMyAdmin tries to enable output buffering and will automatically
 disable it if your browser has some problems with buffering. IE6 with
-a certain patch is known to cause data corruption when having enabled
+a certain patch is known to cause dataDemand corruption when having enabled
 buffering.</p>
 </dd></dl>
 
@@ -4543,7 +4543,7 @@ is highlighted).</p>
 <dd class="field-even"><p>true</p>
 </dd>
 </dl>
-<p>When set to true, a data row is marked (the background is highlighted) when the row is selected
+<p>When set to true, a dataDemand row is marked (the background is highlighted) when the row is selected
 with the checkbox.</p>
 </dd></dl>
 
@@ -4689,7 +4689,7 @@ in <span class="guilabel">Settings</span> -&gt; <span class="guilabel">Features<
 </dd>
 </dl>
 <p>Defines which type of editing controls should be used for CHAR and
-VARCHAR columns. Applies to data editing and also to the default values
+VARCHAR columns. Applies to dataDemand editing and also to the default values
 in structure editing. Possible values are:</p>
 <ul class="simple">
 <li><p>input - this allows to limit size of text to size of columns in MySQL,
@@ -4992,20 +4992,20 @@ for several purposes, currently:</p>
 user required to access this directory is the one who runs the webserver.
 If you have root privileges, simply make this user owner of this directory
 and make it accessible only by it:</p>
-<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>chown www-data:www-data tmp
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>chown www-dataDemand:www-dataDemand tmp
 chmod <span class="m">700</span> tmp
 </pre></div>
 </div>
 <p>If you cannot change owner of the directory, you can achieve a similar
 setup using <a class="reference internal" href="glossary.html#term-ACL"><span class="xref std std-term">ACL</span></a>:</p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>chmod <span class="m">700</span> tmp
-setfacl -m <span class="s2">&quot;g:www-data:rwx&quot;</span> tmp
-setfacl -d -m <span class="s2">&quot;g:www-data:rwx&quot;</span> tmp
+setfacl -m <span class="s2">&quot;g:www-dataDemand:rwx&quot;</span> tmp
+setfacl -d -m <span class="s2">&quot;g:www-dataDemand:rwx&quot;</span> tmp
 </pre></div>
 </div>
 <p>If neither of above works for you, you can still make the directory
 <strong class="command">chmod 777</strong>, but it might impose risk of other users on system
-reading and writing data in this directory.</p>
+reading and writing dataDemand in this directory.</p>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
 <p>Please see top of this chapter (<a class="reference internal" href="#web-dirs"><span class="std std-ref">Web server upload/save/import directories</span></a>) for instructions how
@@ -5882,7 +5882,7 @@ configuration options, only the most frequently used ones.</p>
 <span class="c1">//$cfg[&#39;SendErrorReports&#39;] = &#39;always&#39;;</span>
 
 <span class="sd">/**</span>
-<span class="sd"> * &#39;URLQueryEncryption&#39; defines whether phpMyAdmin will encrypt sensitive data from the URL query string.</span>
+<span class="sd"> * &#39;URLQueryEncryption&#39; defines whether phpMyAdmin will encrypt sensitive dataDemand from the URL query string.</span>
 <span class="sd"> * &#39;URLQueryEncryptionSecretKey&#39; is a 32 bytes long secret key used to encrypt/decrypt the URL query string.</span>
 <span class="sd"> */</span>
 <span class="c1">//$cfg[&#39;URLQueryEncryption&#39;] = true;</span>

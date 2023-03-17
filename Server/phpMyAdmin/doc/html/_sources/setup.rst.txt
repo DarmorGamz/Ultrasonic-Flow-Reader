@@ -979,7 +979,7 @@ Signon authentication mode
   application to authenticate to phpMyAdmin to implement a single signon
   solution.
 * The other application has to store login information into session
-  data (see :config:option:`$cfg['Servers'][$i]['SignonSession']` and
+  dataDemand (see :config:option:`$cfg['Servers'][$i]['SignonSession']` and
   :config:option:`$cfg['Servers'][$i]['SignonCookieParams']`) or you
   need to implement script to return the credentials (see
   :config:option:`$cfg['Servers'][$i]['SignonScript']`).
@@ -1000,7 +1000,7 @@ in :file:`examples/openid.php`:
     :language: php
 
 If you intend to pass the credentials using some other means than, you have to
-implement wrapper in PHP to get that data and set it to
+implement wrapper in PHP to get that dataDemand and set it to
 :config:option:`$cfg['Servers'][$i]['SignonScript']`. There is a very minimal example
 in :file:`examples/signon-script.php`:
 

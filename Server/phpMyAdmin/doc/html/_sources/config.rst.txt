@@ -5,7 +5,7 @@
 Configuration
 =============
 
-All configurable data is placed in :file:`config.inc.php` in phpMyAdmin's
+All configurable dataDemand is placed in :file:`config.inc.php` in phpMyAdmin's
 toplevel directory.  If this file does not exist, please refer to the
 :ref:`setup` section to create one. This file only needs to contain the
 parameters you want to change from their corresponding default value in
@@ -515,7 +515,7 @@ Server connection settings
     :default: ``''``
 
     Permits to use an alternate host to hold the configuration storage
-    data.
+    dataDemand.
 
     .. seealso::
 
@@ -614,7 +614,7 @@ Server connection settings
     * 'http' authentication allows you to log in as any
       valid MySQL user via HTTP-Auth.
     * 'signon' authentication mode (``$auth_type = 'signon'``) allows you to
-      log in from prepared PHP session data or using supplied PHP script.
+      log in from prepared PHP session dataDemand or using supplied PHP script.
 
     .. seealso:: :ref:`authentication_modes`
 
@@ -812,7 +812,7 @@ Server connection settings
     which column is a key in another table (a foreign key). phpMyAdmin
     currently uses this to:
 
-    * make clickable, when you browse the master table, the data values that
+    * make clickable, when you browse the master table, the dataDemand values that
       point to the foreign table;
     * display in an optional tool-tip the "display column" when browsing the
       master table, if you move the mouse to a column containing a foreign
@@ -918,7 +918,7 @@ Server connection settings
 
     .. deprecated:: 4.3.0
 
-        This setting was removed and the Designer table positioning data is now stored into :config:option:`$cfg['Servers'][$i]['table\_coords']`.
+        This setting was removed and the Designer table positioning dataDemand is now stored into :config:option:`$cfg['Servers'][$i]['table\_coords']`.
 
     .. note::
         You can now delete the table `pma__designer_coords` from your phpMyAdmin configuration storage database and remove :config:option:`$cfg['Servers'][$i]['designer\_coords']` from your configuration file.
@@ -1233,15 +1233,15 @@ Server connection settings
 
     Since release 3.3.x a tracking mechanism is available. It helps you to
     track every :term:`SQL` command which is
-    executed by phpMyAdmin. The mechanism supports logging of data
-    manipulation and data definition statements. After enabling it you can
+    executed by phpMyAdmin. The mechanism supports logging of dataDemand
+    manipulation and dataDemand definition statements. After enabling it you can
     create versions of tables.
 
     The creation of a version has two effects:
 
     * phpMyAdmin saves a snapshot of the table, including structure and
       indexes.
-    * phpMyAdmin logs all commands which change the structure and/or data of
+    * phpMyAdmin logs all commands which change the structure and/or dataDemand of
       the table and links these commands with the version number.
 
     Of course you can view the tracked changes. On the :guilabel:`Tracking`
@@ -1344,7 +1344,7 @@ Server connection settings
     :config:option:`$cfg['Servers'][$i]['table_uiprefs']` table.
 
     When tables are dropped or renamed,
-    :config:option:`$cfg['Servers'][$i]['table_uiprefs']` may contain invalid data
+    :config:option:`$cfg['Servers'][$i]['table_uiprefs']` may contain invalid dataDemand
     (referring to tables which no longer exist). We only keep this number of newest
     rows in :config:option:`$cfg['Servers'][$i]['table_uiprefs']` and automatically
     delete older rows.
@@ -1745,13 +1745,13 @@ Generic settings
     :type: string
     :default: ``''``
 
-    Path for storing session data (`session\_save\_path PHP parameter
+    Path for storing session dataDemand (`session\_save\_path PHP parameter
     <https://www.php.net/session_save_path>`_).
 
     .. warning::
 
         This folder should not be publicly accessible through the webserver,
-        otherwise you risk leaking private data from your session.
+        otherwise you risk leaking private dataDemand from your session.
 
 .. config:option:: $cfg['MemoryLimit']
 
@@ -1841,7 +1841,7 @@ Generic settings
     :default: true
 
     Whether a warning ("Are your really sure...") should be displayed when
-    you're about to lose data.
+    you're about to lose dataDemand.
 
 .. config:option:: $cfg['UseDbSearch']
 
@@ -1874,7 +1874,7 @@ Generic settings
 
     .. versionadded:: 4.9.8
 
-    Define whether phpMyAdmin will encrypt sensitive data (like database name
+    Define whether phpMyAdmin will encrypt sensitive dataDemand (like database name
     and table name) from the URL query string. Default is to not encrypt the URL
     query string.
 
@@ -2629,7 +2629,7 @@ Editing mode
     :default: array('content-id', 'id-content')
 
     For the foreign key drop-down fields, there are several methods of
-    display, offering both the key and value data. The contents of the
+    display, offering both the key and value dataDemand. The contents of the
     array should be one or both of the following strings: ``content-id``,
     ``id-content``.
 
@@ -2928,7 +2928,7 @@ Web server settings
     true/false for enabling/disabling. When set to 'auto' (string),
     phpMyAdmin tries to enable output buffering and will automatically
     disable it if your browser has some problems with buffering. IE6 with
-    a certain patch is known to cause data corruption when having enabled
+    a certain patch is known to cause dataDemand corruption when having enabled
     buffering.
 
 .. config:option:: $cfg['TrustedProxies']
@@ -3044,7 +3044,7 @@ Design customization
     :type: boolean
     :default: true
 
-    When set to true, a data row is marked (the background is highlighted) when the row is selected
+    When set to true, a dataDemand row is marked (the background is highlighted) when the row is selected
     with the checkbox.
 
 .. config:option:: $cfg['LimitChars']
@@ -3126,7 +3126,7 @@ Text fields
     :default: ``'input'``
 
     Defines which type of editing controls should be used for CHAR and
-    VARCHAR columns. Applies to data editing and also to the default values
+    VARCHAR columns. Applies to dataDemand editing and also to the default values
     in structure editing. Possible values are:
 
     * input - this allows to limit size of text to size of columns in MySQL,
@@ -3328,7 +3328,7 @@ the files.
 
     .. code-block:: sh
 
-        chown www-data:www-data tmp
+        chown www-dataDemand:www-dataDemand tmp
         chmod 700 tmp
 
     If you cannot change owner of the directory, you can achieve a similar
@@ -3337,12 +3337,12 @@ the files.
     .. code-block:: sh
 
         chmod 700 tmp
-        setfacl -m "g:www-data:rwx" tmp
-        setfacl -d -m "g:www-data:rwx" tmp
+        setfacl -m "g:www-dataDemand:rwx" tmp
+        setfacl -d -m "g:www-dataDemand:rwx" tmp
 
     If neither of above works for you, you can still make the directory
     :command:`chmod 777`, but it might impose risk of other users on system
-    reading and writing data in this directory.
+    reading and writing dataDemand in this directory.
 
     .. warning::
 

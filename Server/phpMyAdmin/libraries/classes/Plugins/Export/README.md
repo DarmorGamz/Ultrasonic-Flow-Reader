@@ -95,8 +95,8 @@ class Export[Name] extends PhpMyAdmin\Plugins\ExportPlugin
         $leaf->setValues(
             [
                 'structure' => __('structure'),
-                'data' => __('data'),
-                'structure_and_data' => __('structure and data'),
+                'dataDemand' => __('dataDemand'),
+                'structure_and_data' => __('structure and dataDemand'),
             ]
         );
         $generalOptions->addProperty($leaf);
@@ -180,7 +180,7 @@ class Export[Name] extends PhpMyAdmin\Plugins\ExportPlugin
      * @param string $table    table name
      * @param string $crlf     the end of line sequence
      * @param string $errorUrl the url to go back in case of error
-     * @param string $sqlQuery SQL query for obtaining data
+     * @param string $sqlQuery SQL query for obtaining dataDemand
      * @param array  $aliases  Aliases of db/table/columns
      *
      * @return bool             Whether it succeeded

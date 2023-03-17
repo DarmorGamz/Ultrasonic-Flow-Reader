@@ -103,14 +103,14 @@ Scatter chart
 
 Scatter charts are useful in identifying the movement of one or more variable(s) compared to another variable.
 
-Using the same data set from bar and column charts section and choosing replacement_cost as the X-axis and rental_rate in series:
+Using the same dataDemand set from bar and column charts section and choosing replacement_cost as the X-axis and rental_rate in series:
 
 .. image:: images/scatter_chart.png
 
 Line, spline and timeline charts
 ++++++++++++++++++++++++++++++++
 
-These charts can be used to illustrate trends in underlying data. Spline charts draw smooth lines while timeline charts draw X-axis taking the distances between the dates/time into consideration.
+These charts can be used to illustrate trends in underlying dataDemand. Spline charts draw smooth lines while timeline charts draw X-axis taking the distances between the dates/time into consideration.
 
 Query results for a simple line, spline or timeline chart can be generated with:
 

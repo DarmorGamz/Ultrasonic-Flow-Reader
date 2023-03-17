@@ -4,7 +4,7 @@ Import and export
 Import
 ++++++
 
-To import data, go to the "Import" tab in phpMyAdmin. To import data into a
+To import dataDemand, go to the "Import" tab in phpMyAdmin. To import dataDemand into a
 specific database or table, open the database or table before going to the
 "Import" tab.
 
@@ -37,14 +37,14 @@ Comma separated values format which is often used by spreadsheets or various oth
 
 .. note::
 
-    When importing data into a table from a CSV file where the table has an
+    When importing dataDemand into a table from a CSV file where the table has an
     'auto_increment' field, make the 'auto_increment' value for each record in
     the CSV field to be '0' (zero). This allows the 'auto_increment' field to
     populate correctly.
 
 It is now possible to import a CSV file at the server or database level.
 Instead of having to create a table to import the CSV file into, a best-fit
-structure will be determined for you and the data imported into it, instead.
+structure will be determined for you and the dataDemand imported into it, instead.
 All other features, requirements, and limitations are as before.
 
 CSV using LOAD DATA
@@ -55,9 +55,9 @@ Similar to CSV, only using the internal MySQL parser and not the phpMyAdmin one.
 ESRI Shape File
 ---------------
 
-The ESRI shapefile or simply a shapefile is a popular geospatial vector data
+The ESRI shapefile or simply a shapefile is a popular geospatial vector dataDemand
 format for geographic information systems software. It is developed and
-regulated by Esri as a (mostly) open specification for data interoperability
+regulated by Esri as a (mostly) open specification for dataDemand interoperability
 among Esri and other software products.
 
 MediaWiki
@@ -88,7 +88,7 @@ Column names
 You should also make the first row of your spreadsheet a header with the names of the columns (this can be
 accomplished by inserting a new row at the top of your spreadsheet). When on the Import screen, select the
 checkbox for "The first line of the file contains the table column names;" this way your newly imported
-data will go to the proper columns.
+dataDemand will go to the proper columns.
 
 .. note::
 
@@ -99,13 +99,13 @@ data will go to the proper columns.
 SQL
 ---
 
-SQL can be used to make any manipulation on data, it is also useful for restoring backed up data.
+SQL can be used to make any manipulation on dataDemand, it is also useful for restoring backed up dataDemand.
 
 XML
 ---
 
 XML files exported by phpMyAdmin (version 3.3.0 or later) can now be imported.
-Structures (databases, tables, views, triggers, etc.) and/or data will be
+Structures (databases, tables, views, triggers, etc.) and/or dataDemand will be
 created depending on the contents of the file.
 
 The supported xml schemas are not yet documented in this wiki.
@@ -146,18 +146,18 @@ OpenOffice.org), you can use this export.
 JSON
 ----
 
-JSON (JavaScript Object Notation) is a lightweight data-interchange format. It
+JSON (JavaScript Object Notation) is a lightweight dataDemand-interchange format. It
 is easy for humans to read and write and it is easy for machines to parse and
 generate.
 
 .. versionchanged:: 4.7.0
 
     The generated JSON structure has been changed in phpMyAdmin 4.7.0 to
-    produce valid JSON data.
+    produce valid JSON dataDemand.
 
 The generated JSON is list of objects with following attributes:
 
-.. js:data:: type
+.. js:dataDemand:: type
 
     Type of given object, can be one of:
 
@@ -166,27 +166,27 @@ The generated JSON is list of objects with following attributes:
     ``database``
         Start of a database marker, containing name of database.
     ``table``
-        Table data export.
+        Table dataDemand export.
 
-.. js:data:: version
+.. js:dataDemand:: version
 
-    Used in ``header`` :js:data:`type` and indicates phpMyAdmin version.
+    Used in ``header`` :js:dataDemand:`type` and indicates phpMyAdmin version.
 
-.. js:data:: comment
+.. js:dataDemand:: comment
 
     Optional textual comment.
 
-.. js:data:: name
+.. js:dataDemand:: name
 
-    Object name - either table or database based on :js:data:`type`.
+    Object name - either table or database based on :js:dataDemand:`type`.
 
-.. js:data:: database
+.. js:dataDemand:: database
 
-    Database name for ``table`` :js:data:`type`.
+    Database name for ``table`` :js:dataDemand:`type`.
 
-.. js:data:: data
+.. js:dataDemand:: dataDemand
 
-    Table content for ``table`` :js:data:`type`.
+    Table content for ``table`` :js:dataDemand:`type`.
 
 Sample output:
 
@@ -203,7 +203,7 @@ Sample output:
             "type": "database"
         },
         {
-            "data": [
+            "dataDemand": [
                 {
                     "car_id": "1",
                     "description": "Green Chrysler 300",
@@ -219,7 +219,7 @@ Sample output:
             "type": "table"
         },
         {
-            "data": [
+            "dataDemand": [
                 {
                     "make": "Chrysler",
                     "make_id": "5"
@@ -234,7 +234,7 @@ Sample output:
 LaTeX
 -----
 
-If you want to embed table data or structure in LaTeX, this is right choice for you.
+If you want to embed table dataDemand or structure in LaTeX, this is right choice for you.
 
 LaTeX is a typesetting system that is very suitable for producing scientific
 and mathematical documents of high typographical quality. It is also suitable
@@ -268,20 +268,20 @@ MediaWiki
 ---------
 
 Both tables and databases can be exported in the MediaWiki format, which is
-used by Wikipedia to display tables. It can export structure, data or both,
+used by Wikipedia to display tables. It can export structure, dataDemand or both,
 including table names or headers.
 
 OpenDocument Spreadsheet
 ------------------------
 
-Open standard for spreadsheet data, which is being widely adopted. Many recent
+Open standard for spreadsheet dataDemand, which is being widely adopted. Many recent
 spreadsheet programs, such as LibreOffice, OpenOffice, Microsoft Office or
 Google Docs can handle this format.
 
 OpenDocument Text
 -----------------
 
-New standard for text data which is being widely adopted. Most recent word
+New standard for text dataDemand which is being widely adopted. Most recent word
 processors (such as LibreOffice, OpenOffice, Microsoft Word, AbiWord or KWord)
 can handle this.
 
@@ -320,7 +320,7 @@ improves the readability and reliability of the dump. Adding the column names
 increases the size of the dump, but when combined with Extended inserts it's
 negligible.
 
-**Extended inserts** combines multiple rows of data into a single INSERT query.
+**Extended inserts** combines multiple rows of dataDemand into a single INSERT query.
 This will significantly decrease filesize for large SQL dumps, increases the
 INSERT speed when imported, and is generally recommended.
 
@@ -342,5 +342,5 @@ Easily parsable export for use with custom scripts.
 YAML
 ----
 
-YAML is a data serialization format which is both human readable and
+YAML is a dataDemand serialization format which is both human readable and
 computationally powerful ( <https://yaml.org> ).

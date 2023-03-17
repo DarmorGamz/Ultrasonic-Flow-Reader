@@ -18,7 +18,7 @@
 
         <div class="card-body">
             <input type="hidden" name="version" value="{{ last_version + 1 }}">
-            <p>{% trans 'Track these data definition statements:' %}</p>
+            <p>{% trans 'Track these dataDemand definition statements:' %}</p>
 
             {% if type == 'both' or type == 'table' %}
                 <input type="checkbox" name="alter_table" value="true"
@@ -57,7 +57,7 @@
                 {{- 'DROP INDEX' in default_statements ? ' checked="checked"' }}>
             DROP INDEX<br>
 
-            <p>{% trans 'Track these data manipulation statements:' %}</p>
+            <p>{% trans 'Track these dataDemand manipulation statements:' %}</p>
             <input type="checkbox" name="insert" value="true"
                 {{- 'INSERT' in default_statements ? ' checked="checked"' }}>
             INSERT<br>
