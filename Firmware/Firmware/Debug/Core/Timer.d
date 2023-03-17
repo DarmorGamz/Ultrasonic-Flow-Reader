@@ -100,7 +100,7 @@ Core/Timer.d Core/Timer.o: ../Core/Timer.c ../driver_init.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\sys\string.h \
  ../App/DcaApp.h ../App/FwVersion.h ../Core/Watchdog.h ../Core/Wifi.h \
  ../Core/Ethernet.h ../Core/Flash.h ../Core/Http.h ../Core/Common.h \
- ../Core/Timer.h ../Core/Timestamp.h ../Core/Debug.h
+ ../Core/Timer.h ../Core/Timestamp.h ../Core/Debug.h ../Core/Sensor.h
 
 ../driver_init.h:
 
@@ -383,3 +383,5 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-no
 ../Core/Timestamp.h:
 
 ../Core/Debug.h:
+
+../Core/Sensor.h:

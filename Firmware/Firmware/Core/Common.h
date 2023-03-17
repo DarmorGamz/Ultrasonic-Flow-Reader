@@ -45,6 +45,7 @@ extern char                 g_acLocalTxBuffer[];
 extern char                 g_acCmdFifo[];
 extern char                 g_acReadingBuffer[];
 
+#define USER_CONFIG_INIT_CODE                0x5A5A
 
 #define CMDCODE_SETEVENT                         (uint8_t)0x50
 

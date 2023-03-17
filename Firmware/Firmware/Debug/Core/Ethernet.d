@@ -127,7 +127,8 @@ Core/Ethernet.d Core/Ethernet.o: ../Core/Ethernet.c ../driver_init.h \
  ../tcpip_lite/include/udpv4.h ../tcpip_lite/ethernet_drivers/enc28j60.h \
  ../Core/Ethernet.h ../App/DcaApp.h ../App/FwVersion.h ../Core/Watchdog.h \
  ../Core/Wifi.h ../Core/Ethernet.h ../Core/Flash.h ../Core/Http.h \
- ../Core/Common.h ../Core/Timer.h ../Core/Timestamp.h ../Core/Debug.h
+ ../Core/Common.h ../Core/Timer.h ../Core/Timestamp.h ../Core/Debug.h \
+ ../Core/Sensor.h
 
 ../driver_init.h:
 
@@ -486,3 +487,5 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-no
 ../Core/Timestamp.h:
 
 ../Core/Debug.h:
+
+../Core/Sensor.h:

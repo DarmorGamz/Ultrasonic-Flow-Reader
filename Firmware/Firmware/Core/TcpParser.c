@@ -65,20 +65,21 @@ int8_t _BuildRedirectDashboard(char* pcTxBuff, uint16_t* pu16TxSize);
 
 
 
-bool EyedroTcpParser_ParseServerResponse(char* pcResponseBuff, uint16_t u16ResponseSize) {
+bool TcpParser_ParseServerResponse(char* pcResponseBuff, uint16_t u16ResponseSize) {
     uint16_t contentLen;
     char* pContent;
     char* pBuffEnd;
     int payloadBytes;
     char* pSrc;
 
-    // Look for "200 OK" in response
+    /*// Look for "200 OK" in response
     if (_FindOkResponse(pcResponseBuff)==false) {
         DEBUG_INFO("Unable to find 200 OK. ");
 		DEBUG_INFO("%s", pcResponseBuff);
         // Don't idle the socket... return false so it will try to receive more bytes in the event it's just split
         return false;
-    }
+    }*/
+	
     // Look for content-length
     contentLen = _FindContentLength(pcResponseBuff);
     if (contentLen==-1) {
@@ -110,7 +111,7 @@ bool EyedroTcpParser_ParseServerResponse(char* pcResponseBuff, uint16_t u16Respo
 
     // Now set the pointer to the payload and pass to the application layer for processing
     pSrc = pContent;
-    //EyedroApp_ProcessBinaryPayload(pSrc, contentLen);
+    App_ProcessBinaryPayload(pSrc, contentLen);
 
 
     return true;

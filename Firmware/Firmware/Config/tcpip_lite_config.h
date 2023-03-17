@@ -18,14 +18,14 @@
 // <i> A name which define DHCP
 // <id> dhcp_name
 #ifndef DHCP_NAME
-#define DHCP_NAME "MCHP ETHERNET"
+#define DHCP_NAME "DCA-XXXYYYYY"
 #endif
 
 // <o> DHCP Name Length <1-255>
 // <i> Application must defined the DCHP Name Length
 // <id> dhcp_name_size
 #ifndef DHCP_NAME_SIZE
-#define DHCP_NAME_SIZE 13
+#define DHCP_NAME_SIZE 12
 #endif
 // </h>
 

@@ -37,8 +37,8 @@ extern "C" {
 #include <hal_wdt.h>
 
 extern struct flash_descriptor      FLASH_0;
-extern struct spi_m_sync_descriptor ETHERNET_SPI;
 extern struct spi_m_sync_descriptor WIRELESS_SPI;
+extern struct spi_m_sync_descriptor ETHERNET_SPI;
 
 extern struct timer_descriptor TIMER_0;
 extern struct timer_descriptor TICK_TIMER;
@@ -48,13 +48,13 @@ extern struct wdt_descriptor WDT_0;
 void FLASH_0_init(void);
 void FLASH_0_CLOCK_init(void);
 
-void ETHERNET_SPI_PORT_init(void);
-void ETHERNET_SPI_CLOCK_init(void);
-void ETHERNET_SPI_init(void);
-
 void WIRELESS_SPI_PORT_init(void);
 void WIRELESS_SPI_CLOCK_init(void);
 void WIRELESS_SPI_init(void);
+
+void ETHERNET_SPI_PORT_init(void);
+void ETHERNET_SPI_CLOCK_init(void);
+void ETHERNET_SPI_init(void);
 
 void delay_driver_init(void);
 

@@ -2,6 +2,7 @@
 #include <sys/time.h>
 #include <App/DcaApp.h>
 
+
 int main(void) {
 	/* Initializes MCU, drivers and middleware */
 	atmel_start_init();

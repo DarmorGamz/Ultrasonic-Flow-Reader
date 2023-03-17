@@ -48,6 +48,8 @@ Component\winc1500\winc_init.c
 
 Core\CmdFifo.c
 
+Core\DataFifo.c
+
 Core\Debug.c
 
 Core\Ethernet.c
@@ -55,6 +57,8 @@ Core\Ethernet.c
 Core\Flash.c
 
 Core\Http.c
+
+Core\Sensor.c
 
 Core\TcpParser.c
 

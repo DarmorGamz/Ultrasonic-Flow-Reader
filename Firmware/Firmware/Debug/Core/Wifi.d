@@ -142,7 +142,7 @@ Core/Wifi.d Core/Wifi.o: ../Core/Wifi.c \
  ../Component/winc1500/driver/include/m2m_ota.h ../Core/Wifi.h \
  ../App/DcaApp.h ../App/FwVersion.h ../Core/Watchdog.h ../Core/Wifi.h \
  ../Core/Ethernet.h ../Core/Flash.h ../Core/Http.h ../Core/Common.h \
- ../Core/Timer.h ../Core/Timestamp.h ../Core/Debug.h
+ ../Core/Timer.h ../Core/Timestamp.h ../Core/Debug.h ../Core/Sensor.h
 
 c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\string.h:
 
@@ -531,3 +531,5 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-no
 ../Core/Timestamp.h:
 
 ../Core/Debug.h:
+
+../Core/Sensor.h:

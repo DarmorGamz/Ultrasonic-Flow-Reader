@@ -54,7 +54,16 @@ SUBDIRS :=  \
 ../Component/winc1500/spi_flash/include/ \
 ../Component/winc1500/spi_flash/source/ \
 ../Config/ \
+../Debug/ \
+../Debug/App/ \
+../Debug/Component/ \
+../Debug/Component/winc1500/ \
+../Debug/Component/winc1500/bsp/ \
+../Debug/Component/winc1500/bsp/include/ \
 ../Device_Startup/ \
+../App \
+../Core \
+../Component \
 ../documentation/ \
 ../examples/ \
 ../hal/ \
@@ -76,9 +85,6 @@ SUBDIRS :=  \
 ../hpl/systick/ \
 ../hpl/tc/ \
 ../hpl/wdt/ \
-../App \
-../Core \
-../Component \
 ../hri/ \
 ../tcpip_lite/ \
 ../tcpip_lite/ethernet_drivers/ \
@@ -111,10 +117,12 @@ C_SRCS +=  \
 ../Component/winc1500/spi_flash/source/spi_flash.c \
 ../Component/winc1500/winc_init.c \
 ../Core/CmdFifo.c \
+../Core/DataFifo.c \
 ../Core/Debug.c \
 ../Core/Ethernet.c \
 ../Core/Flash.c \
 ../Core/Http.c \
+../Core/Sensor.c \
 ../Core/TcpParser.c \
 ../Core/Timer.c \
 ../Core/Timestamp.c \
@@ -194,10 +202,12 @@ Component/winc1500/spi_flash/source/flexible_flash.o \
 Component/winc1500/spi_flash/source/spi_flash.o \
 Component/winc1500/winc_init.o \
 Core/CmdFifo.o \
+Core/DataFifo.o \
 Core/Debug.o \
 Core/Ethernet.o \
 Core/Flash.o \
 Core/Http.o \
+Core/Sensor.o \
 Core/TcpParser.o \
 Core/Timer.o \
 Core/Timestamp.o \
@@ -270,10 +280,12 @@ Component/winc1500/spi_flash/source/flexible_flash.o \
 Component/winc1500/spi_flash/source/spi_flash.o \
 Component/winc1500/winc_init.o \
 Core/CmdFifo.o \
+Core/DataFifo.o \
 Core/Debug.o \
 Core/Ethernet.o \
 Core/Flash.o \
 Core/Http.o \
+Core/Sensor.o \
 Core/TcpParser.o \
 Core/Timer.o \
 Core/Timestamp.o \
@@ -346,10 +358,12 @@ Component/winc1500/spi_flash/source/flexible_flash.d \
 Component/winc1500/spi_flash/source/spi_flash.d \
 Component/winc1500/winc_init.d \
 Core/CmdFifo.d \
+Core/DataFifo.d \
 Core/Debug.d \
 Core/Ethernet.d \
 Core/Flash.d \
 Core/Http.d \
+Core/Sensor.d \
 Core/TcpParser.d \
 Core/Timer.d \
 Core/Timestamp.d \
@@ -422,10 +436,12 @@ Component/winc1500/spi_flash/source/flexible_flash.d \
 Component/winc1500/spi_flash/source/spi_flash.d \
 Component/winc1500/winc_init.d \
 Core/CmdFifo.d \
+Core/DataFifo.d \
 Core/Debug.d \
 Core/Ethernet.d \
 Core/Flash.d \
 Core/Http.d \
+Core/Sensor.d \
 Core/TcpParser.d \
 Core/Timer.d \
 Core/Timestamp.d \
@@ -651,6 +667,13 @@ Core/CmdFifo.o: ../Core/CmdFifo.c
 	@echo Finished building: $<
 	
 
+Core/DataFifo.o: ../Core/DataFifo.c
+	@echo Building file: $<
+	@echo Invoking: ARM/GNU C Compiler : 6.3.1
+	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\arm\arm-gnu-toolchain\bin\arm-none-eabi-gcc.exe$(QUOTE)  -x c -mthumb -D__SAMD20E18__ -DDEBUG  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\arm\CMSIS\5.4.0\CMSIS\Core\Include" -I"../Component/winc1500" -I"../Config" -I".." -I"../examples" -I"../hal/include" -I"../hal/utils/include" -I"../hpl/core" -I"../hpl/eic" -I"../hpl/gclk" -I"../hpl/nvmctrl" -I"../hpl/pm" -I"../hpl/port" -I"../hpl/sercom" -I"../hpl/sysctrl" -I"../hpl/systick" -I"../hpl/tc" -I"../hpl/wdt" -I"../hri" -I"../tcpip_lite/ethernet_drivers" -I"../tcpip_lite/include" -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\SAMD20_DFP\1.3.165\samd20\include"  -Og -ffunction-sections -mlong-calls -g3 -Wall -mcpu=cortex-m0plus -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	@echo Finished building: $<
+	
+
 Core/Debug.o: ../Core/Debug.c
 	@echo Building file: $<
 	@echo Invoking: ARM/GNU C Compiler : 6.3.1
@@ -673,6 +696,13 @@ Core/Flash.o: ../Core/Flash.c
 	
 
 Core/Http.o: ../Core/Http.c
+	@echo Building file: $<
+	@echo Invoking: ARM/GNU C Compiler : 6.3.1
+	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\arm\arm-gnu-toolchain\bin\arm-none-eabi-gcc.exe$(QUOTE)  -x c -mthumb -D__SAMD20E18__ -DDEBUG  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\arm\CMSIS\5.4.0\CMSIS\Core\Include" -I"../Component/winc1500" -I"../Config" -I".." -I"../examples" -I"../hal/include" -I"../hal/utils/include" -I"../hpl/core" -I"../hpl/eic" -I"../hpl/gclk" -I"../hpl/nvmctrl" -I"../hpl/pm" -I"../hpl/port" -I"../hpl/sercom" -I"../hpl/sysctrl" -I"../hpl/systick" -I"../hpl/tc" -I"../hpl/wdt" -I"../hri" -I"../tcpip_lite/ethernet_drivers" -I"../tcpip_lite/include" -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\SAMD20_DFP\1.3.165\samd20\include"  -Og -ffunction-sections -mlong-calls -g3 -Wall -mcpu=cortex-m0plus -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	@echo Finished building: $<
+	
+
+Core/Sensor.o: ../Core/Sensor.c
 	@echo Building file: $<
 	@echo Invoking: ARM/GNU C Compiler : 6.3.1
 	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\arm\arm-gnu-toolchain\bin\arm-none-eabi-gcc.exe$(QUOTE)  -x c -mthumb -D__SAMD20E18__ -DDEBUG  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\arm\CMSIS\5.4.0\CMSIS\Core\Include" -I"../Component/winc1500" -I"../Config" -I".." -I"../examples" -I"../hal/include" -I"../hal/utils/include" -I"../hpl/core" -I"../hpl/eic" -I"../hpl/gclk" -I"../hpl/nvmctrl" -I"../hpl/pm" -I"../hpl/port" -I"../hpl/sercom" -I"../hpl/sysctrl" -I"../hpl/systick" -I"../hpl/tc" -I"../hpl/wdt" -I"../hri" -I"../tcpip_lite/ethernet_drivers" -I"../tcpip_lite/include" -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\SAMD20_DFP\1.3.165\samd20\include"  -Og -ffunction-sections -mlong-calls -g3 -Wall -mcpu=cortex-m0plus -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
@@ -1036,11 +1066,9 @@ $(OUTPUT_FILE_PATH): $(OBJS) $(USER_OBJS) $(OUTPUT_FILE_DEP) $(LIB_DEP) $(LINKER
 	@echo Invoking: ARM/GNU Linker : 6.3.1
 	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\arm\arm-gnu-toolchain\bin\arm-none-eabi-gcc.exe$(QUOTE) -o$(OUTPUT_FILE_PATH_AS_ARGS) $(OBJS_AS_ARGS) $(USER_OBJS) $(LIBS) -mthumb -Wl,-Map="DCA_FIRMWARE.map" --specs=nano.specs -Wl,--start-group -lm  -Wl,--end-group -L"..\\Device_Startup"  -Wl,--gc-sections -mcpu=cortex-m0plus -Tsamd20e18_flash.ld  
 	@echo Finished building target: $@
-	"C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\arm\arm-gnu-toolchain\bin\arm-none-eabi-objcopy.exe" -O binary "DCA_FIRMWARE.elf" "DCA_FIRMWARE.bin"
 	"C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\arm\arm-gnu-toolchain\bin\arm-none-eabi-objcopy.exe" -O ihex -R .eeprom -R .fuse -R .lock -R .signature  "DCA_FIRMWARE.elf" "DCA_FIRMWARE.hex"
 	"C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\arm\arm-gnu-toolchain\bin\arm-none-eabi-objcopy.exe" -j .eeprom --set-section-flags=.eeprom=alloc,load --change-section-lma .eeprom=0 --no-change-warnings -O binary "DCA_FIRMWARE.elf" "DCA_FIRMWARE.eep" || exit 0
 	"C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\arm\arm-gnu-toolchain\bin\arm-none-eabi-objdump.exe" -h -S "DCA_FIRMWARE.elf" > "DCA_FIRMWARE.lss"
-	"C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\arm\arm-gnu-toolchain\bin\arm-none-eabi-objcopy.exe" -O srec -R .eeprom -R .fuse -R .lock -R .signature  "DCA_FIRMWARE.elf" "DCA_FIRMWARE.srec"
 	"C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\arm\arm-gnu-toolchain\bin\arm-none-eabi-size.exe" "DCA_FIRMWARE.elf"
 	
 	

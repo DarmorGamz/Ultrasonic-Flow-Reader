@@ -23,8 +23,8 @@ middlewares:
     user_label: TCPIP_STACK
     configuration:
       arp_map_size: 8
-      dhcp_name: MCHP ETHERNET
-      dhcp_name_size: 13
+      dhcp_name: DCA-XXXYYYYY
+      dhcp_name_size: 12
       enable_ip_debug: false
       enable_net_debug: false
       enable_syslog_debug: false
@@ -142,20 +142,34 @@ drivers:
       eic_arch_wakeupen8: false
       eic_arch_wakeupen9: false
     optional_signals:
-    - identifier: EXTERNAL_IRQ_0:EXTINT/14
-      pad: PA14
+    - identifier: EXTERNAL_IRQ_0:EXTINT/4
+      pad: PA04
       mode: Enabled
       configuration: null
-      definition: Atmel:SAMD20_Drivers:0.0.1::SAMD20E18A-AN::optional_signal_definition::EIC.EXTINT.14
-      name: EIC/EXTINT/14
-      label: EXTINT/14
-    - identifier: EXTERNAL_IRQ_0:EXTINT/15
-      pad: PA15
+      definition: Atmel:SAMD20_Drivers:0.0.1::SAMD20E18A-AN::optional_signal_definition::EIC.EXTINT.4
+      name: EIC/EXTINT/4
+      label: EXTINT/4
+    - identifier: EXTERNAL_IRQ_0:EXTINT/6
+      pad: PA06
       mode: Enabled
       configuration: null
-      definition: Atmel:SAMD20_Drivers:0.0.1::SAMD20E18A-AN::optional_signal_definition::EIC.EXTINT.15
-      name: EIC/EXTINT/15
-      label: EXTINT/15
+      definition: Atmel:SAMD20_Drivers:0.0.1::SAMD20E18A-AN::optional_signal_definition::EIC.EXTINT.6
+      name: EIC/EXTINT/6
+      label: EXTINT/6
+    - identifier: EXTERNAL_IRQ_0:EXTINT/8
+      pad: PA28
+      mode: Enabled
+      configuration: null
+      definition: Atmel:SAMD20_Drivers:0.0.1::SAMD20E18A-AN::optional_signal_definition::EIC.EXTINT.8
+      name: EIC/EXTINT/8
+      label: EXTINT/8
+    - identifier: EXTERNAL_IRQ_0:EXTINT/11
+      pad: PA11
+      mode: Enabled
+      configuration: null
+      definition: Atmel:SAMD20_Drivers:0.0.1::SAMD20E18A-AN::optional_signal_definition::EIC.EXTINT.11
+      name: EIC/EXTINT/11
+      label: EXTINT/11
     variant: null
     clocks:
       domain_group:
@@ -309,50 +323,6 @@ drivers:
           external: false
           external_frequency: 0
         configuration: {}
-  ETHERNET_SPI:
-    user_label: ETHERNET_SPI
-    definition: Atmel:SAMD20_Drivers:0.0.1::SAMD20E18A-AN::SERCOM0::driver_config_definition::SPI.Master::HAL:Driver:SPI.Master.Sync
-    functionality: SPI
-    api: HAL:Driver:SPI_Master_Sync
-    configuration:
-      spi_master_advanced: false
-      spi_master_arch_cpha: Sample input on leading edge
-      spi_master_arch_cpol: SCK is low when idle
-      spi_master_arch_dbgstop: Keep running
-      spi_master_arch_dord: MSB first
-      spi_master_arch_ibon: In data stream
-      spi_master_arch_runstdby: false
-      spi_master_baud_rate: 4000000
-      spi_master_character_size: 8 bits
-      spi_master_dummybyte: 256
-      spi_master_rx_enable: true
-    optional_signals: []
-    variant:
-      specification: TXPO=3, RXPO=1
-      required_signals:
-      - name: SERCOM0/PAD/0
-        pad: PA08
-        label: MOSI
-      - name: SERCOM0/PAD/1
-        pad: PA09
-        label: MISO
-      - name: SERCOM0/PAD/3
-        pad: PA07
-        label: SCK
-    clocks:
-      domain_group:
-        nodes:
-        - name: Core
-          input: Generic clock generator 0
-          external: false
-          external_frequency: 0
-        - name: Slow
-          input: Generic clock generator 2
-          external: false
-          external_frequency: 0
-        configuration:
-          core_gclk_selection: Generic clock generator 0
-          slow_gclk_selection: Generic clock generator 2
   WIRELESS_SPI:
     user_label: WIRELESS_SPI
     definition: Atmel:SAMD20_Drivers:0.0.1::SAMD20E18A-AN::SERCOM1::driver_config_definition::SPI.Master::HAL:Driver:SPI.Master.Sync
@@ -381,7 +351,51 @@ drivers:
         pad: PA17
         label: MISO
       - name: SERCOM1/PAD/3
-        pad: PA31
+        pad: PA19
+        label: SCK
+    clocks:
+      domain_group:
+        nodes:
+        - name: Core
+          input: Generic clock generator 0
+          external: false
+          external_frequency: 0
+        - name: Slow
+          input: Generic clock generator 2
+          external: false
+          external_frequency: 0
+        configuration:
+          core_gclk_selection: Generic clock generator 0
+          slow_gclk_selection: Generic clock generator 2
+  ETHERNET_SPI:
+    user_label: ETHERNET_SPI
+    definition: Atmel:SAMD20_Drivers:0.0.1::SAMD20E18A-AN::SERCOM3::driver_config_definition::SPI.Master::HAL:Driver:SPI.Master.Sync
+    functionality: SPI
+    api: HAL:Driver:SPI_Master_Sync
+    configuration:
+      spi_master_advanced: false
+      spi_master_arch_cpha: Sample input on leading edge
+      spi_master_arch_cpol: SCK is low when idle
+      spi_master_arch_dbgstop: Keep running
+      spi_master_arch_dord: MSB first
+      spi_master_arch_ibon: In data stream
+      spi_master_arch_runstdby: false
+      spi_master_baud_rate: 4000000
+      spi_master_character_size: 8 bits
+      spi_master_dummybyte: 256
+      spi_master_rx_enable: true
+    optional_signals: []
+    variant:
+      specification: TXPO=1, RXPO=0
+      required_signals:
+      - name: SERCOM3/PAD/0
+        pad: PA22
+        label: MISO
+      - name: SERCOM3/PAD/2
+        pad: PA24
+        label: MOSI
+      - name: SERCOM3/PAD/3
+        pad: PA25
         label: SCK
     clocks:
       domain_group:
@@ -562,110 +576,124 @@ drivers:
         configuration:
           wdt_gclk_selection: Generic clock generator 1
 pads:
-  ETHERNET_RESET:
+  LED_GREEN:
     name: PA02
     definition: Atmel:SAMD20_Drivers:0.0.1::SAMD20E18A-AN::pad::PA02
     mode: Digital output
-    user_label: ETHERNET_RESET
+    user_label: LED_GREEN
     configuration: null
-  WIRELESS_RESET:
+  LED_RED:
     name: PA03
     definition: Atmel:SAMD20_Drivers:0.0.1::SAMD20E18A-AN::pad::PA03
     mode: Digital output
-    user_label: WIRELESS_RESET
+    user_label: LED_RED
     configuration: null
-  WIRELESS_WAKE:
+  SENSOR1_IN:
     name: PA04
     definition: Atmel:SAMD20_Drivers:0.0.1::SAMD20E18A-AN::pad::PA04
-    mode: Digital output
-    user_label: WIRELESS_WAKE
+    mode: Digital input
+    user_label: SENSOR1_IN
     configuration: null
-  WIRELESS_EN:
+  SENSOR1_OUT:
     name: PA05
     definition: Atmel:SAMD20_Drivers:0.0.1::SAMD20E18A-AN::pad::PA05
     mode: Digital output
-    user_label: WIRELESS_EN
+    user_label: SENSOR1_OUT
     configuration: null
-  ETHERNET_SCK:
+  SENSOR2_IN:
+    name: PA06
+    definition: Atmel:SAMD20_Drivers:0.0.1::SAMD20E18A-AN::pad::PA06
+    mode: Digital input
+    user_label: SENSOR2_IN
+    configuration: null
+  SENSOR2_OUT:
     name: PA07
     definition: Atmel:SAMD20_Drivers:0.0.1::SAMD20E18A-AN::pad::PA07
     mode: Digital output
-    user_label: ETHERNET_SCK
+    user_label: SENSOR2_OUT
     configuration: null
-  ETHERNET_MOSI:
-    name: PA08
-    definition: Atmel:SAMD20_Drivers:0.0.1::SAMD20E18A-AN::pad::PA08
-    mode: Digital output
-    user_label: ETHERNET_MOSI
-    configuration: null
-  ETHERNET_MISO:
-    name: PA09
-    definition: Atmel:SAMD20_Drivers:0.0.1::SAMD20E18A-AN::pad::PA09
-    mode: Digital input
-    user_label: ETHERNET_MISO
-    configuration: null
-  ETHERNET_CS:
+  WIRELESS_IRQn:
     name: PA11
     definition: Atmel:SAMD20_Drivers:0.0.1::SAMD20E18A-AN::pad::PA11
-    mode: Digital output
-    user_label: ETHERNET_CS
-    configuration:
-      pad_initial_level: High
-  ETHERNET_IRQ:
+    mode: Digital input
+    user_label: WIRELESS_IRQn
+    configuration: null
+  WIRELESS_EN:
     name: PA14
     definition: Atmel:SAMD20_Drivers:0.0.1::SAMD20E18A-AN::pad::PA14
-    mode: Digital input
-    user_label: ETHERNET_IRQ
-    configuration:
-      pad_pull_config: Pull-up
-  WIRELESS_IRQ:
+    mode: Digital output
+    user_label: WIRELESS_EN
+    configuration: null
+  WIRELESS_RESETn:
     name: PA15
     definition: Atmel:SAMD20_Drivers:0.0.1::SAMD20E18A-AN::pad::PA15
-    mode: Digital input
-    user_label: WIRELESS_IRQ
-    configuration:
-      pad_pull_config: Pull-up
+    mode: Digital output
+    user_label: WIRELESS_RESETn
+    configuration: null
   WIRELESS_MOSI:
     name: PA16
     definition: Atmel:SAMD20_Drivers:0.0.1::SAMD20E18A-AN::pad::PA16
     mode: Digital output
     user_label: WIRELESS_MOSI
-    configuration: null
+    configuration:
+      pad_initial_level: High
   WIRELESS_MISO:
     name: PA17
     definition: Atmel:SAMD20_Drivers:0.0.1::SAMD20E18A-AN::pad::PA17
     mode: Digital input
     user_label: WIRELESS_MISO
-    configuration: null
-  PA18:
+    configuration:
+      pad_pull_config: Pull-up
+  WIRELESS_CSn:
     name: PA18
     definition: Atmel:SAMD20_Drivers:0.0.1::SAMD20E18A-AN::pad::PA18
     mode: Digital output
-    user_label: PA18
-    configuration: null
-  WIRELESS_CSn:
+    user_label: WIRELESS_CSn
+    configuration:
+      pad_initial_level: High
+  WIRELESS_SCK:
     name: PA19
     definition: Atmel:SAMD20_Drivers:0.0.1::SAMD20E18A-AN::pad::PA19
     mode: Digital output
-    user_label: WIRELESS_CSn
-    configuration: null
-  LED_GREEN:
+    user_label: WIRELESS_SCK
+    configuration:
+      pad_initial_level: High
+  ETHERNET_MISO:
     name: PA22
     definition: Atmel:SAMD20_Drivers:0.0.1::SAMD20E18A-AN::pad::PA22
-    mode: Digital output
-    user_label: LED_GREEN
+    mode: Digital input
+    user_label: ETHERNET_MISO
     configuration: null
-  LED_RED:
+  ETHERNET_CS:
     name: PA23
     definition: Atmel:SAMD20_Drivers:0.0.1::SAMD20E18A-AN::pad::PA23
     mode: Digital output
-    user_label: LED_RED
-    configuration: null
-  WIRELESS_SCK:
-    name: PA31
-    definition: Atmel:SAMD20_Drivers:0.0.1::SAMD20E18A-AN::pad::PA31
+    user_label: ETHERNET_CS
+    configuration:
+      pad_initial_level: High
+  ETHERNET_MOSI:
+    name: PA24
+    definition: Atmel:SAMD20_Drivers:0.0.1::SAMD20E18A-AN::pad::PA24
     mode: Digital output
-    user_label: WIRELESS_SCK
+    user_label: ETHERNET_MOSI
+    configuration: null
+  ETHERNET_SCK:
+    name: PA25
+    definition: Atmel:SAMD20_Drivers:0.0.1::SAMD20E18A-AN::pad::PA25
+    mode: Digital output
+    user_label: ETHERNET_SCK
+    configuration: null
+  ETHERNET_RESET:
+    name: PA27
+    definition: Atmel:SAMD20_Drivers:0.0.1::SAMD20E18A-AN::pad::PA27
+    mode: Digital output
+    user_label: ETHERNET_RESET
+    configuration: null
+  ETHERNET_IRQ:
+    name: PA28
+    definition: Atmel:SAMD20_Drivers:0.0.1::SAMD20E18A-AN::pad::PA28
+    mode: Digital input
+    user_label: ETHERNET_IRQ
     configuration: null
 toolchain_options: []
 static_files: []

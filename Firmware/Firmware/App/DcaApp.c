@@ -12,6 +12,8 @@ typedef enum {
 	LED_COLOR_BOTH
 } eLED_COLOR;
 
+tsUserConfig g_st_UserConfig;
+
 // Global buffers
 char                g_acBuffer64[STRSM_BUFFER_NUM_BYTES];
 char                g_acBuffer256[STRLG_BUFFER_NUM_BYTES];
@@ -22,7 +24,7 @@ char                g_acLocalTxBuffer[LOCAL_TX_BUFFER_NUM_BYTES];
 
 // Command FIFO and reading storage
 char                g_acCmdFifo[COMMAND_FIFO_NUM_BYTES];
-//char                g_acReadingBuffer[READING_BUFF_NUM_BYTES];
+char                g_acReadingBuffer[READING_BUFF_NUM_BYTES];
 
 // ------ TIMERS ------
 static uint16_t     TIMER_APP_LED_HOLD;
@@ -48,7 +50,7 @@ const uint8_t STATUS_LED[STATUS_COUNT][LED_SEQUENCE_MAXCNT] =
 { // mapped with eStatusCode
     {LED_COLOR_RED,   LED_COLOR_RED,   LED_COLOR_RED,   LED_COLOR_RED},   // STATUS_DEVICE_ERROR
     {LED_COLOR_GREEN, LED_COLOR_GREEN, LED_COLOR_NONE,  LED_COLOR_NONE},  // STATUS_OK (provisioned)
-	{LED_COLOR_RED,   LED_COLOR_GREEN,   LED_COLOR_RED,   LED_COLOR_GREEN},   // STATUS_DEVICE_ERROR
+	{LED_COLOR_RED,   LED_COLOR_GREEN,   LED_COLOR_RED,   LED_COLOR_GREEN},   // STATUS_NO_SERVER_COMM
 	{LED_COLOR_RED,   LED_COLOR_RED,   LED_COLOR_RED,   LED_COLOR_RED},   // STATUS_DEVICE_ERROR
 };
 
@@ -60,6 +62,15 @@ void _LedControl(void);
 void _SetLed(uint8_t value);
 
 bool _AddToFifo_EventStartup(void);
+bool _AddToFifo_EventResetCause(int);
+bool _AddToFifo_EventSync(int16_t s16Diff);
+bool _AddToFifo_Heartbeat(void);
+
+bool _AddToFifo_EventData(int);
+
+void _FlashReadAppUserConfig(void);
+void _FlashWriteAppUserConfig(void);
+void _InitUserConfig(void);
 
 static bool         s_fUseWifi;
 
@@ -71,8 +82,6 @@ static void _One_Second_Timer_Callback(void) {
     // Pump the timer driver (decrements all non-zero timers)
     if (fSkipPump==false) Timer_Pump();
     if (fDoublePump==true) Timer_Pump();
-
-	//_AddToFifo_EventStartup();
 	
     // Toggle the LEDs based on the current status code if not currently holding the user set LED value (setvar&led={val})
     if (Timer_GetTimer(TIMER_APP_LED_HOLD)==0) _LedControl();
@@ -106,13 +115,33 @@ void DcaApp_Init(void) {
     Timer_AddTimer(&TIMER_APP_UPDATE_CLOCK);
 	Timer_AddTimer(&TIMER_APP_ENWI_LINK_CHECK);
 	
-	// Initialize Command FIFO - do here so we can queue up any events that occur
-	EyedroCmdFifo_Init();
-	DEBUG_INFO("FIFO initialized. ");
+	// Initialize the Timestamp (RTC) functionality
+	Timestamp_Init();
+	DEBUG_INFO("RTC initialized. ");
+	
+	// Initialize Command FIFO
+	CmdFifo_Init();
+	DEBUG_INFO("CmdFIFO initialized. ");
+	
+	// Initialize Data FIFO
+	DataFifo_Init();
+	DEBUG_INFO("DataFIFO initialized. ");
 	
 	// Initialize flash 
     Flash_Init();
     DEBUG_INFO("Flash initialized. ");
+	
+	_FlashReadAppUserConfig();
+	DEBUG_INFO("User configuration retrieved. ");
+	
+	// Set current time from the last timestamp stored in flash (better than nothing...)
+    uint32_t timestamp;
+    memcpy(&timestamp, &g_st_UserConfig.au8Timestamp[0], 4);
+    if (timestamp>0) {
+        Timestamp_SetTimestamp(timestamp);
+    }
+    DEBUG_INFO("Timestamp initialized. ");
+	
 	
     int8_t s8Status;
     // Initialize Ethernet driver
@@ -135,13 +164,26 @@ void DcaApp_Init(void) {
 	// Power down Ethernet and WiFi 
     Ethernet_PowerDown();
     //Wifi_PowerDown(); Not working
-
+	
+	// Init Sensors.
+	Sensor_Init();
+	DEBUG_INFO("Sensors Init. ");
+	
     DEBUG_INFO("Application init complete. ");
 	
 	// Add the startup event to the command FIFO
-    //_AddToFifo_EventStartup();
+    _AddToFifo_EventStartup();
 	
-	s_u16HeartbeatRate = EYEDRO_TIMEOUT_STARTUP_HEARTBEAT;
+	// Let server know if last reset was due to watchdog timeout or brown-out condition
+    if ((u8ResetCause & PM_RCAUSE_WDT) == PM_RCAUSE_WDT) {
+		_AddToFifo_EventResetCause(1);
+    } else if ((u8ResetCause & PM_RCAUSE_BOD33) == PM_RCAUSE_BOD33) {
+        _AddToFifo_EventResetCause(2);
+    } else if ((u8ResetCause & PM_RCAUSE_BOD12) == PM_RCAUSE_BOD12) {
+        _AddToFifo_EventResetCause(3);
+    }
+	
+	s_u16HeartbeatRate = TIMEOUT_STARTUP_HEARTBEAT_HOLD;
 	
     // Register Timer callback
     Timer_Register_Callback(_One_Second_Timer_Callback);
@@ -166,7 +208,7 @@ void DcaApp_Entry(void) {
 			
 			// Check for Ethernet link
             bool fLinked = false;
-            Timer_SetTimer(TIMER_APP_ETHERNET_LINK_TIMEOUT, EYEDRO_TIMEOUT_ETHERNET_LINK);
+            Timer_SetTimer(TIMER_APP_ETHERNET_LINK_TIMEOUT, TIMEOUT_ETHERNET_LINK);
             while(Timer_GetTimer(TIMER_APP_ETHERNET_LINK_TIMEOUT)>0) {
                 Watchdog_Feed();
                 if (Ethernet_HasLink()==true) {
@@ -204,18 +246,20 @@ void DcaApp_Entry(void) {
 		// Determine if it is time to send to the server
         bool fTimeToSend = false;
 		
+		// If data send.
+		
+		// It's time to send when... there is anything in the command FIFO
+        if (CmdFifo_GetByteCount()>0) {
+            fTimeToSend = true;
+        }
+		
+		// Time to send if Heart beat has expired.
 		if (Timer_GetTimer(TIMER_APP_HEARTBEAT)==0) {
+			if (CmdFifo_GetByteCount()==0) _AddToFifo_Heartbeat();
             // Set the flag indicating that it's time to send (regardless if the heartbeat was added)
             fTimeToSend = true;
         }
 		
-		
-		// It's time to send when... there is anything in the command FIFO
-            if (EyedroCmdFifo_GetByteCount()>0) {
-                fTimeToSend = true;
-            }
-
-			
 		// Reset the link check timer
         Timer_SetTimer(TIMER_APP_ENWI_LINK_CHECK, 300);
 		
@@ -287,27 +331,161 @@ eStatusCode App_GetStatus(void) {
 }
 
 bool _AddToFifo_EventStartup(void) {
-    uint8_t u8PayloadLength, u8TotalLength;
-    char* pCmd;
+	uint32_t u32Timestamp;
+    Timestamp_GetTimestamp(&u32Timestamp);
 
-    // Compute length
-    //u8PayloadLength = EVENT_PAYLOAD_LENGTH_STARTUP_V3 + 1;
-    u8TotalLength = 4;
+	// String to add to buffer
+	sprintf(g_acBuffer64, "Event:System:Startup:%d", u32Timestamp);
 
-    // Make sure there is room in the FIFO before proceeding
-    if (EyedroCmdFifo_GetByteRemaining() < u8TotalLength) return false;
-
-    // Use the shared 64-byte buffer to build the command
-    pCmd = &g_acBuffer64[0];
-
-    // setevent command byte
-    *pCmd++ = (char)'T';
-	*pCmd++ = (char)'I';
-	*pCmd++ = (char)'M';
-	*pCmd++ = (char)'E';
-
+	uint8_t u8TotalLength;
+	u8TotalLength = strlen(g_acBuffer64);
+	
     // Push to the command FIFO
-    EyedroCmdFifo_Push(&g_acBuffer64[0], u8TotalLength);
+    CmdFifo_Push(&g_acBuffer64[0], u8TotalLength);
+	
 
     return true;
+}
+
+bool _AddToFifo_Heartbeat(void) {
+	uint32_t u32Timestamp;
+    Timestamp_GetTimestamp(&u32Timestamp);
+
+	// String to add to buffer
+	sprintf(g_acBuffer64, "Event:System:Heartbeat:%d", u32Timestamp);
+
+	uint8_t u8TotalLength;
+	u8TotalLength = strlen(g_acBuffer64);
+	
+    // Push to the command FIFO
+    CmdFifo_Push(&g_acBuffer64[0], u8TotalLength);
+	
+
+    return true;
+}
+
+bool _AddToFifo_EventResetCause(int u8ResetCause) {
+	uint32_t u32Timestamp;
+    Timestamp_GetTimestamp(&u32Timestamp);
+	
+	uint8_t u8TotalLength;
+
+	switch(u8ResetCause) {
+		case 1:
+			sprintf(g_acBuffer64, "Event:ResetCause:WDT:%d", u32Timestamp);
+			u8TotalLength = strlen(g_acBuffer64);
+			break;
+		case 2:
+			sprintf(g_acBuffer64, "Event:ResetCause:3.3V Brownout:%d", u32Timestamp);
+			u8TotalLength = strlen(g_acBuffer64);
+			break;
+		case 3:
+			sprintf(g_acBuffer64, "Event:ResetCause:1.2V Brownout:%d", u32Timestamp);
+			u8TotalLength = strlen(g_acBuffer64);
+			break;
+		default:
+			sprintf(g_acBuffer64, "Event:ResetCause:Unknown:%d", u32Timestamp);
+			u8TotalLength = strlen(g_acBuffer64);
+			break;
+	}
+	
+    // Push to the command FIFO
+    CmdFifo_Push(&g_acBuffer64[0], u8TotalLength);
+
+
+    return true;
+}
+
+bool _AddToFifo_EventSync(int16_t s16Diff) {
+	uint32_t u32Timestamp;
+    Timestamp_GetTimestamp(&u32Timestamp);
+	
+	memcpy(&g_st_UserConfig.au8Timestamp[0], &u32Timestamp, 4);
+	_FlashWriteAppUserConfig();
+	
+	if(s16Diff > 120) {
+	// String to add to buffer
+	sprintf(g_acBuffer64, "Event:Sync:%d:%d", s16Diff, u32Timestamp);
+
+	uint8_t u8TotalLength;
+	u8TotalLength = strlen(g_acBuffer64);
+	
+    // Push to the command FIFO
+    CmdFifo_Push(&g_acBuffer64[0], u8TotalLength);
+	}
+	
+	return true;
+}
+
+bool _AddToFifo_EventData(int iSensor) {
+	uint32_t u32Timestamp;
+    Timestamp_GetTimestamp(&u32Timestamp);
+	
+	if(iSensor==0) {
+		sprintf(g_acBuffer256, "Event:Data:T1:%d", u32Timestamp);
+	} else {
+		sprintf(g_acBuffer256, "Event:Data:T2:%d", u32Timestamp);
+	}
+
+	uint8_t u8TotalLength;
+	u8TotalLength = strlen(g_acBuffer256);
+	
+    // Push to the command FIFO
+    CmdFifo_Push(&g_acBuffer256[0], u8TotalLength);	
+}
+
+void App_ProcessBinaryPayload(char *pSrc, int nSrcBytes) {
+	uint32_t u32NewTime = atoi(pSrc);
+	
+	
+	uint32_t u32CheckTime;
+    int16_t s16Diff;
+    Timestamp_GetTimestamp(&u32CheckTime);
+    s16Diff = (int16_t)(u32CheckTime - u32NewTime);
+	
+	if(abs(s16Diff)>1) {
+		Timestamp_SetTimestamp(u32NewTime);
+		_AddToFifo_EventSync(abs(s16Diff));
+	}
+	
+	return;
+}
+
+void _FlashReadAppUserConfig(void) {
+	// Copy the user configuration from non-volatile memory to the global structure in RAM
+    Flash_ReadFlash(USER_CONFIG_SPACE_ORIGIN, (char*)&g_st_UserConfig, sizeof(tsUserConfig));
+
+	// If user config is not initialized, initialize (and store) it now.
+    if (g_st_UserConfig.u16InitCode!=USER_CONFIG_INIT_CODE) {
+        DEBUG_INFO("Initializing the user configuration. ");
+        _InitUserConfig();
+    }
+	DEBUG_INFO("UserRead");
+}
+
+void _FlashWriteAppUserConfig(void) {
+	// Set timestamp
+    uint32_t timestamp;
+    Timestamp_GetTimestamp(&timestamp);
+	memcpy(&g_st_UserConfig.au8Timestamp[0], &timestamp, 4);
+	
+	// Before the flash can be written, it must be erased - note this will erase whole 256 byte rows!
+    Flash_EraseFlash(USER_CONFIG_SPACE_ORIGIN, USER_CONFIG_SPACE_SIZE_PAGES);
+	
+	// Wait for the Flash memory controller to finish erasing
+	while (RTC->MODE0.STATUS.bit.SYNCBUSY || NVMCTRL->INTFLAG.bit.READY == 0);
+
+    // Store the user configuration in the appropriate region of NVM
+    Flash_WriteFlash(USER_CONFIG_SPACE_ORIGIN, (char*)&g_st_UserConfig, sizeof(tsUserConfig));
+	memset(&g_st_UserConfig, 0, sizeof(tsUserConfig));
+	Flash_ReadFlash(USER_CONFIG_SPACE_ORIGIN, (char*)&g_st_UserConfig, sizeof(tsUserConfig));
+	DEBUG_INFO("UserWrite");
+}
+
+void _InitUserConfig(void) {
+	memset(&g_st_UserConfig, 0, sizeof(tsUserConfig));
+	 g_st_UserConfig.u16InitCode = USER_CONFIG_INIT_CODE;
+	 
+	_FlashWriteAppUserConfig();
+	DEBUG_INFO("UserInit");
 }

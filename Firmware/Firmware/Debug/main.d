@@ -127,7 +127,8 @@ main.d main.o: .././main.c ../atmel_start.h ../driver_init.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\machine\_time.h \
  ../App/DcaApp.h ../driver_init.h ../App/FwVersion.h ../Core/Watchdog.h \
  ../Core/Wifi.h ../Core/Ethernet.h ../Core/Flash.h ../Core/Http.h \
- ../Core/Common.h ../Core/Timer.h ../Core/Timestamp.h ../Core/Debug.h
+ ../Core/Common.h ../Core/Timer.h ../Core/Timestamp.h ../Core/Debug.h \
+ ../Core/Sensor.h
 
 ../atmel_start.h:
 
@@ -486,3 +487,5 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-no
 ../Core/Timestamp.h:
 
 ../Core/Debug.h:
+
+../Core/Sensor.h:

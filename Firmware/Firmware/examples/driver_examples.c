@@ -10,11 +10,19 @@
 #include "driver_init.h"
 #include "utils.h"
 
-static void button_on_PA14_pressed(void)
+static void button_on_PA04_pressed(void)
 {
 }
 
-static void button_on_PA15_pressed(void)
+static void button_on_PA06_pressed(void)
+{
+}
+
+static void button_on_PA28_pressed(void)
+{
+}
+
+static void button_on_PA11_pressed(void)
 {
 }
 
@@ -24,8 +32,10 @@ static void button_on_PA15_pressed(void)
 void EXTERNAL_IRQ_0_example(void)
 {
 
-	ext_irq_register(PIN_PA14, button_on_PA14_pressed);
-	ext_irq_register(PIN_PA15, button_on_PA15_pressed);
+	ext_irq_register(PIN_PA04, button_on_PA04_pressed);
+	ext_irq_register(PIN_PA06, button_on_PA06_pressed);
+	ext_irq_register(PIN_PA28, button_on_PA28_pressed);
+	ext_irq_register(PIN_PA11, button_on_PA11_pressed);
 }
 
 static uint8_t src_data[128];
@@ -53,20 +63,6 @@ void FLASH_0_example(void)
 }
 
 /**
- * Example of using ETHERNET_SPI to write "Hello World" using the IO abstraction.
- */
-static uint8_t example_ETHERNET_SPI[12] = "Hello World!";
-
-void ETHERNET_SPI_example(void)
-{
-	struct io_descriptor *io;
-	spi_m_sync_get_io_descriptor(&ETHERNET_SPI, &io);
-
-	spi_m_sync_enable(&ETHERNET_SPI);
-	io_write(io, example_ETHERNET_SPI, 12);
-}
-
-/**
  * Example of using WIRELESS_SPI to write "Hello World" using the IO abstraction.
  */
 static uint8_t example_WIRELESS_SPI[12] = "Hello World!";
@@ -78,6 +74,20 @@ void WIRELESS_SPI_example(void)
 
 	spi_m_sync_enable(&WIRELESS_SPI);
 	io_write(io, example_WIRELESS_SPI, 12);
+}
+
+/**
+ * Example of using ETHERNET_SPI to write "Hello World" using the IO abstraction.
+ */
+static uint8_t example_ETHERNET_SPI[12] = "Hello World!";
+
+void ETHERNET_SPI_example(void)
+{
+	struct io_descriptor *io;
+	spi_m_sync_get_io_descriptor(&ETHERNET_SPI, &io);
+
+	spi_m_sync_enable(&ETHERNET_SPI);
+	io_write(io, example_ETHERNET_SPI, 12);
 }
 
 void delay_example(void)

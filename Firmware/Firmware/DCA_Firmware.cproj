@@ -26,7 +26,7 @@
     <OverrideVtorValue>exception_table</OverrideVtorValue>
     <BootSegment>2</BootSegment>
     <ResetRule>0</ResetRule>
-    <eraseonlaunchrule>0</eraseonlaunchrule>
+    <eraseonlaunchrule>1</eraseonlaunchrule>
     <EraseKey />
     <AsfFrameworkConfig>
       <framework-data xmlns="">
@@ -149,11 +149,11 @@
           <AcmeProjectActionInfo Action="File" Source="tcpip_lite/source/tcpv4.c" IsConfig="false" Hash="k8S14ib0QrN1MvOPH/lJ0A" />
           <AcmeProjectActionInfo Action="File" Source="tcpip_lite/source/udpv4.c" IsConfig="false" Hash="XD6gYkwHxPa6SIQmawXgFw" />
           <AcmeProjectActionInfo Action="File" Source="main.c" IsConfig="false" Hash="k0AH7j+BrmdFhBPzCCMptA" />
-          <AcmeProjectActionInfo Action="File" Source="driver_init.c" IsConfig="false" Hash="kXyh0YpZyr8XJkV/34QPvg" />
-          <AcmeProjectActionInfo Action="File" Source="driver_init.h" IsConfig="false" Hash="PLaSSajn7Uz6K3pCeORv1g" />
-          <AcmeProjectActionInfo Action="File" Source="atmel_start_pins.h" IsConfig="false" Hash="45Q+HrHzscDyjZ61QsYyjA" />
+          <AcmeProjectActionInfo Action="File" Source="driver_init.c" IsConfig="false" Hash="4CBvsko5mU59O2DJWFSqkQ" />
+          <AcmeProjectActionInfo Action="File" Source="driver_init.h" IsConfig="false" Hash="i9a+SAEWIAXHjZqp5GAUmQ" />
+          <AcmeProjectActionInfo Action="File" Source="atmel_start_pins.h" IsConfig="false" Hash="mRFHXOtloVUZpte2dN07GA" />
           <AcmeProjectActionInfo Action="File" Source="examples/driver_examples.h" IsConfig="false" Hash="1DYO0RXYHA2Ogj38f/8dCQ" />
-          <AcmeProjectActionInfo Action="File" Source="examples/driver_examples.c" IsConfig="false" Hash="lTwCd+zLUf08gOCisK/cjA" />
+          <AcmeProjectActionInfo Action="File" Source="examples/driver_examples.c" IsConfig="false" Hash="FEvUnN5ZnRg2dlmvubr64g" />
           <AcmeProjectActionInfo Action="File" Source="hal/include/hal_timer.h" IsConfig="false" Hash="5pZVthtMl40VMvofOld2ng" />
           <AcmeProjectActionInfo Action="File" Source="hal/include/hpl_missing_features.h" IsConfig="false" Hash="XsAvpgfutzkw0Y5SydYFaw" />
           <AcmeProjectActionInfo Action="File" Source="hal/include/hpl_pwm.h" IsConfig="false" Hash="1wL9C0Z542rKOnnyJpZ7Yg" />
@@ -166,14 +166,14 @@
           <AcmeProjectActionInfo Action="File" Source="hal/include/hpl_timer.h" IsConfig="false" Hash="s/0PW0pyF4MQIYZJ6S0wyA" />
           <AcmeProjectActionInfo Action="File" Source="hal/include/hpl_usart_async.h" IsConfig="false" Hash="tBfmk3BN3Q1WbYVoWDbsJw" />
           <AcmeProjectActionInfo Action="File" Source="hal/include/hpl_usart_sync.h" IsConfig="false" Hash="Yj+PoPxG2CqDOy5XoIWkwg" />
-          <AcmeProjectActionInfo Action="File" Source="hal/src/hal_ext_irq.c" IsConfig="false" Hash="Hi8BWrYBf6f91sJYhG9v3Q" />
+          <AcmeProjectActionInfo Action="File" Source="hal/src/hal_ext_irq.c" IsConfig="false" Hash="rwF6tK0bb82tLAcye7381w" />
           <AcmeProjectActionInfo Action="File" Source="hal/src/hal_spi_m_sync.c" IsConfig="false" Hash="Q0IudnTEWeoIkfQIoYIqxA" />
           <AcmeProjectActionInfo Action="File" Source="hal/src/hal_timer.c" IsConfig="false" Hash="F2MrEXhHq4umI9xpONnlGg" />
           <AcmeProjectActionInfo Action="File" Source="hal/utils/include/parts.h" IsConfig="false" Hash="MfoGayz0XcEKPI59BfKE4Q" />
           <AcmeProjectActionInfo Action="File" Source="hpl/core/hpl_core_m0plus_base.c" IsConfig="false" Hash="AcX9qn6GCVzwrlYdWY3zOA" />
           <AcmeProjectActionInfo Action="File" Source="hpl/core/hpl_core_port.h" IsConfig="false" Hash="RXrDMMracCeflR1F9jWiGg" />
           <AcmeProjectActionInfo Action="File" Source="hpl/core/hpl_init.c" IsConfig="false" Hash="uZ1d5irCWigkXsMIO1Dfsw" />
-          <AcmeProjectActionInfo Action="File" Source="hpl/eic/hpl_eic.c" IsConfig="false" Hash="yuCn8DhGdkhILrb/NWo4sA" />
+          <AcmeProjectActionInfo Action="File" Source="hpl/eic/hpl_eic.c" IsConfig="false" Hash="kv+GLBrG6tLGd1oLgeximw" />
           <AcmeProjectActionInfo Action="File" Source="hpl/gclk/hpl_gclk.c" IsConfig="false" Hash="NtQ9ehLwgO43rrWhB72Fxg" />
           <AcmeProjectActionInfo Action="File" Source="hpl/gclk/hpl_gclk_base.h" IsConfig="false" Hash="XtS8huv0QZPSF9cvAeZ8RA" />
           <AcmeProjectActionInfo Action="File" Source="hpl/nvmctrl/hpl_nvmctrl.c" IsConfig="false" Hash="2SYfzkvxEmCLOPB3omCaAw" />
@@ -192,18 +192,18 @@
           <AcmeProjectActionInfo Action="File" Source="tcpip_lite/include/sys_arch.h" IsConfig="false" Hash="lmJfupnn0C+SwIYQ721ghw" />
           <AcmeProjectActionInfo Action="File" Source="atmel_start.h" IsConfig="false" Hash="HzTJQlwoL1Q9VWgHkroRqQ" />
           <AcmeProjectActionInfo Action="File" Source="atmel_start.c" IsConfig="false" Hash="L4QuASImsXvP7e+MZ/WQMQ" />
-          <AcmeProjectActionInfo Action="File" Source="config/hpl_eic_config.h" IsConfig="true" Hash="jem1ojUONQ9ii8nP5tQ2oA" />
+          <AcmeProjectActionInfo Action="File" Source="config/hpl_eic_config.h" IsConfig="true" Hash="se8NfjRW6wKYv9ZoW1Q/lQ" />
           <AcmeProjectActionInfo Action="File" Source="config/hpl_gclk_config.h" IsConfig="true" Hash="//r1QkzN8MHwoT69UV2+zQ" />
           <AcmeProjectActionInfo Action="File" Source="config/hpl_nvmctrl_config.h" IsConfig="true" Hash="l5K9dhQ/DEXZQde+K7Oh/A" />
           <AcmeProjectActionInfo Action="File" Source="config/hpl_pm_config.h" IsConfig="true" Hash="GH0DautnKY3X7yLEFG4tgA" />
-          <AcmeProjectActionInfo Action="File" Source="config/hpl_sercom_config.h" IsConfig="true" Hash="bWbVR8rfG+J+uthOhQ8k/Q" />
+          <AcmeProjectActionInfo Action="File" Source="config/hpl_sercom_config.h" IsConfig="true" Hash="wsnvJsgtjTxTKuFUy7BLKQ" />
           <AcmeProjectActionInfo Action="File" Source="config/hpl_sysctrl_config.h" IsConfig="true" Hash="odMNXuS7+Rs6SfX9F4Wq4g" />
           <AcmeProjectActionInfo Action="File" Source="config/hpl_systick_config.h" IsConfig="true" Hash="tlT3lNDKWFe82MiGWfQzcA" />
           <AcmeProjectActionInfo Action="File" Source="config/hpl_tc_config.h" IsConfig="true" Hash="yB+N/p8VWI0Wpor7jUxtFA" />
           <AcmeProjectActionInfo Action="File" Source="config/hpl_wdt_config.h" IsConfig="true" Hash="CEooFQe894hXQEFvijK/7w" />
-          <AcmeProjectActionInfo Action="File" Source="config/peripheral_clk_config.h" IsConfig="true" Hash="eOLK3T/osnxMxDPlei6kvg" />
+          <AcmeProjectActionInfo Action="File" Source="config/peripheral_clk_config.h" IsConfig="true" Hash="pGFZEfHwo86QHLYo+pEx7g" />
           <AcmeProjectActionInfo Action="File" Source="config/enc28j60_spiif_config.h" IsConfig="true" Hash="as438+XsISkPSbaemlPB7A" />
-          <AcmeProjectActionInfo Action="File" Source="config/tcpip_lite_config.h" IsConfig="true" Hash="rPinkEtMnufIXGpinmnKgg" />
+          <AcmeProjectActionInfo Action="File" Source="config/tcpip_lite_config.h" IsConfig="true" Hash="sovLddBnE7/iCgEzKTXBZw" />
         </AcmeActionInfos>
         <NonsecureFilesInfo />
       </AcmeProjectConfig>
@@ -224,6 +224,19 @@
       <ToolName>Atmel-ICE</ToolName>
     </com_atmel_avrdbg_tool_atmelice>
     <avrtoolinterfaceclock>2000000</avrtoolinterfaceclock>
+    <custom>
+      <ToolOptions>
+        <InterfaceProperties>
+          <SwdClock>2000000</SwdClock>
+        </InterfaceProperties>
+        <InterfaceName>
+        </InterfaceName>
+      </ToolOptions>
+      <ToolType>custom</ToolType>
+      <ToolNumber>
+      </ToolNumber>
+      <ToolName>Custom Programming Tool</ToolName>
+    </custom>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
     <ToolchainSettings>
@@ -342,8 +355,8 @@
   <armgcc.common.outputfiles.hex>True</armgcc.common.outputfiles.hex>
   <armgcc.common.outputfiles.lss>True</armgcc.common.outputfiles.lss>
   <armgcc.common.outputfiles.eep>True</armgcc.common.outputfiles.eep>
-  <armgcc.common.outputfiles.bin>True</armgcc.common.outputfiles.bin>
-  <armgcc.common.outputfiles.srec>True</armgcc.common.outputfiles.srec>
+  <armgcc.common.outputfiles.bin>False</armgcc.common.outputfiles.bin>
+  <armgcc.common.outputfiles.srec>False</armgcc.common.outputfiles.srec>
   <armgcc.compiler.symbols.DefSymbols>
     <ListValues>
       <Value>DEBUG</Value>
@@ -664,6 +677,9 @@
     <Compile Include="Core\Common.h">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="Core\DataFifo.c">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="Core\Debug.c">
       <SubType>compile</SubType>
     </Compile>
@@ -686,6 +702,12 @@
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="Core\Http.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Core\Sensor.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Core\Sensor.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="Core\TcpParser.c">
@@ -1155,7 +1177,16 @@
     <Folder Include="Component\winc1500\spi_flash\include\" />
     <Folder Include="Component\winc1500\spi_flash\source\" />
     <Folder Include="Config\" />
+    <Folder Include="Debug\" />
+    <Folder Include="Debug\App\" />
+    <Folder Include="Debug\Component\" />
+    <Folder Include="Debug\Component\winc1500\" />
+    <Folder Include="Debug\Component\winc1500\bsp\" />
+    <Folder Include="Debug\Component\winc1500\bsp\include\" />
     <Folder Include="Device_Startup\" />
+    <Folder Include="App" />
+    <Folder Include="Core" />
+    <Folder Include="Component" />
     <Folder Include="documentation\" />
     <Folder Include="examples\" />
     <Folder Include="hal\" />
@@ -1177,9 +1208,6 @@
     <Folder Include="hpl\systick\" />
     <Folder Include="hpl\tc\" />
     <Folder Include="hpl\wdt\" />
-    <Folder Include="App" />
-    <Folder Include="Core" />
-    <Folder Include="Component" />
     <Folder Include="hri\" />
     <Folder Include="tcpip_lite\" />
     <Folder Include="tcpip_lite\ethernet_drivers\" />
@@ -1188,6 +1216,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Component\winc1500\WINC1500_SW_API.chm">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="debug.log">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="Debug\App\DcaApp.o">
       <SubType>compile</SubType>
     </None>
     <None Include="Device_Startup\samd20e18_flash.ld">

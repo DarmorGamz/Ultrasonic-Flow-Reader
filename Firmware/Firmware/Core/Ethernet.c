@@ -160,7 +160,7 @@ int8_t Ethernet_Init(void) {
 	
     // Build the host name before initializing the stack (so the initial DHCP request will have the correct name)
     char acHostname[24];
-    // Build the Hostname "EYEDRO-{SN}"
+    // Build the Hostname "DCA-{SN}"
     sprintf(acHostname, "DCA-00001");
     uint8_t len = (uint8_t)strlen(acHostname)+1;
 
@@ -370,7 +370,7 @@ void Ethernet_PumpEvents(void) {
             if (s_u8EthernetHostIdx>=4) s_u8EthernetHostIdx=0;
             s_stEthernetInfo.eState = ETHERNET_STATE_ERROR;
             // Set timer for establishing comm (once connected)
-            Timer_SetTimer(TIMER_ETH_SERVER_ESTABLISH_COMM, EYEDRO_TIMEOUT_ESTABLISH_COMM); // 10 minutes before we try a soft reset
+            Timer_SetTimer(TIMER_ETH_SERVER_ESTABLISH_COMM, TIMEOUT_ESTABLISH_COMM); // 10 minutes before we try a soft reset
         } else {
             App_SetStatus(STATUS_OK);
             s_fEthernetServerCommLost = false;
@@ -379,7 +379,7 @@ void Ethernet_PumpEvents(void) {
     // Give system/connection a couple minutes to establish/recover before performing a soft reset
     if (s_fEthernetServerCommLost==true) {
         if (Timer_GetTimer(TIMER_ETH_SERVER_ESTABLISH_COMM)==0){
-            //EyedroApp_SoftReset();
+            //App_SoftReset();
         }
     }
 }
@@ -463,7 +463,7 @@ void _ManageEthernetState(void){
             break;
 
         case ETHERNET_STATE_IDLE:
-		//DEBUG_INFO("ETHERNET STATE IDLE");
+			//DEBUG_INFO("ETHERNET STATE IDLE");
             ip = IPV4_GetMyIP();
             if (ip != s_stEthernetInfo.u32IpAddr) {
 				DEBUG_INFO("ETHERNET STATE IDLE (IP CHANGED)");
@@ -540,7 +540,7 @@ void _ManageEthernetRemoteSocketState(void) {
 
     switch (eSocketState) {
         case NOT_A_SOCKET: // This is not a socketk;
-			DEBUG_INFO("Socket (NOT A SOCKET)");
+			//DEBUG_INFO("Socket (NOT A SOCKET)");
 			// Insert and initialize the socket
             if (TCP_SocketInit(&s_stEthernetSocketRemote) != SUCCESS) return;
 			break;	
@@ -571,26 +571,26 @@ void _ManageEthernetRemoteSocketState(void) {
 				
                 // Add receive buffer
                 if (TCP_InsertRxBuffer(&s_stEthernetSocketRemote, (uint8_t*)g_acRxBuffer, RX_BUFFER_NUM_BYTES) != true) {
-                    if (s_u8TxAttemptCount>5) {} //EyedroApp_SetLastError(EYEDRO_ERROR_ETH_RX_BUFFER_FAILURE);
+                    if (s_u8TxAttemptCount>5) {} //App_SetLastError(ERROR_ETH_RX_BUFFER_FAILURE);
                     else s_u8TxAttemptCount++;
                     TCP_SocketRemove(&s_stEthernetSocketRemote);
                     return;
                 }
                 // Attempt connection
                 if (TCP_Connect(&s_stEthernetSocketRemote, &s_stEthernetSocketAddressRemote) == false) {
-                    if (s_u8TxAttemptCount>5) {} //EyedroApp_SetLastError(EYEDRO_ERROR_ETH_REMOTE_SOCKET_OPEN);
+                    if (s_u8TxAttemptCount>5) {} //App_SetLastError(ERROR_ETH_REMOTE_SOCKET_OPEN);
                     else s_u8TxAttemptCount++;
                     TCP_SocketRemove(&s_stEthernetSocketRemote);
                     return;
                 }
-                Timer_SetTimer(TIMER_ETH_SOCKET_REMOTE_INIT_TIMEOUT, EYEDRO_TIMEOUT_SOCKET_REMOTE_INIT);
+                Timer_SetTimer(TIMER_ETH_SOCKET_REMOTE_INIT_TIMEOUT, TIMEOUT_SOCKET_REMOTE_INIT);
             }
             break;
 		case SOCKET_IN_PROGRESS: // Initiate a connection
 			//DEBUG_INFO("Socket (SOCKET IN PROGRESS)");
 
         if (Timer_GetTimer(TIMER_ETH_SOCKET_REMOTE_INIT_TIMEOUT) == 0) {
-            //EyedroApp_SetLastError(EYEDRO_ERROR_ETH_REMOTE_SOCKET_CONNECT);
+            //App_SetLastError(ERROR_ETH_REMOTE_SOCKET_CONNECT);
             TCP_Close(&s_stEthernetSocketRemote);
         }
         break;
@@ -611,7 +611,7 @@ void _ManageEthernetRemoteSocketState(void) {
                 pTxDst += s_u16EthernetPostPayloadOffset;
 
                 // Put as much of the command FIFO into the TX buffer as possible (TX buffer is big enough to hold all)
-                u16FifoBytes = EyedroCmdFifo_Send(pTxDst, COMMAND_FIFO_NUM_BYTES);
+                u16FifoBytes = CmdFifo_Send(pTxDst, COMMAND_FIFO_NUM_BYTES);
 				
 				DEBUG_INFO("%u", u16FifoBytes);
                 u16PayloadBytes = u16FifoBytes;
@@ -647,7 +647,7 @@ void _ManageEthernetRemoteSocketState(void) {
                     s_u16EthernetRemainingRemoteBytes = u16BytesToSend;
                     s_pvEthernetRemainingRemoteBuffer = (void*)&g_acTxBuffer[0];
                     // Set the response timeout (will also include the actual transmission of the data)
-                    Timer_SetTimer(TIMER_ETH_SOCKET_REMOTE_RESPONSE_TIMEOUT, EYEDRO_TIMEOUT_SOCKET_REMOTE_RESPONSE);
+                    Timer_SetTimer(TIMER_ETH_SOCKET_REMOTE_RESPONSE_TIMEOUT, TIMEOUT_SOCKET_REMOTE_RESPONSE);
 
                 } else {
                     DEBUG_INFO("Empty payload. ");
@@ -670,10 +670,10 @@ void _ManageEthernetRemoteSocketState(void) {
                     // If too many bytes for socket, it will need to be broken up
                     if (s_u16EthernetRemainingRemoteBytes>MAX_TCP_CHUNK_SIZE) {
                         DEBUG_INFO("Sending %d bytes of data to server. ", MAX_TCP_CHUNK_SIZE);
-						DEBUG_INFO("%s", (char *)g_acTxBuffer[0]);
+						//DEBUG_INFO("%s", (char *)s_pvEthernetRemainingRemoteBuffer);
                         if (TCP_Send(&s_stEthernetSocketRemote, (uint8_t*)s_pvEthernetRemainingRemoteBuffer, MAX_TCP_CHUNK_SIZE) != true) {
                             DEBUG_INFO("Failed sending segment. ");
-                            //EyedroApp_SetLastError(EYEDRO_ERROR_ETH_TX_BUFFER_FAILURE);
+                            //App_SetLastError(ERROR_ETH_TX_BUFFER_FAILURE);
                             TCP_Close(&s_stEthernetSocketRemote);
                             return;
                         }
@@ -682,9 +682,10 @@ void _ManageEthernetRemoteSocketState(void) {
 
                     } else {
                         DEBUG_INFO("Sending %d bytes of data to server. ", s_u16EthernetRemainingRemoteBytes);
+						//DEBUG_INFO("%s", (char *)s_pvEthernetRemainingRemoteBuffer);
                         if (TCP_Send(&s_stEthernetSocketRemote, (uint8_t*)s_pvEthernetRemainingRemoteBuffer, s_u16EthernetRemainingRemoteBytes) != true) {
                             DEBUG_INFO("Failed sending. ");
-                            //EyedroApp_SetLastError(EYEDRO_ERROR_ETH_TX_BUFFER_FAILURE);
+                            //App_SetLastError(ERROR_ETH_TX_BUFFER_FAILURE);
                             TCP_Close(&s_stEthernetSocketRemote);
                             return;
                         }
@@ -696,16 +697,15 @@ void _ManageEthernetRemoteSocketState(void) {
                 // Has a timeout occurred before we've even got to the part where we wait for the actual response
                 } else if (Timer_GetTimer(TIMER_ETH_SOCKET_REMOTE_RESPONSE_TIMEOUT)==0) {
                     DEBUG_INFO("Failed sending. ");
-                    //EyedroApp_SetLastError(EYEDRO_ERROR_ETH_TX_BUFFER_FAILURE);
+                    //App_SetLastError(ERROR_ETH_TX_BUFFER_FAILURE);
                     TCP_Close(&s_stEthernetSocketRemote);
                     return;
                 }
-
             // POST sent... waiting for the server response
             } else {
                 // Have we timed out?
                 if (Timer_GetTimer(TIMER_ETH_SOCKET_REMOTE_RESPONSE_TIMEOUT)==0) {
-                    //EyedroApp_SetLastError(EYEDRO_ERROR_ETH_RX_TIMEOUT);
+                    //App_SetLastError(ERROR_ETH_RX_TIMEOUT);
                     TCP_Close(&s_stEthernetSocketRemote);
                     return;
                 }
@@ -720,45 +720,16 @@ void _ManageEthernetRemoteSocketState(void) {
                         s_u16ResponseSize += u16RxSize;
 
                         // Parse received response (and act accordingly)
-                        if (EyedroTcpParser_ParseServerResponse((char*)g_acRxBuffer, s_u16ResponseSize)==true) {
-                            DEBUG_INFO("Response successfully parsed. ");
+                        if (TcpParser_ParseServerResponse((char*)g_acRxBuffer, s_u16ResponseSize)==true) {
                             // All good! This looks like a valid response from the server, set the flag and timer used to determine lost communication
                             s_fEthernetServerCommEstablished = true;
-                            //Timer_SetTimer(TIMER_ETH_SERVER_LOST_COMM, 120);
-                            s_fPendingRepsonse = false;
+                            Timer_SetTimer(TIMER_ETH_SERVER_LOST_COMM, 120);
+                            //s_fPendingRepsonse = false;
                             // Server will close the socket after sending response - so let it clean itself up
                             TCP_Close(&s_stEthernetSocketRemote);
 
                         } else {
 							DEBUG_INFO("ERROR - invalid response! ");
-                            /*if (EyedroApp_GetLastError()==EYEDRO_ERROR_POST_RESP_FAILURE) {
-                                // Didn't find 200 OK but, since it is non-zero length, we likely got some other kind of server response (400, 403, etc)
-                                // Expire the DNS and move to next server in the list
-                                DEBUG_INFO("ERROR - invalid response! ");
-                                TCP_Close(&s_stEthernetSocketRemote);
-                                s_u8EthernetHostIdx++;
-                                if (s_u8EthernetHostIdx>=4) { // Roll-over
-                                    s_u8EthernetHostIdx=0;
-                                }
-                                s_fUseNextHost = true;
-                                Timer_SetTimer(TIMER_ETH_DNS_REMOTE_RESOLUTION_TIMEOUT, 0);
-
-                            } else if (s_u16ResponseSize>=RX_BUFFER_NUM_BYTES) {
-                                DEBUG_INFO("ERROR - no room to receive content! ");
-                                EyedroApp_SetLastError(EYEDRO_ERROR_ETH_RX_BUFFER_FULL);
-                                TCP_Close(&s_stEthernetSocketRemote);
-                            } else if (s_u8RxAttemptCount>5) {
-                                DEBUG_INFO("ERROR - rx attempts exceeded! ");
-                                TCP_Close(&s_stEthernetSocketRemote);
-                            } else {
-                                // Setup to receive any remaining response bytes
-                                u16RxSpace = RX_BUFFER_NUM_BYTES-s_u16ResponseSize;
-                                if (TCP_InsertRxBuffer(&s_stEthernetSocketRemote, (uint8_t*)&g_acRxBuffer[s_u16ResponseSize], u16RxSpace) != true) {
-                                    DEBUG_INFO("ERROR - RX buffer failure! ");
-                                    EyedroApp_SetLastError(EYEDRO_ERROR_ETH_RX_BUFFER_FAILURE);
-                                    TCP_Close(&s_stEthernetSocketRemote);
-                                }
-                            }*/
                        }
                     }
                 }
@@ -766,7 +737,18 @@ void _ManageEthernetRemoteSocketState(void) {
 
             break;
         case SOCKET_CLOSING: // The user initiated the closing procedure for this socket
-			DEBUG_INFO("Socket (SOCKET CLOSING)");
+			//DEBUG_INFO("Socket (SOCKET CLOSING)");
+			// Do nothing
+            if (s_fPendingClose==false) {
+                s_fPendingClose = true;
+                Timer_SetTimer(TIMER_ETH_SOCKET_REMOTE_CLEANUP_TIMEOUT, 3);
+
+            } else if (Timer_GetTimer(TIMER_ETH_SOCKET_REMOTE_CLEANUP_TIMEOUT) == 0) {
+                DEBUG_INFO("ERROR - Failed remote socket cleanup! ");
+                s_fPendingRepsonse = false;
+                s_fPendingClose = false;
+                // TODO.. reinit remote socket
+            }
             break;
         default:
             DEBUG_INFO("Invalid remote socket state! ");
@@ -799,7 +781,7 @@ void _ManageEthernetRemoteSocketState(void) {
                     fDnsRequested = true;
                 } 
             } while (fDnsRequested==false);
-            Timer_SetTimer(TIMER_ETH_DNS_REMOTE_RESOLUTION_TIMEOUT, EYEDRO_TIMEOUT_DNS_RERESOLVE);
+            Timer_SetTimer(TIMER_ETH_DNS_REMOTE_RESOLUTION_TIMEOUT, TIMEOUT_DNS_RERESOLVE);
         }
     }
 }
@@ -831,10 +813,10 @@ void _DnsRemoteHostCb(void) {
 		DEBUG_INFO("Failed resolving %s. ", s_pcLookupHostname);
 		if (s_u8EthernetRemoteDnsAttempts<3) {
 			// Set the error state
-			if (s_u8EthernetHostIdx==0) {} //EyedroApp_SetLastError(EYEDRO_ERROR_DNS_RES_ALT1_FAILURE);
-			if (s_u8EthernetHostIdx==1) {} //EyedroApp_SetLastError(EYEDRO_ERROR_DNS_RES_ALT2_FAILURE);
-			if (s_u8EthernetHostIdx==2) {} //EyedroApp_SetLastError(EYEDRO_ERROR_DNS_RES_PRIMARY_FAILURE);
-			if (s_u8EthernetHostIdx==3) {} //EyedroApp_SetLastError(EYEDRO_ERROR_DNS_RES_FAILSAFE_FAILURE);
+			if (s_u8EthernetHostIdx==0) {}
+			if (s_u8EthernetHostIdx==1) {}
+			if (s_u8EthernetHostIdx==2) {}
+			if (s_u8EthernetHostIdx==3) {} 
 			// Send the next DNS request
 			bool fDnsRequested = false;
 			do {
@@ -854,7 +836,7 @@ void _DnsRemoteHostCb(void) {
 			} else {
 			DEBUG_INFO("Unable to resolve. ");
 			// Failed resolution of primary and secondary - soft reset the device
-			//EyedroApp_SoftReset();
+			//App_SoftReset();
 		}
 	}
 }
@@ -878,7 +860,7 @@ void _ManageEthernetDnsState(void) {
 			
             *s_pu32LookupHostIp = 0;
             s_eEthernetDnsState = DNS_STATE_OPEN_SOCKET;
-            Timer_SetTimer(TIMER_ETH_DNS_TIMEOUT, EYEDRO_TIMEOUT_DNS_RESOLUTION);
+            Timer_SetTimer(TIMER_ETH_DNS_TIMEOUT, TIMEOUT_DNS_RESOLUTION);
             // No need to break. Drop right into next state
 
         case DNS_STATE_OPEN_SOCKET: // Open UDP socket - will perform ARP if necessary
@@ -911,7 +893,7 @@ void _ManageEthernetDnsState(void) {
             // Flush the UDP
             UDP_Send();
             // Reset the timeout to wait for response
-            Timer_SetTimer(TIMER_ETH_DNS_TIMEOUT, EYEDRO_TIMEOUT_DNS_RESOLUTION);
+            Timer_SetTimer(TIMER_ETH_DNS_TIMEOUT, TIMEOUT_DNS_RESOLUTION);
             // Move to next state
             s_eEthernetDnsState = DNS_STATE_GET_RESULT;
             break;
@@ -934,7 +916,7 @@ void _ManageEthernetDnsState(void) {
             // Retry resolution
             if (su8Attempts<2) {
                 s_eEthernetDnsState = DNS_STATE_OPEN_SOCKET;
-                Timer_SetTimer(TIMER_ETH_DNS_TIMEOUT, EYEDRO_TIMEOUT_DNS_RESOLUTION);
+                Timer_SetTimer(TIMER_ETH_DNS_TIMEOUT, TIMEOUT_DNS_RESOLUTION);
 
             // Number of retries has been exceeded
             } else {
@@ -1145,5 +1127,5 @@ void Ethernet_QueueServerSend(void) {
     // No point in setting the flag is still waiting on a response
     if (s_stEthernetSocketRemote.socketState==SOCKET_CONNECTED || s_stEthernetSocketRemote.socketState==SOCKET_IN_PROGRESS) return;
 	
-	if (EyedroCmdFifo_GetByteCount()>0) s_fEthernetQueueServerSend = true;
+	if (CmdFifo_GetByteCount()>0) s_fEthernetQueueServerSend = true;
 }
