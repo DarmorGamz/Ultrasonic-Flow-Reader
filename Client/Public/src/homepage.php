@@ -20,8 +20,7 @@
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="../assets/js/sessionkeycheck.js"></script>
-    <script src="../assets/js/highcharts.js"></script>
-    <script src="../assets/js/data.js"></script>
+    <script src="../assets/js/dataDemand.js"></script>
 
     <script>
         document.addEventListener("DOMContentLoaded", function() {
@@ -90,80 +89,17 @@
     <!-- Content -->
     <div id="content" class="content">
         <h1>Demand - <span id="clock"></span></h1>
+        <label for="timeframe-select">Select Timeframe:</label>
+        <select id="timeframe-select">
+            <option value="1">1 minute</option>
+            <option value="15">15 minutes</option>
+            <option value="60">1 hour</option>
+        </select>
         <h4>1 Min: <span id="volume1min"></span></h4>
+        <h4>15 Min: <span id="volume15min"></span></h4>
         <h4>1 Hr: <span id="volume1hr"></span></h4>
-        <h4>Total: <span id="volumeTotal"></span></h4>
-        <h4>Flow Speed: <span id="flowSpeed"></span></h4>
-        <button onclick="sendPostRequest()">Send POST request now</button>
         <div id="chart-container"></div>
     </div>
-
-    <script>
-        // Set up the chart
-        var chart = Highcharts.chart('chart-container', {
-            chart: {
-                type: 'line',
-                events: {
-                    load: function () {
-                        // set up the updating of the chart every 5 seconds
-                        var series = this.series[0];
-                        setInterval(function () {
-                            var x = (new Date()).getTime(), // current time
-                                y = Math.random();
-                            series.addPoint([x, y], true, true);
-                        }, 5000);
-                    }
-                }
-            },
-            title: {
-                text: 'Live random data'
-            },
-            xAxis: {
-                type: 'datetime',
-                tickPixelInterval: 150
-            },
-            yAxis: {
-                title: {
-                    text: 'Value'
-                },
-                plotLines: [{
-                    value: 0,
-                    width: 1,
-                    color: '#808080'
-                }]
-            },
-            tooltip: {
-                formatter: function () {
-                    return '<b>' + this.series.name + '</b><br/>' +
-                        Highcharts.dateFormat('%Y-%m-%d %H:%M:%S', this.x) + '<br/>' +
-                        Highcharts.numberFormat(this.y, 2);
-                }
-            },
-            legend: {
-                enabled: false
-            },
-            exporting: {
-                enabled: false
-            },
-            series: [{
-                name: 'Random data',
-                data: (function () {
-                    // generate an array of random data
-                    var data = [],
-                        time = (new Date()).getTime(),
-                        i;
-
-                    for (i = -19; i <= 0; i += 1) {
-                        data.push({
-                            x: time + i * 1000,
-                            y: Math.random()
-                        });
-                    }
-                    return data;
-                }())
-            }]
-        });
-    </script>
 
     <!-- Footer -->
     <footer class="footer">

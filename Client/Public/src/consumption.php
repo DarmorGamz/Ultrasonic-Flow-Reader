@@ -14,7 +14,7 @@
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="../assets/js/sessionkeycheck.js"></script>
-    <script src="../assets/js/data.js"></script>
+    <script src="../assets/js/dataConsumption.js"></script>
 
     <script>
         document.addEventListener("DOMContentLoaded", function() {
@@ -81,7 +81,18 @@
 
 <!-- Content -->
 <div id="content" class="content">
-    <h1>Consumption</h1>
+    <h1>Consumption - <span id="clock"></span></h1>
+    <label for="timeframe-select">Select Timeframe:</label>
+    <select id="timeframe-select">
+        <option value="1D">1 Day</option>
+        <option value="1M">1 Month</option>
+        <option value="F">Forever</option>
+    </select>
+    <h4>1 Day: <span id="volume1day"></span></h4>
+    <h4>1 Month: <span id="volume1month"></span></h4>
+    <h4>Total: <span id="volumeTotal"></span></h4>
+
+    <div id="chart-container"></div>
 </div>
 
 <!-- Footer -->

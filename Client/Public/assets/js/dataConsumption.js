@@ -1,10 +1,10 @@
 // Define the data to be sent in the POST request
-const data = {
+const dataDemand = {
     Cmd: "getdata"
 };
 
 const params = new URLSearchParams();
-params.append('Cmd', data.Cmd);
+params.append('Cmd', dataDemand.Cmd);
 
 // Set the URL of the server you want to send the POST request to
 const url = 'https://darmorgamz.ca/api.php?' + params.toString();
@@ -20,17 +20,17 @@ function sendPostRequest() {
         .then(response => response.json())
         .then(json => {
             const data = json.Data;
-            document.getElementById('volume1min').textContent = data.Volume1Min;
-            document.getElementById('volume1hr').textContent = data.Volume1Hr;
-            document.getElementById('volumeTotal').textContent = data.VolumeTotal;
-            document.getElementById('flowSpeed').textContent = data.FlowSpeed;
+            document.getElementById('volume1day').textContent = data.Day;
+            document.getElementById('volume1month').textContent = data.Month;
+            document.getElementById('volumeTotal').textContent = data.Total;
+
         })
         .catch(error => console.error(error));
 }
 
 // Send the POST request every minute using setInterval()
 sendPostRequest();
-const interval = setInterval(sendPostRequest, 60000); // 60000 ms = 1 minute
+const interval = setInterval(sendPostRequest, 1000); // 60000 ms = 1 minute
 
 // Override the interval and send a POST request immediately on button click
 const button = document.querySelector('button');
