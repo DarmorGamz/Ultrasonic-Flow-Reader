@@ -15,6 +15,7 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="../assets/js/sessionkeycheck.js"></script>
     <script src="../assets/js/data.js"></script>
+    <script src="../assets/js/configuration.js"></script>
 
     <script>
         document.addEventListener("DOMContentLoaded", function() {
@@ -51,12 +52,13 @@
     </div>
     <!-- Login button -->
     <div class="login-button">
-            <span class="tooltip" data-tooltip="Logout">
-                <button id="login-button">
-                <i class="fas fa-lock"></i>
-            </button>
-                <div class="tooltip-text">Logout</div>
-            </span>
+        <span id="UserEmail"></span>
+        <span class="tooltip" data-tooltip="Logout">
+            <button id="login-button">
+            <i class="fas fa-lock"></i>
+        </button>
+            <div class="tooltip-text">Logout</div>
+        </span>
         <i class="fas fa-question-circle"></i>
     </div>
 </nav>
@@ -82,6 +84,14 @@
 <!-- Content -->
 <div id="content" class="content">
     <h1>Configuration</h1>
+    <form>
+        <div class="form-group">
+            <input id="password-input" type="password" placeholder="Current Password">
+        </div>
+        <div class="form-group">
+            <button id="delete-user-button" type="submit">Delete User</button>
+        </div>
+    </form>
 </div>
 
 <!-- Footer -->
