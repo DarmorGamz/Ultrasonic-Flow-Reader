@@ -127,7 +127,7 @@ class DataDb extends Db {
 
         // Run Command.
         if("Get" == $sCmd) {
-            $sQry = "SELECT * FROM RawData WHERE 1";
+            $sQry = "SELECT * FROM RawData WHERE 1 LIMIT 10000";
             if(($oRes = $this->oDb->query($sQry)) === false) { /* Error */ return false; }
             while($aRow = $oRes->fetch_assoc()) {
                 $aVarsOut['Data'][] = $aRow;
