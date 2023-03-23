@@ -162,6 +162,22 @@ class UserDb extends Db {
 
             $aVarsOut['UserInfo'] = $aUserInfo;
         } else if("Del" == $sCmd) {
+            // Init vars.
+            if(empty($aVarsIn['Email']) || empty($aVarsIn['PwdMd5'])) { /* Error */ return false;}
+            $sEmail = $aVarsIn['Email']; $sPassword = $aVarsIn['PwdMd5'];
+            $sEmail = strtolower($sEmail);
+
+            $sQry = "SELECT * FROM User WHERE Email='{$sEmail}' AND PwdMd5='{$sPassword}' LIMIT 1";
+            if(($oRes = $this->oDb->query($sQry)) === false) { /* Error */ return false; }
+            if(!$oRes->num_rows) { /* Error */ return false; }
+            if(!$aRow = $oRes->fetch_assoc()) { /* Error */ return false; }
+            $aUserInfo = $aRow;
+
+            if(empty($aUserInfo['Id'])) { /* Error */ return false; }
+            $iTimeNow = time();
+
+            $sQry = "DELETE FROM User WHERE Id={$aUserInfo['Id']} LIMIT 1";
+            if(($oRes = $this->oDb->query($sQry)) === false) { /* Error */ return false; }
 
         } else if("Login" == $sCmd) {
             // Init vars.
