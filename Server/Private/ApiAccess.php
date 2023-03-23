@@ -95,7 +95,14 @@ final class ApiAccess {
         } elseif($sCmd == 'User.Set') {
             if(!$oUser->UserGsad("User.Set", $aVarsIn, $aVarsOut)) { $this->SetError(2, "User.Set Failed."); return false; }
         } elseif($sCmd == 'User.Del') {
+            // Init vars.
+            $sEmail = $sPwd = '';
+            if(!$this->GetInputVar('Email', $sEmail) || !$this->GetInputVar('Password', $sPwd)) { $this->SetError(2, "Invalid Input vars."); return false; }
+
+            // Set Vars.
+            $aVarsIn['Email'] = $sEmail; $aVarsIn['PwdMd5'] = md5($sPwd);
             if(!$oUser->UserGsad("User.Del", $aVarsIn, $aVarsOut)) { $this->SetError(2, "User.Del Failed."); return false; }
+
         } elseif($sCmd == 'Login') {
             // Init vars.
             $sEmail = $sPwd = '';
