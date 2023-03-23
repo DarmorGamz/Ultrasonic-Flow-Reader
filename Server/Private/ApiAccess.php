@@ -37,7 +37,7 @@ final class ApiAccess {
         }
 
         $sCmd = '';
-        if(empty($this->aIpVar['Cmd'])) { return false; }
+        if(empty($this->aIpVar['Cmd'])) { $this->SetError(1, "Cmd Not Found."); return false; }
         $sCmd = $this->aIpVar['Cmd'];
         $this->aResp['Cmd'] = $sCmd;
 
@@ -53,11 +53,11 @@ final class ApiAccess {
                 break;
             case "Login":
             case "Signup":
+            case "ResetPassword":
             case "User.Get":
             case "User.Add":
             case "User.Set":
             case "User.Del":
-                if($sCmd == "Login") $sCmd = "User.Get";
                 if($sCmd == "Signup") $sCmd = "User.Add";
                 if(!$this->UserGsad($sCmd)) { $this->SetError(1, "UserGsad Failed."); return false; }
                 break;
@@ -78,28 +78,17 @@ final class ApiAccess {
         $aVarsIn = $aVarsOut = [];
 
         if($sCmd == 'User.Get') {
-            // Init vars.
-            $sEmail = $sPwd = '';
-            if(!$this->GetInputVar('Email', $sEmail) || !$this->GetInputVar('Password', $sPwd)) { $this->SetError(2, "Invalid Input vars."); return false; }
 
-            // Set Vars.
-            $aVarsIn['Email'] = $sEmail; $aVarsIn['Password'] = $sPwd;
-            if(!$oUser->UserGsad("User.Get", $aVarsIn, $aVarsOut) || empty($aVarsOut['UserInfo'])) { $this->SetError(2, "User.Get Failed."); return false; }
-            $aUserInfo = $aVarsOut['UserInfo'];
-            unset($aUserInfo['Password']); // Security idk.
-
-            // Set Response.
-            $this->aResp['UserInfo'] = $aUserInfo;
         } elseif($sCmd == 'User.Add') {
             // Init vars.
             $sEmail = $sPwd = '';
             if(!$this->GetInputVar('Email', $sEmail) || !$this->GetInputVar('Password', $sPwd)) { $this->SetError(2, "Invalid Input vars."); return false; }
 
             // Set Vars.
-            $aVarsIn['Email'] = $sEmail; $aVarsIn['Password'] = $sPwd;
+            $aVarsIn['Email'] = $sEmail; $aVarsIn['PwdMd5'] = md5($sPwd);
             if(!$oUser->UserGsad("User.Add", $aVarsIn, $aVarsOut) || empty($aVarsOut['UserInfo'])) { $this->SetError(2, "User.Add Failed."); return false; }
             $aUserInfo = $aVarsOut['UserInfo'];
-            unset($aUserInfo['Password']); // Security idk.
+            unset($aUserInfo['PwdMd5']); // Security idk.
 
             // Set Response.
             $this->aResp['UserInfo'] = $aUserInfo;
@@ -107,6 +96,28 @@ final class ApiAccess {
             if(!$oUser->UserGsad("User.Set", $aVarsIn, $aVarsOut)) { $this->SetError(2, "User.Set Failed."); return false; }
         } elseif($sCmd == 'User.Del') {
             if(!$oUser->UserGsad("User.Del", $aVarsIn, $aVarsOut)) { $this->SetError(2, "User.Del Failed."); return false; }
+        } elseif($sCmd == 'Login') {
+            // Init vars.
+            $sEmail = $sPwd = '';
+            if(!$this->GetInputVar('Email', $sEmail) || !$this->GetInputVar('Password', $sPwd)) { $this->SetError(2, "Invalid Input vars."); return false; }
+
+            // Set Vars.
+            $aVarsIn['Email'] = $sEmail; $aVarsIn['PwdMd5'] = md5($sPwd);
+            if(!$oUser->UserGsad("Login", $aVarsIn, $aVarsOut) || empty($aVarsOut['UserInfo'])) { $this->SetError(2, "Login Failed."); return false; }
+            $aUserInfo = $aVarsOut['UserInfo'];
+            unset($aUserInfo['PwdMd5']); // Security idk.
+
+            // Set Response.
+            $this->aResp['UserInfo'] = $aUserInfo;
+        } elseif($sCmd == 'ResetPassword') {
+            // Init vars.
+            $sEmail = $sPwd = $sOldPwd = '';
+            if(!$this->GetInputVar('Email', $sEmail) || !$this->GetInputVar('Password', $sPwd) || !$this->GetInputVar('PasswordOld', $sOldPwd)) { $this->SetError(2, "Invalid Input vars."); return false; }
+
+            // Set Vars.
+            $aVarsIn['Email'] = $sEmail; $aVarsIn['PwdOldMd5'] = md5($sOldPwd); $aVarsIn['PwdMd5'] = md5($sPwd);
+            if(!$oUser->UserGsad("ResetPassword", $aVarsIn, $aVarsOut)) { $this->SetError(2, "ResetPassword Failed."); return false; }
+
         } else { return false; }
 
         // Return Success.
@@ -148,6 +159,12 @@ final class ApiAccess {
                 if(!isset($this->aIpVar['Password']) || empty($this->aIpVar['Password']) || strlen($this->aIpVar['Password']) > 25) return false;
                 // Returns the valid email.
                 $IpVarOut = $this->aIpVar['Password'];
+                break;
+            case "PasswordOld":
+                // Checks if Email is valid.
+                if(!isset($this->aIpVar['PasswordOld']) || empty($this->aIpVar['PasswordOld']) || strlen($this->aIpVar['PasswordOld']) > 25) return false;
+                // Returns the valid email.
+                $IpVarOut = $this->aIpVar['PasswordOld'];
                 break;
             default:
                 return false;

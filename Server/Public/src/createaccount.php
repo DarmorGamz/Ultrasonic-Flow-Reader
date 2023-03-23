@@ -45,7 +45,7 @@
                     <button id="createaccount-button" type="submit">Create account</button>
                 </div>
                 <div class="form-group">
-                    <button type="button" class="signup-button" onclick="window.location.href='/'">Back to Login</button>
+                    <button type="button" class="signup-button" onclick="window.location.href='/index2.php'">Back to Login</button>
                 </div>
             </form>
         </div>
