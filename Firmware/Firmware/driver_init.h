@@ -33,6 +33,8 @@ extern "C" {
 #include <hpl_tc_base.h>
 #include <hal_timer.h>
 #include <hpl_tc_base.h>
+#include <hal_timer.h>
+#include <hpl_tc_base.h>
 
 #include <hal_wdt.h>
 
@@ -41,6 +43,7 @@ extern struct spi_m_sync_descriptor WIRELESS_SPI;
 extern struct spi_m_sync_descriptor ETHERNET_SPI;
 
 extern struct timer_descriptor TIMER_0;
+extern struct timer_descriptor SAMPLE_TIMER;
 extern struct timer_descriptor TICK_TIMER;
 
 extern struct wdt_descriptor WDT_0;

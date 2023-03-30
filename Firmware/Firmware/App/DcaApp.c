@@ -3,6 +3,7 @@
 #include <string.h>
 #include <stdlib.h>
 #include "DcaApp.h"
+#include "component\tc.h"
 
 
 typedef enum {
@@ -24,7 +25,9 @@ char                g_acLocalTxBuffer[LOCAL_TX_BUFFER_NUM_BYTES];
 
 // Command FIFO and reading storage
 char                g_acCmdFifo[COMMAND_FIFO_NUM_BYTES];
-char                g_acReadingBuffer[READING_BUFF_NUM_BYTES];
+
+char                g_acReadingBuffer1[READING_BUFF_NUM_BYTES];
+char                g_acReadingBuffer2[READING_BUFF_NUM_BYTES];
 
 // ------ TIMERS ------
 static uint16_t     TIMER_APP_LED_HOLD;
@@ -72,6 +75,7 @@ void _FlashReadAppUserConfig(void);
 void _FlashWriteAppUserConfig(void);
 void _InitUserConfig(void);
 
+
 static bool         s_fUseWifi;
 
 static void _One_Second_Timer_Callback(void) {
@@ -82,6 +86,9 @@ static void _One_Second_Timer_Callback(void) {
     // Pump the timer driver (decrements all non-zero timers)
     if (fSkipPump==false) Timer_Pump();
     if (fDoublePump==true) Timer_Pump();
+	
+	// Calculate Data.
+	TC2->COUNT32.COUNT.reg = 0; // Reset the timer count to 0
 	
     // Toggle the LEDs based on the current status code if not currently holding the user set LED value (setvar&led={val})
     if (Timer_GetTimer(TIMER_APP_LED_HOLD)==0) _LedControl();
@@ -115,6 +122,9 @@ void DcaApp_Init(void) {
     Timer_AddTimer(&TIMER_APP_UPDATE_CLOCK);
 	Timer_AddTimer(&TIMER_APP_ENWI_LINK_CHECK);
 	
+	timer_set_clock_cycles_per_tick(&SAMPLE_TIMER, (uint32_t)1000);
+	timer_start(&SAMPLE_TIMER);
+	
 	// Initialize the Timestamp (RTC) functionality
 	Timestamp_Init();
 	DEBUG_INFO("RTC initialized. ");
@@ -124,7 +134,7 @@ void DcaApp_Init(void) {
 	DEBUG_INFO("CmdFIFO initialized. ");
 	
 	// Initialize Data FIFO
-	DataFifo_Init();
+	ReadingQueue_Init();
 	DEBUG_INFO("DataFIFO initialized. ");
 	
 	// Initialize flash 
@@ -185,6 +195,9 @@ void DcaApp_Init(void) {
 	
 	s_u16HeartbeatRate = TIMEOUT_STARTUP_HEARTBEAT_HOLD;
 	
+	// Set Reading buffer used.
+	s_u8ReadingBufferUsed = 0;
+	
     // Register Timer callback
     Timer_Register_Callback(_One_Second_Timer_Callback);
 
@@ -242,6 +255,10 @@ void DcaApp_Entry(void) {
 		
 		if (s_fUseWifi==true) {} // Wifi_PumpEvents();
 		if (s_fUseWifi==false) Ethernet_PumpEvents();
+		
+		// Calculate Data.
+		_Sensor1_Callback();
+		
 		
 		// Determine if it is time to send to the server
         bool fTimeToSend = false;
@@ -488,4 +505,9 @@ void _InitUserConfig(void) {
 	 
 	_FlashWriteAppUserConfig();
 	DEBUG_INFO("UserInit");
+}
+
+uint32_t _get_tick_count(void) {
+	uint32_t count = TC2->COUNT32.COUNT.reg;
+	return count;
 }

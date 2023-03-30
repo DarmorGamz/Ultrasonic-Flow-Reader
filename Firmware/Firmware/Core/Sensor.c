@@ -9,6 +9,8 @@
 /** LOCAL (PRIVATE) TYPEDEFS, STRUCTURES AND ENUMERATIONS *********************/
 bool Sensor1_Tx = true;
 
+#define COUNT_NUM 4
+
 void _Sensor1_Callback(void);
 void _Sensor2_Callback(void);
 
@@ -29,15 +31,70 @@ int8_t Sensor_Init(void) {
 	return 1;
 }
 
+static uint32_t Sensor1Val;
+static uint32_t Sensor2Val;
+
 void _Sensor1_Callback(void) {
-	if(Sensor1_Tx) {
-		_AddToFifo_EventData(0);
-	} else {
-		_AddToFifo_EventData(1);
-	}
+	// Init vars.
+	static uint32_t ValBuffer[COUNT_NUM];
+	static uint32_t Now;
+	static uint32_t Read;
+	static int iCount;
 	
-	// FLip sensor.
-	Sensor1_Tx = !Sensor1_Tx;
+	// Get Current ticks.
+	Read = _get_tick_count();
+	
+	// Read and Now will be equal on first iteration.
+	if(Now != NULL) { Now = Read; } 
+		
+	// Insert Tick value into buffer.
+	ValBuffer[iCount] = Now;
+	
+	// Update Now with the Read value. Redundant and waste of time on first iteration.
+	Now = Read;
+		
+	// Increase count.
+	iCount++;
+	
+	if(iCount == 4) { // Ready to Average Buffer and reset variables. Needs to be multiple of 2 to bit shift for division.
+		if(Sensor1_Tx) {
+			int i = 0;
+			for(;i<iCount; i++) {
+				Sensor1Val+=ValBuffer[i];
+			}
+			Sensor1Val = Sensor1Val >> iCount; // Faster than division.
+			
+			// Reset vars.
+			memset(ValBuffer, 0, sizeof(ValBuffer));
+			Now = 0; Read = 0; iCount = 0;
+			
+			// Flip Rx and Tx.
+			Sensor1_Tx = false; // Needs to handle the digital high somewhere.
+		} else {
+			int i = 0;
+			for(;i<iCount; i++) {
+				Sensor2Val+=ValBuffer[i];
+			}
+			Sensor2Val = Sensor2Val >> iCount; // Faster than division.
+			
+			if(!s_u8ReadingBufferUsed) {
+				ReadingQueue1_Add((Sensor2Val - Sensor1Val));
+			} else {
+				ReadingQueue2_Add((Sensor2Val - Sensor1Val));
+			}
+			
+			// Reset vars.
+			memset(ValBuffer, 0, sizeof(ValBuffer));
+			Now = 0; Read = 0; iCount = 0;
+			
+			// Flip Rx and Tx.
+			Sensor1_Tx = true; // Needs to handle the digital high somewhere.
+			
+			// Clear buffers.
+			Sensor1Val = 0;
+			Sensor2Val = 0;
+		}
+	}
 }
 
 void _Sensor2_Callback(void) {

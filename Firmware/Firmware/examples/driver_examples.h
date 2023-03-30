@@ -20,6 +20,8 @@ void delay_example(void);
 
 void TIMER_0_example(void);
 
+void SAMPLE_TIMER_example(void);
+
 void TICK_TIMER_example(void);
 
 void WDT_0_example(void);

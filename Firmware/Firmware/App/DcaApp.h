@@ -41,7 +41,7 @@ typedef struct {
 #define LOCAL_TX_BUFFER_NUM_BYTES                   5120    // Block of RAM containing data to be transmitted on local socket connection
 
 #define COMMAND_FIFO_NUM_BYTES                  4096    // Block of RAM containing commands (and responses) going to server - large size to support gateway requirements
-#define READING_BUFF_NUM_BYTES					3072
+#define READING_BUFF_NUM_BYTES					128
 
 // Memory mapping - address offsets
 #define BOOTLOADER_SPACE_ORIGIN                     0x00000000
@@ -96,6 +96,8 @@ typedef struct {
 extern char                 g_acHostnameSerialString[];
 extern uint8_t              g_au8MacAddress[];
 
+static volatile uint8_t	    s_u8ReadingBufferUsed;
+
 #define CFG_DEFAULT_HOST                      "hw.darmorgamz.ca"
 #define CFG_DEFAULT_PATH                      "data"
 
@@ -114,6 +116,8 @@ void App_SetStatus(eStatusCode code);
 eStatusCode App_GetStatus(void);
 
 void App_ProcessBinaryPayload(char *pSrc, int nSrcBytes);
+
+uint32_t _get_tick_count(void);
 
 #ifdef __cplusplus
 }

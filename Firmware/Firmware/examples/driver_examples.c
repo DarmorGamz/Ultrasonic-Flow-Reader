@@ -122,6 +122,33 @@ void TIMER_0_example(void)
 	timer_start(&TIMER_0);
 }
 
+static struct timer_task SAMPLE_TIMER_task1, SAMPLE_TIMER_task2;
+
+/**
+ * Example of using SAMPLE_TIMER.
+ */
+static void SAMPLE_TIMER_task1_cb(const struct timer_task *const timer_task)
+{
+}
+
+static void SAMPLE_TIMER_task2_cb(const struct timer_task *const timer_task)
+{
+}
+
+void SAMPLE_TIMER_example(void)
+{
+	SAMPLE_TIMER_task1.interval = 100;
+	SAMPLE_TIMER_task1.cb       = SAMPLE_TIMER_task1_cb;
+	SAMPLE_TIMER_task1.mode     = TIMER_TASK_REPEAT;
+	SAMPLE_TIMER_task2.interval = 200;
+	SAMPLE_TIMER_task2.cb       = SAMPLE_TIMER_task2_cb;
+	SAMPLE_TIMER_task2.mode     = TIMER_TASK_REPEAT;
+
+	timer_add_task(&SAMPLE_TIMER, &SAMPLE_TIMER_task1);
+	timer_add_task(&SAMPLE_TIMER, &SAMPLE_TIMER_task2);
+	timer_start(&SAMPLE_TIMER);
+}
+
 static struct timer_task TICK_TIMER_task1, TICK_TIMER_task2;
 
 /**

@@ -16,6 +16,7 @@
 struct spi_m_sync_descriptor WIRELESS_SPI;
 struct spi_m_sync_descriptor ETHERNET_SPI;
 struct timer_descriptor      TIMER_0;
+struct timer_descriptor      SAMPLE_TIMER;
 struct timer_descriptor      TICK_TIMER;
 
 struct flash_descriptor FLASH_0;
@@ -50,7 +51,7 @@ void EXTERNAL_IRQ_0_init(void)
 	                       // <GPIO_PULL_DOWN"> Pull-down
 	                       GPIO_PULL_OFF);
 
-	//gpio_set_pin_function(SENSOR2_IN, PINMUX_PA06A_EIC_EXTINT6);
+	gpio_set_pin_function(SENSOR2_IN, PINMUX_PA06A_EIC_EXTINT6);
 
 	// Set pin direction to input
 	gpio_set_pin_direction(ETHERNET_IRQ, GPIO_DIRECTION_IN);
@@ -76,7 +77,7 @@ void EXTERNAL_IRQ_0_init(void)
 	                       // <GPIO_PULL_DOWN"> Pull-down
 	                       GPIO_PULL_OFF);
 
-	//gpio_set_pin_function(WIRELESS_IRQn, PINMUX_PA11A_EIC_EXTINT11);
+	gpio_set_pin_function(WIRELESS_IRQn, PINMUX_PA11A_EIC_EXTINT11);
 
 	ext_irq_init();
 }
@@ -101,7 +102,7 @@ void WIRELESS_SPI_PORT_init(void)
 	                   // <id> pad_initial_level
 	                   // <false"> Low
 	                   // <true"> High
-	                   true);
+	                   false);
 
 	// Set pin direction to output
 	gpio_set_pin_direction(WIRELESS_MOSI, GPIO_DIRECTION_OUT);
@@ -217,6 +218,19 @@ static void TIMER_0_init(void)
 	_gclk_enable_channel(TC0_GCLK_ID, CONF_GCLK_TC0_SRC);
 
 	timer_init(&TIMER_0, TC0, _tc_get_timer());
+}
+
+/**
+ * \brief Timer initialization function
+ *
+ * Enables Timer peripheral, clocks and initializes Timer driver
+ */
+static void SAMPLE_TIMER_init(void)
+{
+	_pm_enable_bus_clock(PM_BUS_APBC, TC2);
+	_gclk_enable_channel(TC2_GCLK_ID, CONF_GCLK_TC2_SRC);
+
+	timer_init(&SAMPLE_TIMER, TC2, _tc_get_timer());
 }
 
 /**
@@ -385,6 +399,7 @@ void system_init(void)
 	delay_driver_init();
 
 	TIMER_0_init();
+	SAMPLE_TIMER_init();
 	TICK_TIMER_init();
 
 	WDT_0_init();

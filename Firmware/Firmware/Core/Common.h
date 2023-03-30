@@ -43,7 +43,8 @@ extern char                 g_acLocalTxBuffer[];
 
 // Large buffers for command/response FIFO and (raw) reading storage - sizes are application specific and defined in EyedroApp.c
 extern char                 g_acCmdFifo[];
-extern char                 g_acReadingBuffer[];
+extern char                 g_acReadingBuffer1[];
+extern char                 g_acReadingBuffer2[];
 
 #define USER_CONFIG_INIT_CODE                0x5A5A
 

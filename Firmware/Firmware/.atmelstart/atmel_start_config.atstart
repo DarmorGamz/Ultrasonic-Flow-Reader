@@ -452,6 +452,36 @@ drivers:
           external_frequency: 0
         configuration:
           tc_gclk_selection: Generic clock generator 1
+  SAMPLE_TIMER:
+    user_label: SAMPLE_TIMER
+    definition: Atmel:SAMD20_Drivers:0.0.1::SAMD20E18A-AN::TC2::driver_config_definition::Timer::HAL:Driver:Timer
+    functionality: Timer
+    api: HAL:Driver:Timer
+    configuration:
+      tc_arch_dbgrun: false
+      tc_arch_evact: Event action disabled
+      tc_arch_mceo0: false
+      tc_arch_mceo1: false
+      tc_arch_ovfeo: false
+      tc_arch_presync: Reload or reset counter on next GCLK
+      tc_arch_runstdby: false
+      tc_arch_tcei: false
+      tc_arch_tceinv: false
+      timer_advanced_configuration: true
+      timer_event_control: true
+      timer_prescaler: No division
+      timer_tick: 0
+    optional_signals: []
+    variant: null
+    clocks:
+      domain_group:
+        nodes:
+        - name: TC
+          input: Generic clock generator 0
+          external: false
+          external_frequency: 0
+        configuration:
+          tc_gclk_selection: Generic clock generator 0
   TICK_TIMER:
     user_label: TICK_TIMER
     definition: Atmel:SAMD20_Drivers:0.0.1::SAMD20E18A-AN::TC4::driver_config_definition::Timer::HAL:Driver:Timer
@@ -635,8 +665,7 @@ pads:
     definition: Atmel:SAMD20_Drivers:0.0.1::SAMD20E18A-AN::pad::PA16
     mode: Digital output
     user_label: WIRELESS_MOSI
-    configuration:
-      pad_initial_level: High
+    configuration: null
   WIRELESS_MISO:
     name: PA17
     definition: Atmel:SAMD20_Drivers:0.0.1::SAMD20E18A-AN::pad::PA17

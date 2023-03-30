@@ -117,11 +117,11 @@ C_SRCS +=  \
 ../Component/winc1500/spi_flash/source/spi_flash.c \
 ../Component/winc1500/winc_init.c \
 ../Core/CmdFifo.c \
-../Core/DataFifo.c \
 ../Core/Debug.c \
 ../Core/Ethernet.c \
 ../Core/Flash.c \
 ../Core/Http.c \
+../Core/ReadingQueue.c \
 ../Core/Sensor.c \
 ../Core/TcpParser.c \
 ../Core/Timer.c \
@@ -202,11 +202,11 @@ Component/winc1500/spi_flash/source/flexible_flash.o \
 Component/winc1500/spi_flash/source/spi_flash.o \
 Component/winc1500/winc_init.o \
 Core/CmdFifo.o \
-Core/DataFifo.o \
 Core/Debug.o \
 Core/Ethernet.o \
 Core/Flash.o \
 Core/Http.o \
+Core/ReadingQueue.o \
 Core/Sensor.o \
 Core/TcpParser.o \
 Core/Timer.o \
@@ -280,11 +280,11 @@ Component/winc1500/spi_flash/source/flexible_flash.o \
 Component/winc1500/spi_flash/source/spi_flash.o \
 Component/winc1500/winc_init.o \
 Core/CmdFifo.o \
-Core/DataFifo.o \
 Core/Debug.o \
 Core/Ethernet.o \
 Core/Flash.o \
 Core/Http.o \
+Core/ReadingQueue.o \
 Core/Sensor.o \
 Core/TcpParser.o \
 Core/Timer.o \
@@ -358,11 +358,11 @@ Component/winc1500/spi_flash/source/flexible_flash.d \
 Component/winc1500/spi_flash/source/spi_flash.d \
 Component/winc1500/winc_init.d \
 Core/CmdFifo.d \
-Core/DataFifo.d \
 Core/Debug.d \
 Core/Ethernet.d \
 Core/Flash.d \
 Core/Http.d \
+Core/ReadingQueue.d \
 Core/Sensor.d \
 Core/TcpParser.d \
 Core/Timer.d \
@@ -436,11 +436,11 @@ Component/winc1500/spi_flash/source/flexible_flash.d \
 Component/winc1500/spi_flash/source/spi_flash.d \
 Component/winc1500/winc_init.d \
 Core/CmdFifo.d \
-Core/DataFifo.d \
 Core/Debug.d \
 Core/Ethernet.d \
 Core/Flash.d \
 Core/Http.d \
+Core/ReadingQueue.d \
 Core/Sensor.d \
 Core/TcpParser.d \
 Core/Timer.d \
@@ -667,13 +667,6 @@ Core/CmdFifo.o: ../Core/CmdFifo.c
 	@echo Finished building: $<
 	
 
-Core/DataFifo.o: ../Core/DataFifo.c
-	@echo Building file: $<
-	@echo Invoking: ARM/GNU C Compiler : 6.3.1
-	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\arm\arm-gnu-toolchain\bin\arm-none-eabi-gcc.exe$(QUOTE)  -x c -mthumb -D__SAMD20E18__ -DDEBUG  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\arm\CMSIS\5.4.0\CMSIS\Core\Include" -I"../Component/winc1500" -I"../Config" -I".." -I"../examples" -I"../hal/include" -I"../hal/utils/include" -I"../hpl/core" -I"../hpl/eic" -I"../hpl/gclk" -I"../hpl/nvmctrl" -I"../hpl/pm" -I"../hpl/port" -I"../hpl/sercom" -I"../hpl/sysctrl" -I"../hpl/systick" -I"../hpl/tc" -I"../hpl/wdt" -I"../hri" -I"../tcpip_lite/ethernet_drivers" -I"../tcpip_lite/include" -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\SAMD20_DFP\1.3.165\samd20\include"  -Og -ffunction-sections -mlong-calls -g3 -Wall -mcpu=cortex-m0plus -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
-	@echo Finished building: $<
-	
-
 Core/Debug.o: ../Core/Debug.c
 	@echo Building file: $<
 	@echo Invoking: ARM/GNU C Compiler : 6.3.1
@@ -696,6 +689,13 @@ Core/Flash.o: ../Core/Flash.c
 	
 
 Core/Http.o: ../Core/Http.c
+	@echo Building file: $<
+	@echo Invoking: ARM/GNU C Compiler : 6.3.1
+	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\arm\arm-gnu-toolchain\bin\arm-none-eabi-gcc.exe$(QUOTE)  -x c -mthumb -D__SAMD20E18__ -DDEBUG  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\arm\CMSIS\5.4.0\CMSIS\Core\Include" -I"../Component/winc1500" -I"../Config" -I".." -I"../examples" -I"../hal/include" -I"../hal/utils/include" -I"../hpl/core" -I"../hpl/eic" -I"../hpl/gclk" -I"../hpl/nvmctrl" -I"../hpl/pm" -I"../hpl/port" -I"../hpl/sercom" -I"../hpl/sysctrl" -I"../hpl/systick" -I"../hpl/tc" -I"../hpl/wdt" -I"../hri" -I"../tcpip_lite/ethernet_drivers" -I"../tcpip_lite/include" -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\SAMD20_DFP\1.3.165\samd20\include"  -Og -ffunction-sections -mlong-calls -g3 -Wall -mcpu=cortex-m0plus -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	@echo Finished building: $<
+	
+
+Core/ReadingQueue.o: ../Core/ReadingQueue.c
 	@echo Building file: $<
 	@echo Invoking: ARM/GNU C Compiler : 6.3.1
 	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\arm\arm-gnu-toolchain\bin\arm-none-eabi-gcc.exe$(QUOTE)  -x c -mthumb -D__SAMD20E18__ -DDEBUG  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\arm\CMSIS\5.4.0\CMSIS\Core\Include" -I"../Component/winc1500" -I"../Config" -I".." -I"../examples" -I"../hal/include" -I"../hal/utils/include" -I"../hpl/core" -I"../hpl/eic" -I"../hpl/gclk" -I"../hpl/nvmctrl" -I"../hpl/pm" -I"../hpl/port" -I"../hpl/sercom" -I"../hpl/sysctrl" -I"../hpl/systick" -I"../hpl/tc" -I"../hpl/wdt" -I"../hri" -I"../tcpip_lite/ethernet_drivers" -I"../tcpip_lite/include" -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\SAMD20_DFP\1.3.165\samd20\include"  -Og -ffunction-sections -mlong-calls -g3 -Wall -mcpu=cortex-m0plus -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 

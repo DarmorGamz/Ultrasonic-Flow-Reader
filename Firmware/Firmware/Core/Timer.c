@@ -33,6 +33,16 @@ int16_t Timer_Init(void) {
     memset(&s_au16Timers[0], 0, sizeof(s_au16Timers));
     // Reset timer counter
     s_u16TimerCount = 0;
+	
+	// Configure the timer for 32-bit mode and a tick period of 0.125 us
+	TC2->COUNT32.CTRLA.reg = TC_CTRLA_MODE_COUNT32 | TC_CTRLA_PRESCALER_DIV1;
+	TC2->COUNT32.CC[0].reg = 63; // Match value for a period of 0.125 us
+	TC2->COUNT32.CTRLBSET.reg = TC_CTRLBSET_CMD_STOP; // Stop the timer
+	TC2->COUNT32.COUNT.reg = 0; // Reset the timer count to 0
+
+	// Start the timer
+	timer_start(&SAMPLE_TIMER);
+	
     return 0;
 }
 
@@ -88,7 +98,9 @@ void Timer_Register_Callback(void* fpTimerCb) {
     task.cb = fpTimerCb;
     task.mode = TIMER_TASK_REPEAT;
     timer_add_task(&TIMER_0, &task);
-    timer_start(&TIMER_0);
+	
+	TC2->COUNT32.COUNT.reg = 0; // Reset the timer count to 0
+	timer_start(&TIMER_0);
 }
 
 
