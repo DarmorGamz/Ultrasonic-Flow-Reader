@@ -38,20 +38,23 @@ void _Sensor1_Callback(void) {
 	// Init vars.
 	static uint32_t ValBuffer[COUNT_NUM];
 	static uint32_t Now;
-	static uint32_t Read;
+	static uint32_t Prev;
 	static int iCount;
 	
 	// Get Current ticks.
-	Read = _get_tick_count();
+	Now = _get_tick_count();
 	
 	// Read and Now will be equal on first iteration.
-	if(Now != NULL) { Now = Read; } 
+	if(Prev == NULL) {
+		 Prev = Now;
+		 return;
+	} 
 		
 	// Insert Tick value into buffer.
-	ValBuffer[iCount] = Now;
+	ValBuffer[iCount] = Now - Prev;
 	
 	// Update Now with the Read value. Redundant and waste of time on first iteration.
-	Now = Read;
+	Now = Prev;
 		
 	// Increase count.
 	iCount++;
@@ -66,7 +69,7 @@ void _Sensor1_Callback(void) {
 			
 			// Reset vars.
 			memset(ValBuffer, 0, sizeof(ValBuffer));
-			Now = 0; Read = 0; iCount = 0;
+			Now = 0; Prev = 0; iCount = 0;
 			
 			// Flip Rx and Tx.
 			Sensor1_Tx = false; // Needs to handle the digital high somewhere.
@@ -85,7 +88,7 @@ void _Sensor1_Callback(void) {
 			
 			// Reset vars.
 			memset(ValBuffer, 0, sizeof(ValBuffer));
-			Now = 0; Read = 0; iCount = 0;
+			Now = 0; Prev = 0; iCount = 0;
 			
 			// Flip Rx and Tx.
 			Sensor1_Tx = true; // Needs to handle the digital high somewhere.
