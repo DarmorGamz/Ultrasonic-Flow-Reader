@@ -22,7 +22,7 @@ $(document).ready(function() {
     var sessionKey = getCookie("sessionKey");
     if (sessionKey !== "") {
         // session key cookie exists, redirect to homepage
-        window.location.replace("/Conestoga-Capstone/Client/Public/src/homepage.php");
+        window.location.replace("/Public/src/homepage.php");
         return;
     }
 
@@ -51,7 +51,7 @@ $(document).ready(function() {
             document.cookie = cookieString;
 
             // Redirect to dashboard or do something else
-            window.location.replace("/Conestoga-Capstone/Client/Public/src/homepage.php");
+            window.location.replace("/Public/src/homepage.php");
         }
 
         // Check if email is valid
@@ -113,7 +113,7 @@ $(document).ready(function() {
                     document.cookie = cookieString2;
                 }
                 // Redirect to dashboard or do something else
-                window.location.replace("/Conestoga-Capstone/Client/Public/src/homepage.php");
+                window.location.replace("/Public/src/homepage.php");
             },
             error: function(xhr, status, error) {
                 console.log(error);

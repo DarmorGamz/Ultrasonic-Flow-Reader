@@ -51,7 +51,7 @@ $(document).ready(function() {
                 document.cookie = 'password=;expires=Thu, 01 Jan 1970 00:00:00 GMT;path=/';
 
                 // Redirect to dashboard or do something else
-                window.location.replace("Conestoga-Capstone/Client/index2.php");
+                window.location.replace("/index2.php");
             },
             error: function(error) {
                 // Handle the error
