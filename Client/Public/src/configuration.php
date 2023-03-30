@@ -83,16 +83,82 @@
 
 <!-- Content -->
 <div id="content" class="content">
-    <h1>Configuration</h1>
-    <form>
-        <div class="form-group">
-            <input id="password-input" type="password" placeholder="Current Password">
+    <h1>Consumption</h1>
+    <div class="wrapper">
+        <div class="row">
+            <div class="item">
+                Current Speed <br>
+                <div id="current"></div>
+            </div>
+            <div class="item">
+                Water Consumption 1min <br>
+                <div id="min"></div>
+            </div>
         </div>
-        <div class="form-group">
-            <button id="delete-user-button" type="submit">Delete User</button>
+        <div class="row">
+            <div class="item">
+                Water Consumption 1hr <br>
+                <div id="hr"></div>
+            </div>
+            <div class="item">
+                Water Consumption 1d <br>
+                <div id="day"></div>
+            </div>
         </div>
-    </form>
+    </div>
 </div>
+
+<script>
+    var second = 1000; //defines virtual length of 1 second (in ms)
+    var current;
+    var min = new Array(60);
+
+    for(i = 0; i < min.length; i++){
+        min[i] = Math.floor(Math.random() * (200 - 100) + 100);
+    }
+    
+    var hr = new Array(60).fill(0);
+    var day = new Array(24).fill(0);
+    var minIntervalID = window.setInterval(minCallback, second);
+    var hrIntervalID = window.setInterval(hrCallback, 60*second);
+    var dayIntervalID = window.setInterval(dayCallback, 24*60*second);
+    
+    function minCallback() {
+        current = Math.floor(Math.random() * (200 - 100) + 100);
+        currentFixed = current.toFixed(2);
+        document.getElementById('current').innerHTML = currentFixed;
+        min.push(current);
+
+        let avgMin = calculateAverage(min)
+        avgMinFixed = avgMin.toFixed(2); 
+        document.getElementById('min').innerHTML = avgMinFixed;
+        let i = min.shift();
+        i = 0;
+        
+    }
+    function hrCallback() {
+        hr.push(calculateAverage(min));
+        let avgHr = calculateAverage(hr)
+        avgHrFixed = avgHr.toFixed(2);
+        document.getElementById('hr').innerHTML = avgHrFixed;
+    }
+    function dayCallback() {
+        day.push(calculateAverage(hr));
+        let avgDay = calculateAverage(day)
+        avgDayFixed = avgDay.toFixed(2);
+        document.getElementById('day').innerHTML = avgDayFixed;
+    }
+
+    function calculateAverage(array) {
+        var sum = 0;
+        for (var number of array) {
+            sum += number;
+        }
+        return sum / array.length;
+    }
+    
+</script>
+
 
 <!-- Footer -->
 <footer class="footer">

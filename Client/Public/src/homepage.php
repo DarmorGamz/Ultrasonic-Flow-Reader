@@ -101,6 +101,11 @@
         <div id="chart-container"></div>
     </div>
 
+    <script src="../assets/js/dataDemand.js" type="text/javascript"></script> 
+    <script>
+        highchartSetup();
+    </script>
+
     <!-- Footer -->
     <footer class="footer">
         <span>&copy; 2023 DCA</span>
