@@ -3,7 +3,7 @@ function checkSessionKey() {
     console.log(sessionKey);
     if (sessionKey === "") {
         // session key cookie not found, redirect to login page
-        window.location.replace("/index2.php");
+        window.location.replace("Conestoga-Capstone/Client/index2.php");
         return;
     }
     // get the expiry time of the session key cookie
@@ -11,14 +11,14 @@ function checkSessionKey() {
     console.log(expiryTime);
     if (expiryTime === null) {
         // unable to determine expiry time, redirect to login page
-        window.location.replace("/index2.php");
+        window.location.replace("Conestoga-Capstone/Client/index2.php");
         return;
     }
     // check if the expiry time has passed
     console.log(new Date());
     if (new Date() > expiryTime) {
         // session key cookie has expired, redirect to login page
-        window.location.replace("/index2.php");
+        window.location.replace("Conestoga-Capstone/Client/index2.php");
         return;
     }
 }
@@ -80,7 +80,7 @@ $(document).ready(function() {
         document.cookie = 'sessionKey=;expires=Thu, 01 Jan 1970 00:00:00 GMT;path=/';
 
         // Redirect to a different page
-        window.location.href = '/index2.php';
+        window.location.href = 'Conestoga-Capstone/Client/index2.php';
     });
 });
 
