@@ -27,62 +27,25 @@ final class Data {
         if("Data.Get" == $sCmd) {
             // Init vars
             $aVarsIn1 = $aVarsIn; $aVarsOut1 = [];
+            if(!isset($aVarsIn1['DataType'])) { /* Error */ return false; }
+            $aVarsIn1['DateMsUtcStop'] = time();
+            $aVarsIn1['DateMsUtcStart'] = $aVarsIn1['DateMsUtcStop']-(60*15);
 
             // Get User.
             if(!$this->oDb->DataGsad("Get", $aVarsIn1, $aVarsOut1) || !isset($aVarsOut1['Data'])) { /* Error */ return false; }
 
+            // Reverse the data array
+            $aVarsOut1['Data'] = array_reverse($aVarsOut1['Data']);
 
-            // Initialize totals
-            $aVarsOut['Data']['Total'] = 0;
-            $aVarsOut['Data']['Month'] = 0;
-            $aVarsOut['Data']['Day'] = 0;
-            $aVarsOut['Data']['Hour'] = 0;
-            $aVarsOut['Data']['Min15'] = 0;
-            $aVarsOut['Data']['Min1'] = 0;
-
-            // Define time periods in seconds
-            $month = 30 * 24 * 60 * 60;
-            $day = 24 * 60 * 60;
-            $hour = 60 * 60;
-            $min15 = 15 * 60;
-            $min1 = 60;
-
-            // Get current timestamp
-            $current_time = time();
-
-            // Loop through the array and compute totals
-            foreach ($aVarsOut1['Data'] as $item) {
-                $value = intval($item['Value']);
-                $time = intval($item['DateMsUtc']);
-
-                // Compute total for all values
-                $aVarsOut['Data']['Total'] += $value;
-
-                // Compute total for values within a month
-                if ($current_time - $time <= $month) {
-                    $aVarsOut['Data']['Month'] += $value;
-                }
-
-                // Compute total for values within a day
-                if ($current_time - $time <= $day) {
-                    $aVarsOut['Data']['Day'] += $value;
-                }
-
-                // Compute total for values within an hour
-                if ($current_time - $time <= $hour) {
-                    $aVarsOut['Data']['Hour'] += $value;
-                }
-
-                // Compute total for values within 15 mins
-                if ($current_time - $time <= $min15) {
-                    $aVarsOut['Data']['Min15'] += $value;
-                }
-
-                // Compute total for values within 1 min
-                if ($current_time - $time <= $min1) {
-                    $aVarsOut['Data']['Min1'] += $value;
-                }
+            // Iterate through the reversed data array and update the initialized array
+            $aTemperatureData = [];
+            foreach ($aVarsOut1['Data'] as $Data) {
+                    $aTemperatureData[] = ['y' => (float)$Data['Value'], 'x' => $Data['DateMsUtc'] * 1000];
             }
+
+            // Set the output data array
+            $aVarsOut['Data']['Values'] = $aTemperatureData;
+
         } else if("Data.GetList" == $sCmd) {
 
         } else if("Data.Set" == $sCmd) {
@@ -127,11 +90,14 @@ class DataDb extends Db {
 
         // Run Command.
         if("Get" == $sCmd) {
-            $sQry = "SELECT * FROM RawData WHERE 1 LIMIT 10000";
+            // Init vars.
+            if(!isset($aVarsIn['DataType']) || empty($aVarsIn['DateMsUtcStop']) || empty($aVarsIn['DateMsUtcStart'])) { /* Error */ return false; }
+            $iDataType = $aVarsIn['DataType'];
+
+            $sQry = "SELECT * FROM WeatherData WHERE 1 AND DataType={$iDataType} AND DateMsUtc<={$aVarsIn['DateMsUtcStop']} AND DateMsUtc>={$aVarsIn['DateMsUtcStart']} ORDER BY Id DESC LIMIT 900";
             if(($oRes = $this->oDb->query($sQry)) === false) { /* Error */ return false; }
-            while($aRow = $oRes->fetch_assoc()) {
-                $aVarsOut['Data'][] = $aRow;
-            }
+            while($aRow = $oRes->fetch_assoc()) { $aVarsOut['Data'][] = $aRow; }
+
         } else if("Set" == $sCmd) {
 
         } else if("Add" == $sCmd) {
