@@ -11,14 +11,24 @@
     <script src="../assets/js/signup.js"></script>
 </head>
 <body>
+
     <!-- Navbar -->
-    <nav class="navbar">
+    <nav class="navbar sticky">
         <!-- Logo -->
-        <img src="../assets/img/DCA_logo.png" alt="Logo">
+        <div class="logo-container">
+            <img src="../assets/img/logo.png" alt="Logo">
+        </div>
         <!-- Login button -->
         <div class="login-button">
-            <i class="fas fa-lock-open"></i>
-            <i class="fas fa-question-circle"></i>
+            <span id="UserEmail"></span>
+            <span class="tooltip" data-tooltip="Logout">
+                        <button id="login-button"><i class="fas fa-lock-open"></i></button>
+                        <div class="tooltip-text">Login</div>
+                    </span>
+            <span class="tooltip" data-tooltip="Support">
+                        <button id="Support-button"><i class="fas fa-question-circle"></i></button>
+                        <div class="tooltip-text">Support</div>
+                    </span>
         </div>
     </nav>
 

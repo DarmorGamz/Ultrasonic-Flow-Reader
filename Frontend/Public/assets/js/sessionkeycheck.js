@@ -40,28 +40,6 @@ function getCookieExpiryTime(name) {
     return new Date(timestamp);
 }
 
-function updateClock() {
-    // get the current time
-    const now = new Date();
-
-    // extract the hours, minutes, and seconds
-    const hours = now.getHours();
-    const minutes = now.getMinutes();
-    const seconds = now.getSeconds();
-
-    // pad single digits with a leading zero
-    const paddedHours = hours.toString().padStart(2, '0');
-    const paddedMinutes = minutes.toString().padStart(2, '0');
-    const paddedSeconds = seconds.toString().padStart(2, '0');
-
-    // update the clock display
-    const clockElement = document.getElementById('clock');
-    clockElement.textContent = `${paddedHours}:${paddedMinutes}:${paddedSeconds}`;
-}
-
-// update the clock every second
-setInterval(updateClock, 1000);
-
 // check if the session key cookie has expired once a minute
 setInterval(checkSessionKey, 60000);
 

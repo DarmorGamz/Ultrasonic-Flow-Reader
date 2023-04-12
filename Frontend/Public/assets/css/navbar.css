@@ -6,7 +6,6 @@
 
 body {
     background-color: dimgrey;
-    overflow: hidden;
 }
 
 .navbar {
@@ -15,10 +14,16 @@ body {
     align-items: center;
     background-color: rebeccapurple;
     color: #fff;
-    height: 55px;
-    padding: 5px 10px;
+    height: 0.9%;
+    padding: 0px 10px;
     width: 100%;
     z-index: 999;
+}
+
+.sticky {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
 }
 
 .logo-container {
@@ -37,13 +42,20 @@ body {
 
 .login-button span {
     margin-right: 5px;
+    padding-bottom: -50px;
+    margin-bottom: -5px;
 }
+
 #login-button {
     font-size: 20px;
     background-color: rebeccapurple;
     color: white;
     border: 0px;
     cursor: pointer;
+}
+
+.login-button {
+    margin-left: auto;
 }
 
 #login-button:hover {
@@ -55,19 +67,21 @@ body {
     margin-right: 5px;
 }
 
+.Support-button i {
+    font-size: 20px;
+    margin-right: 5px;
+}
+
 .login-button i:not(:last-child) {
     margin-right: 10px;
 }
 
-#datatemp {
-    color: inherit;
-}
 .footer {
     position: fixed;
     bottom: 0;
     left: 0;
     right: 0;
-    height: 25px;
+    height: 2.5%;
     background-color: #333;
     color: white;
     display: flex;
@@ -86,19 +100,36 @@ body {
     visibility: hidden;
     width: 50px;
     background-color: transparent;
-    color: lightgrey;
+    color: white;
     text-align: center;
     border-radius: 6px;
     padding: 5px 0;
+    font-weight: bolder;
 
     /* Position the tooltip text */
     position: absolute;
     z-index: 1;
-    bottom: -40%;
+    bottom: -160%;
     left: 40%;
     margin-left: -60px;
 }
 
 .tooltip:hover .tooltip-text {
     visibility: visible;
+}
+
+.Support-button i {
+    font-size: 20px;
+    margin-right: 5px;
+}
+
+#Support-button:hover {
+    color: lightgrey;
+}
+#Support-button {
+    font-size: 20px;
+    background-color: rebeccapurple;
+    color: white;
+    border: 0px;
+    cursor: pointer;
 }
