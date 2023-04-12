@@ -1,0 +1,134 @@
+/* Wrapper for the form and modal */
+.modal {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* Wrapper for the form and modal */
+.contact-form-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+    position: relative;
+}
+
+#content {
+    position: relative;
+}
+.modal {
+    display: none;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+
+    border-radius: 5px;
+    padding: 1rem;
+    box-sizing: border-box;
+    left: 0;
+    right: 0;
+    bottom: 25px;
+    background-color: rgba(0, 0, 0, 0.5);
+
+}
+
+/* Styling for the form */
+.contact-form {
+    max-width: 1200px;
+    width: 100%;
+    padding: 1rem;
+    box-sizing: border-box;
+    background-color: rebeccapurple;
+    border-radius: 5px;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Styling for the form fields */
+.form-group {
+    margin-bottom: 1rem;
+}
+
+.form-control {
+    display: block;
+    width: 100%;
+    padding: 0.5rem;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    background-color: darkgrey;
+    font-size: 1rem;
+    line-height: 1.5;
+}
+
+/* Styling for the select field */
+.form-control.select {
+    appearance: none;
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="#333333"><path d="M13.667 6.697L8 12.364 2.333 6.697a.999.999 0 00-1.414 1.414l6.999 6.999a.997.997 0 001.414 0l6.999-6.999a.999.999 0 00-1.413-1.414z"/></svg>');
+    background-repeat: no-repeat;
+    background-position: right center;
+    background-size: 1rem;
+    padding-right: 1.5rem;
+}
+
+/* Styling for the submit button */
+.btn {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    font-weight: bold;
+    text-align: center;
+    text-transform: uppercase;
+    color: #fff;
+    background-color: black;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+.btn:hover,
+.btn:focus {
+    background-color: darkgrey;
+}
+
+.modal-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    margin: auto;
+    padding: 20px;
+    margin-top: 200px;
+    border-radius: 5px;
+    width: 100%;
+    max-width: 500px;
+    height: 25%;
+}
+
+
+.modal-close-btn {
+    position: absolute;
+    margin-top: 210px;
+    margin-right: 50px;
+    top: 10px;
+    right: 10px;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: gray;
+    cursor: pointer;
+    border: none;
+    background-color: transparent;
+    outline: none;
+}
+
+.section-text {
+    padding: 25px;
+    font-size: 20px;
+    line-height: 1.6;
+}
