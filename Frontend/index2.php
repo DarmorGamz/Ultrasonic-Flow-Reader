@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>DCA</title>
+    <title>A+ - Log In</title>
     <link rel="stylesheet" type="text/css" href="Public/assets/css/navbar.css">
     <link rel="stylesheet" type="text/css" href="Public/assets/css/loginform.css">
 
@@ -13,13 +13,22 @@
 </head>
 <body>
     <!-- Navbar -->
-    <nav class="navbar">
+    <nav class="navbar sticky">
         <!-- Logo -->
-        <img src="Public/assets/img/DCA_logo.png" alt="Logo">
+        <div class="logo-container">
+             <img src="Public/assets/img/logo.png" alt="Logo">
+        </div>
         <!-- Login button -->
         <div class="login-button">
-            <i class="fas fa-lock-open"></i>
-            <i class="fas fa-question-circle"></i>
+            <span id="UserEmail"></span>
+            <span class="tooltip" data-tooltip="Logout">
+                <button id="login-button"><i class="fas fa-lock-open"></i></button>
+                <div class="tooltip-text">Login</div>
+            </span>
+            <span class="tooltip" data-tooltip="Support">
+                <button id="Support-button"><i class="fas fa-question-circle"></i></button>
+                <div class="tooltip-text">Support</div>
+            </span>
         </div>
     </nav>
 
@@ -51,7 +60,7 @@
 
     <!-- Footer -->
     <footer class="footer">
-        <span>Copyright &copy; 2023 DCA</span>
+        <span>Copyright &copy; 2023 DCA Development</span>
     </footer>
 </body>
 </html>
