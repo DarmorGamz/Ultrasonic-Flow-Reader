@@ -22,6 +22,8 @@ final class ApiAccess {
     final public function __destruct() {}
 
     final public function ProcCmd(): bool {
+        if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') { $this->SendResponse(); exit(); }
+
         // Get Post/Get vars.
         $aInput = $_POST; $aInput += $_GET;
         foreach($aInput as $key => $val) {
@@ -36,7 +38,6 @@ final class ApiAccess {
             }
         }
 
-        $sCmd = '';
         if(empty($this->aIpVar['Cmd'])) { $this->SetError(1, "Cmd Not Found."); return false; }
         $sCmd = $this->aIpVar['Cmd'];
         $this->aResp['Cmd'] = $sCmd;
@@ -51,6 +52,7 @@ final class ApiAccess {
                 if($sCmd == "getdata") $sCmd = "Data.Get";
                 if(!$this->DataGsad($sCmd)) { $this->SetError(1, "DataGsad Failed."); return false; }
                 break;
+
             case "Login":
             case "Signup":
             case "ResetPassword":
@@ -61,6 +63,14 @@ final class ApiAccess {
                 if($sCmd == "Signup") $sCmd = "User.Add";
                 if(!$this->UserGsad($sCmd)) { $this->SetError(1, "UserGsad Failed."); return false; }
                 break;
+
+            case "Contact.Get":
+            case "Contact.Add":
+            case "Contact.Set":
+            case "Contact.Del":
+                if(!$this->ContactGsad($sCmd)) { $this->SetError(1, "ContactGsad Failed."); return false; }
+                break;
+
             default: // Not a valid endpoint.
                 $this->SetError(1, "Cmd not found."); return false;
                 break;
@@ -78,7 +88,7 @@ final class ApiAccess {
         $aVarsIn = $aVarsOut = [];
 
         if($sCmd == 'User.Get') {
-
+            return false;
         } elseif($sCmd == 'User.Add') {
             // Init vars.
             $sEmail = $sPwd = '';
@@ -93,7 +103,8 @@ final class ApiAccess {
             // Set Response.
             $this->aResp['UserInfo'] = $aUserInfo;
         } elseif($sCmd == 'User.Set') {
-            if(!$oUser->UserGsad("User.Set", $aVarsIn, $aVarsOut)) { $this->SetError(2, "User.Set Failed."); return false; }
+            return false;
+
         } elseif($sCmd == 'User.Del') {
             // Init vars.
             $sEmail = $sPwd = '';
@@ -138,10 +149,40 @@ final class ApiAccess {
         // Init vars.
         $aVarsIn = $aVarsOut = [];
         if($sCmd == 'Data.Get') {
-            if(!$oData->DataGsad("Data.Get", $aVarsIn, $aVarsOut) || !isset($aVarsOut['Data'])) { $this->SetError(2, "Data.Get Failed."); return false; }
+            return false;
+        } else { return false; }
 
-            // Set Response.
-            $this->aResp['Data'] = $aVarsOut['Data'];
+
+        // Return Success.
+        return true;
+    }
+
+    private function ContactGsad(string $sCmd) : bool {
+        require_once ROOTPATH.'/Private/User/Contact.php';
+        $oContact = new Contact();
+
+        // Init vars.
+        $aVarsIn = $aVarsOut = [];
+        if($sCmd == 'Contact.Get') {
+            return false;
+
+        } else if($sCmd == 'Contact.Add') {
+            // Init vars.
+            $sFirstName = $sLastName = $sEmail = $sMessage = ""; $iSupportReason = 0;
+            if(!$this->GetInputVar('FirstName', $sFirstName) || !$this->GetInputVar('LastName', $sLastName)
+            || !$this->GetInputVar('Email', $sEmail) || !$this->GetInputVar('Message', $sMessage)
+            || !$this->GetInputVar('SupportReason', $iSupportReason)){ $this->SetError(2, "Invalid Input vars."); return false; }
+
+            // Set Vars.
+            $aVarsIn = ['FirstName' => $sFirstName, 'LastName' => $sLastName, 'Email'=> $sEmail, 'SupportReason' => (int)$iSupportReason, 'Message' => $sMessage];
+            if(!$oContact->ContactGsad("Contact.Add", $aVarsIn, $aVarsOut)) { $this->SetError(2, "Contact.Add Failed."); return false; }
+
+        } else if($sCmd == 'Contact.Set') {
+            return false;
+
+        } else if($sCmd == 'Contact.Del') {
+            return false;
+
         } else { return false; }
 
 
@@ -161,18 +202,63 @@ final class ApiAccess {
                 // Returns the valid email.
                 $IpVarOut = $this->aIpVar['Email'];
                 break;
+
             case "Password":
                 // Checks if Email is valid.
                 if(!isset($this->aIpVar['Password']) || empty($this->aIpVar['Password']) || strlen($this->aIpVar['Password']) > 25) return false;
                 // Returns the valid email.
                 $IpVarOut = $this->aIpVar['Password'];
                 break;
+
             case "PasswordOld":
                 // Checks if Email is valid.
                 if(!isset($this->aIpVar['PasswordOld']) || empty($this->aIpVar['PasswordOld']) || strlen($this->aIpVar['PasswordOld']) > 25) return false;
                 // Returns the valid email.
                 $IpVarOut = $this->aIpVar['PasswordOld'];
                 break;
+
+            case "FirstName":
+                // Checks if FirstName is valid.
+                if(!isset($this->aIpVar['FirstName']) || empty($this->aIpVar['FirstName']) || strlen($this->aIpVar['FirstName']) > 25) return false;
+                // Returns the FirstName email.
+                $IpVarOut = $this->aIpVar['FirstName'];
+                break;
+
+            case "LastName":
+                // Checks if LastName is valid.
+                if(!isset($this->aIpVar['LastName']) || empty($this->aIpVar['LastName']) || strlen($this->aIpVar['LastName']) > 25) return false;
+                // Returns the FirstName email.
+                $IpVarOut = $this->aIpVar['LastName'];
+                break;
+
+            case "SupportReason":
+                // Checks if SupportReason is valid.
+                if(!isset($this->aIpVar['SupportReason'])) return false;
+                // Returns the valid SupportReason.
+                $IpVarOut = $this->aIpVar['SupportReason'];
+                break;
+
+            case "Message":
+                // Checks if Message is valid.
+                if(!isset($this->aIpVar['Message']) || empty($this->aIpVar['Message']) || strlen($this->aIpVar['Message']) > 250) return false;
+                // Returns the Message email.
+                $IpVarOut = $this->aIpVar['Message'];
+                break;
+
+            case "DataType":
+                // Checks if Datatype is valid.
+                if(!isset($this->aIpVar['DataType'])) return false;
+
+                // Returns the valid DataType.
+                $IpVarOut = $this->aIpVar['DataType'];
+                break;
+            case "Date":
+                // Checks if Date is valid.
+                if(!isset($this->aIpVar['Date']) || empty($this->aIpVar['Date'])) return false;
+                // Returns the Date email.
+                $IpVarOut = $this->aIpVar['Date'];
+                break;
+
             default:
                 return false;
                 break;
@@ -186,7 +272,7 @@ final class ApiAccess {
         $sResp = json_encode($this->aResp);
         // Add text/plain header so receiving application knows the type of data
         header("Access-Control-Allow-Origin: *");
-        header("Access-Control-Allow-Methods: GET, POST, OPTIONS");
+        header("Access-Control-Allow-Methods: POST, GET");
         header("Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept");
         header('Content-Type: application/json');
 
