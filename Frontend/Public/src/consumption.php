@@ -9,12 +9,17 @@
 
     <link rel="stylesheet" type="text/css" href="../assets/css/navbar.css">
     <link rel="stylesheet" type="text/css" href="../assets/css/hamburgermenu.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous">
     <link rel="icon" type="image/x-icon" href="../assets/img/favicon.ico">
+
+    <!-- Highcharts   -->
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/modules/data.js"></script>
+    <script src="https://code.highcharts.com/modules/exporting.js"></script>
+    <script src="https://code.highcharts.com/modules/export-data.js"></script>
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="../assets/js/sessionkeycheck.js"></script>
-    <script src="../assets/js/dataConsumption.js"></script>
 
     <script>
         document.addEventListener("DOMContentLoaded", function() {
@@ -39,66 +44,55 @@
     </script>
 </head>
 <body>
-<!-- Navbar -->
-<nav class="navbar">
-    <!-- Hamburger menu icon -->
-    <button id="menu-toggle" class="menu-toggle">
-        <i class="fas fa-bars"></i>
-    </button>
-    <!-- Logo -->
-    <div class="logo-container">
-        <img src="../assets/img/DCA_logo.png" alt="Logo">
-    </div>
-    <!-- Login button -->
-    <div class="login-button">
-        <span id="UserEmail"></span>
-        <span class="tooltip" data-tooltip="Logout">
-            <button id="login-button">
-            <i class="fas fa-lock"></i>
+    <!-- Navbar -->
+    <nav class="navbar sticky">
+        <!-- Hamburger menu icon -->
+        <button id="menu-toggle" class="menu-toggle">
+            <i class="fas fa-bars"></i>
         </button>
-            <div class="tooltip-text">Logout</div>
-        </span>
-        <i class="fas fa-question-circle"></i>
+        <!-- Logo -->
+        <div class="logo-container">
+            <img src="../assets/img/logo.png" alt="Logo">
+        </div>
+        <!-- Login button -->
+        <div class="login-button">
+            <span id="UserEmail"></span>
+            <span class="tooltip" data-tooltip="Logout">
+                        <button id="login-button"><i class="fas fa-lock"></i></button>
+                        <div class="tooltip-text">Logout</div>
+                    </span>
+            <span class="tooltip" data-tooltip="Support">
+                        <button id="Support-button"><i class="fas fa-question-circle"></i></button>
+                        <div class="tooltip-text">Support</div>
+                    </span>
+        </div>
+    </nav>
+
+    <!-- Menu -->
+    <div id="menu-container" class="menu-container">
+        <ul class="menu">
+            <a href="homepage.php#Demand"><li><i class="fas fa-faucet-drip  menuicons"></i>Demand</li></a>
+            <a href="consumption.php#Consumption"><li><i class="fas fa-glass-water menuicons"></i>Consumption</li></a>
+            <a href="#"><li><i class="fas fa-bug menuicons"></i>N/A</li></a>
+            <a href="#"><li><i class="fas fa-bug menuicons"></i>N/A</li></a>
+            <a href="#"><li><i class="fas fa-bug menuicons"></i>N/A</li></a>
+            <a href="#"><li><i class="fas fa-bug menuicons"></i>N/A</li></a>
+            <a href="#"><li><i class="fas fa-bug menuicons"></i>N/A</li></a>
+            <a href="#"><li><i class="fas fa-bug menuicons"></i>N/A</li></a>
+            <a href="configuration.php#Configuration"><li><i class="fas fa-cog menuicons"></i>Configuration</li></a>
+            <a href="about.php#About"><li><i class="fas fa-graduation-cap menuicons"></i>About</li></a>
+            <a href="support.php#Support"><li><i class="fas fa-question-circle menuicons"></i>Support</li></a>
+        </ul>
     </div>
-</nav>
 
-<!-- Menu -->
-<div id="menu-container" class="menu-container">
-    <ul class="menu">
-        <li><i class="fas fa-lock menuicons"></i><a href="homepage.php#Demand">Demand</a></li>
-        <li><i class="fas fa-cog menuicons"></i><a href="consumption.php#Consumption">Consumption</a></li>
-        <li><i class="fas fa-bug menuicons"></i><a href="#">N/A</a></li>
-        <li><i class="fas fa-bug menuicons"></i><a href="#">N/A</a></li>
-        <li><i class="fas fa-bug menuicons"></i><a href="#">N/A</a></li>
-        <li><i class="fas fa-bug menuicons"></i><a href="#">N/A</a></li>
-        <li><i class="fas fa-bug menuicons"></i><a href="#">N/A</a></li>
-        <li><i class="fas fa-bug menuicons"></i><a href="#">N/A</a></li>
-        <li><i class="fas fa-bug menuicons"></i><a href="#">N/A</a></li>
-        <li><i class="fas fa-lock menuicons"></i><a href="configuration.php#Configuration">Configuration</a></li>
-        <li><i class="fas fa-graduation-cap menuicons"></i><a href="about.php#About">About</a></li>
-        <li><i class="fas fa-question-circle menuicons"></i><a href="support.php#Support">Support</a></li>
-    </ul>
-</div>
+    <!-- Content -->
+    <div id="content" class="content">
+        <h1>Consumption - Volume</h1>
+    </div>
 
-<!-- Content -->
-<div id="content" class="content">
-    <h1>Consumption - <span id="clock"></span></h1>
-    <label for="timeframe-select">Select Timeframe:</label>
-    <select id="timeframe-select">
-        <option value="1D">1 Day</option>
-        <option value="1M">1 Month</option>
-        <option value="F">Forever</option>
-    </select>
-    <h4>1 Day: <span id="volume1day"></span></h4>
-    <h4>1 Month: <span id="volume1month"></span></h4>
-    <h4>Total: <span id="volumeTotal"></span></h4>
-
-    <div id="chart-container"></div>
-</div>
-
-<!-- Footer -->
-<footer class="footer">
-    <span>&copy; 2023 DCA</span>
-</footer>
+    <!-- Footer -->
+    <footer class="footer">
+        <span>&copy; 2023 DCA</span>
+    </footer>
 </body>
 </html>
