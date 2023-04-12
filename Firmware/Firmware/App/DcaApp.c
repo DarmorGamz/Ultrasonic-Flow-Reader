@@ -89,6 +89,8 @@ static void _One_Second_Timer_Callback(void) {
 	
 	// Calculate Data.
 	TC2->COUNT32.COUNT.reg = 0; // Reset the timer count to 0
+	memset(&g_acReadingBuffer1[0], 0, READING_BUFF_NUM_BYTES);
+	ext_irq_enable(SENSOR1_IN);
 	
     // Toggle the LEDs based on the current status code if not currently holding the user set LED value (setvar&led={val})
     if (Timer_GetTimer(TIMER_APP_LED_HOLD)==0) _LedControl();
@@ -256,9 +258,6 @@ void DcaApp_Entry(void) {
 		if (s_fUseWifi==true) {} // Wifi_PumpEvents();
 		if (s_fUseWifi==false) Ethernet_PumpEvents();
 		
-		// Calculate Data.
-		_Sensor1_Callback();
-		
 		
 		// Determine if it is time to send to the server
         bool fTimeToSend = false;
@@ -282,7 +281,7 @@ void DcaApp_Entry(void) {
 		
 		// Transmit any pending packets/responses to server if it has been determined we need to send
         if (fTimeToSend==true) {
-            Ethernet_QueueServerSend();
+            //Ethernet_QueueServerSend();
 			
             // Reset the heartbeat timer
             Timer_SetTimer(TIMER_APP_HEARTBEAT, s_u16HeartbeatRate);

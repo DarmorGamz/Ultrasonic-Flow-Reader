@@ -48,7 +48,11 @@ void ReadingQueue2_GetReadingRemaining(void) {
 
 bool ReadingQueue1_Add(uint16_t val) {
 	// Bail out if there isn't room for readings
-	if (s_u16Queue1Count >= READING_BUFF_NUM_BYTES) return false;
+	if (s_u16Queue1Count >= READING_BUFF_NUM_BYTES) {
+		ext_irq_disable(SENSOR1_IN);
+		s_u16Queue1Count = 0; 
+		return true;
+	}
 	
 	g_acReadingBuffer1[s_u16Queue1Count] = val;
 	

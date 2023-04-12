@@ -73,6 +73,7 @@ void _Sensor1_Callback(void) {
 			
 			// Flip Rx and Tx.
 			Sensor1_Tx = false; // Needs to handle the digital high somewhere.
+			gpio_set_pin_level(SENSOR1_OUT, true);
 		} else {
 			int i = 0;
 			for(;i<iCount; i++) {
@@ -80,22 +81,24 @@ void _Sensor1_Callback(void) {
 			}
 			Sensor2Val = Sensor2Val >> iCount; // Faster than division.
 			
-			if(!s_u8ReadingBufferUsed) {
-				ReadingQueue1_Add((Sensor2Val - Sensor1Val));
-			} else {
-				ReadingQueue2_Add((Sensor2Val - Sensor1Val));
-			}
-			
 			// Reset vars.
 			memset(ValBuffer, 0, sizeof(ValBuffer));
 			Now = 0; Prev = 0; iCount = 0;
 			
 			// Flip Rx and Tx.
 			Sensor1_Tx = true; // Needs to handle the digital high somewhere.
+			gpio_set_pin_level(SENSOR1_OUT, false);
 			
-			// Clear buffers.
-			Sensor1Val = 0;
-			Sensor2Val = 0;
+			
+			if(!s_u8ReadingBufferUsed) {
+				ReadingQueue1_Add((Sensor2Val - Sensor1Val));
+				// Clear buffers.
+				Sensor1Val = 0;
+				Sensor2Val = 0;
+			} else {
+				ReadingQueue2_Add((Sensor2Val - Sensor1Val));
+			}
+			
 		}
 	}
 }
