@@ -1,8 +1,16 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    overflow: hidden; /* Hide scrollbars */
+}
+
 .menu-container {
+    overflow: hidden;
     position: fixed;
-    top: 55px;
-    left: -180px;
-    width: 180px;
+    top: calc(0 + 0.9%);;
+    left: -10%;
+    width: 10%;
     height: 100%;
     background-color: black;
     transition: all 0.5s ease-in-out;
@@ -31,40 +39,47 @@
     color: #fff;
     list-style: none;
     margin: 0;
-    padding: 0;
+    padding: 5px;
     font: 300 17px/1.25 'Arial Bold', 'Arial', sans-serif;
 }
 
 .menuicons {
     color: mediumpurple;
+    font-size: 18px;
+    width: 24px;
+    text-align: center;
+    margin-right: 8px;
 }
+
+
+.menu a:hover {
+    background-color: #111111FF;
+}
+
 .menu li {
     display: flex;
     align-items: center;
     padding: 10px;
+    margin-left: 10px;
 }
 
-.menu li a {
+.menu a {
     display: flex;
     align-items: center;
     color: #fff;
     text-decoration: none;
-    margin-left: 15px;
 }
 
 .content {
     font-size: 30px;
-    margin-left: 0;
+    margin-left: 0%;
     transition: margin-left 0.5s ease-out;
     padding: 25px;
+    height: calc(100vh - 2.5% - 0.9%)
 }
+
 
 .content.menu-open {
-    margin-left: 180px;
+    margin-left: 10%;
     padding: 25px;
-}
-
-#chart-container {
-    height: 300px;
-    width: 75%;
 }
